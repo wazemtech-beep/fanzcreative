@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="FanzCreative AI agency website built with React and Vite." />
+    <title>FanzCreative - AI Agency</title>
+    <link rel="shortcut icon" href="/assets/images/logo/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/logo/favicon.png" />
+    <link rel="stylesheet" href="/assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="/assets/icon/icomoon/style.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/assets/css/slick.css" />
+    <link rel="stylesheet" href="/assets/css/slick.theme.css" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body class="counter-scroll">
+    <div id="root"></div>
+
+    <!--
+      GSAP and ScrollTrigger are loaded as globals here, exactly as in the
+      original template, so Hero.jsx and future section components can
+      reference window.gsap / window.ScrollTrigger inside useEffect.
+    -->
+    <script src="/assets/js/gsap.min.js"></script>
+    <script src="/assets/js/ScrollTrigger.min.js"></script>
+    <script src="/assets/js/ScrollToPlugin.min.js"></script>
+    <script>
+      // Make GSAP plugins available on window for components that check them
+      if (window.gsap && window.ScrollTrigger) {
+        window.gsap.registerPlugin(window.ScrollTrigger, window.ScrollToPlugin);
+      }
+    </script>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
