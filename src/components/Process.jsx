@@ -1,14 +1,11 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
 import DotField from './DotField';
-
-/**
- * Process — `.section-process` from index-v2.html
- *
- * The original used a Swiper slider initialised via data-attributes +
- * carousel.js globals. Reproduced here with a lightweight local-state
- * slider — same 3 cards, same prev/next buttons, no external dep needed.
- */
+import { playClick, playHover } from '../hooks/useSound';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const SLIDES = [
   {
@@ -40,23 +37,15 @@ const SLIDES = [
     num: '04',
   },
 ];
+
 function Process() {
   const sectionRef = useRef(null);
   useScrollFade(sectionRef);
 
-  const trackRef = useRef(null);
-  const [active, setActive] = useState(0);
-
-  const prev = () => setActive((a) => Math.max(a - 1, 0));
-  const next = () => setActive((a) => Math.min(a + 1, SLIDES.length - 1));
-
-  useEffect(() => {
-    if (!trackRef.current) return;
-    const card = trackRef.current.querySelector('.swiper-slide');
-    if (!card) return;
-    const offset = (card.offsetWidth + 24) * active;
-    trackRef.current.style.transform = `translateX(-${offset}px)`;
-  }, [active]);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [isEnd, setIsEnd] = useState(false);
+  const [isBeginning, setIsBeginning] = useState(true);
 
   return (
     <div className="section-process flat-spacing pt-0" ref={sectionRef} style={{ position: 'relative' }}>
@@ -86,19 +75,23 @@ function Process() {
                 <div
                   className="nav-prev-swiper"
                   role="button"
-                  onClick={prev}
-                  style={{ opacity: active === 0 ? 0.4 : 1, cursor: active === 0 ? 'default' : 'pointer' }}
+                  ref={prevRef}
+                  style={{ opacity: isBeginning ? 0.4 : 1, cursor: isBeginning ? 'default' : 'pointer' }}
+                  onClick={playClick}
+                  onMouseEnter={playHover}
                 >
                   <i className="icon icon-angle-left-solid"></i>
                 </div>
                 <div
                   className="nav-next-swiper"
                   role="button"
-                  onClick={next}
+                  ref={nextRef}
                   style={{
-                    opacity: active === SLIDES.length - 1 ? 0.4 : 1,
-                    cursor: active === SLIDES.length - 1 ? 'default' : 'pointer',
+                    opacity: isEnd ? 0.4 : 1,
+                    cursor: isEnd ? 'default' : 'pointer',
                   }}
+                  onClick={playClick}
+                  onMouseEnter={playHover}
                 >
                   <i className="icon icon-angle-right-solid"></i>
                 </div>
@@ -108,23 +101,43 @@ function Process() {
 
           {/* Right — slides */}
           <div className="col-lg-7">
-            <div className="process-slide" style={{ overflow: 'hidden' }}>
-              <div
-                className="swiper-wrapper"
-                ref={trackRef}
-                style={{
-                  display: 'flex',
-                  gap: 24,
-                  transition: 'transform 0.4s cubic-bezier(0.22,1,0.36,1)',
+            <div className="process-slide">
+              <Swiper
+                modules={[Navigation]}
+                navigation={{
+                  prevEl: prevRef.current,
+                  nextEl: nextRef.current,
                 }}
+                onBeforeInit={(swiper) => {
+                  swiper.params.navigation.prevEl = prevRef.current;
+                  swiper.params.navigation.nextEl = nextRef.current;
+                }}
+                onSlideChange={(swiper) => {
+                  setIsBeginning(swiper.isBeginning);
+                  setIsEnd(swiper.isEnd);
+                }}
+                loop={false}
+                centeredSlides={false}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                  },
+                  768: {
+                    slidesPerView: 2,
+                    spaceBetween: 24,
+                  },
+                  992: {
+                    slidesPerView: 2,
+                    spaceBetween: 24,
+                  },
+                }}
+                className="swiper tf-swiper swiper-box-shadow"
+                dir="ltr"
               >
                 {SLIDES.map((slide, i) => (
-                  <div
-                    key={i}
-                    className="swiper-slide"
-                    style={{ flexShrink: 0, width: 'calc(56% - 12px)' }}
-                  >
-                    <div className="process-card">
+                  <SwiperSlide key={i} style={{ display: 'flex', height: 'auto', paddingBottom: '30px' }}>
+                    <div className="process-card" style={{ width: '100%', height: '100%' }}>
                       <i className={`icon ${slide.icon}`}></i>
                       <div className="content">
                         <h4 className="title fw-semibold">{slide.title}</h4>
@@ -138,9 +151,9 @@ function Process() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </SwiperSlide>
                 ))}
-              </div>
+              </Swiper>
             </div>
           </div>
 

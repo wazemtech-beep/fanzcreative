@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
 import Waves from './Waves';
+import { playSwoosh, playTap, playHover } from '../hooks/useSound';
 
 /**
  * Services — converted from `#services .section-services` in index-v2.html
@@ -117,13 +118,15 @@ function Services() {
                       key={item.id}
                       className="accordion-faq_item effectFade fadeUp"
                       role="presentation"
+                      style={{ borderRadius: '40px', overflow: 'hidden' }}
                     >
                       {/* Accordion trigger */}
                       <div
                         className={`accordion-action services-image-btn${isOpen ? ' active-img' : ' collapsed'}`}
                         role="button"
                         aria-expanded={isOpen}
-                        onClick={() => handleAccordionClick(item.id)}
+                        onClick={() => { handleAccordionClick(item.id); playSwoosh(); }}
+                        onMouseEnter={playHover}
                       >
                         <div className="accordion-title">
                           {titleLines[0]} <br /> {titleLines[1]}
@@ -133,17 +136,22 @@ function Services() {
 
                       {/* Accordion body */}
                       <div
-                        className={`collapse${isOpen ? ' show' : ''}`}
-                        style={isOpen ? {} : { display: 'none' }}
+                        style={{
+                          display: 'grid',
+                          gridTemplateRows: isOpen ? '1fr' : '0fr',
+                          transition: 'grid-template-rows 0.4s ease',
+                        }}
                       >
-                        <div className="accordion-content">
-                          <div className="text-body-3 text-neutral-300 text">{item.desc}</div>
-                          <div className="list-tags">
-                            {item.tags.map((tag) => (
-                              <a key={tag} href="#" className="tags-item fw-semibold">
-                                {tag}
-                              </a>
-                            ))}
+                        <div style={{ overflow: 'hidden' }}>
+                          <div className="accordion-content">
+                            <div className="text-body-3 text-neutral-300 text">{item.desc}</div>
+                            <div className="list-tags">
+                              {item.tags.map((tag) => (
+                                <a key={tag} href="#" className="tags-item fw-semibold" onClick={playTap} onMouseEnter={playHover}>
+                                  {tag}
+                                </a>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>

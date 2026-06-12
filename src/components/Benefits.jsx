@@ -11,10 +11,10 @@ import { useScrollFade } from '../hooks/useScrollFade';
  */
 
 const PROGRESS_ITEMS = [
-  { icon: 'icon-star-solid',           label: 'Design Quality', value: 95 },
-  { icon: 'icon-clock-solid',          label: 'On-Time Delivery', value: 98 },
+  { icon: 'icon-star-solid',           label: 'Design Quality', value: 100 },
+  { icon: 'icon-clock-solid',          label: 'On-Time Delivery', value: 100 },
   { icon: 'icon-heart-solid',          label: 'Client Satisfaction', value: 100 },
-  { icon: 'icon-chart-line-solid',     label: 'Brand Impact', value: 85 },
+  { icon: 'icon-chart-line-solid',     label: 'Brand Impact', value: 100 },
 ];
 
 function Benefits() {
@@ -85,8 +85,9 @@ function Benefits() {
 
           {/* Step / checklist box */}
           <div className="col-lg-5">
-            <div className="benefits-box benefits-step effectFade fadeUp">
-              <div className="benefits-step-inner">
+            <div className="effectFade fadeUp" style={{ padding: '30px', margin: '-30px' }}>
+              <div className="benefits-box benefits-step">
+                <div className="benefits-step-inner">
                 <div className="line-step"></div>
                 <div className="step-item"><i className="icon icon-check-solid"></i></div>
                 <div className="step-item"><i className="icon icon-check-solid"></i></div>
@@ -97,6 +98,7 @@ function Benefits() {
                 <p className="text text-secondary">
                   We build realistic timelines and stick to them. You always know where your project stands — no surprises, ever.
                 </p>
+              </div>
               </div>
             </div>
           </div>

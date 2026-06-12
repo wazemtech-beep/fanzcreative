@@ -1,10 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
+import { playClick } from '../hooks/useSound';
 
 const STATS = [
-  { label: 'PROJECTS DELIVERED',  number: '180', prefix: '+' },
-  { label: 'SATISFIED CLIENTS',   number: '94',  prefix: '+' },
-  { label: 'ON-TIME DELIVERY',    number: '98',  prefix: '%' },
+  { label: 'PROJECTS DELIVERED', number: '180', prefix: '+' },
+  { label: 'SATISFIED CLIENTS', number: '94', prefix: '+' },
+  { label: 'ON-TIME DELIVERY', number: '98', prefix: '%' },
 ];
 
 function Statistic() {
@@ -15,11 +16,41 @@ function Statistic() {
 
   const prev = () => setActive((a) => (a - 1 + total) % total);
   const next = () => setActive((a) => (a + 1) % total);
+
+  useEffect(() => {
+    const timer = setInterval(next, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
   const stat = STATS[active];
   const progress = ((active + 1) / total) * 100;
 
   return (
     <div className="section-statistic" ref={sectionRef}>
+      <style>{`
+        .section-statistic {
+          overflow: visible !important;
+          clip-path: none !important;
+        }
+        .section-statistic .container {
+          overflow: visible !important;
+        }
+        .section-statistic .row {
+          overflow: visible !important;
+        }
+        .section-statistic .col-md-6 {
+          overflow: visible !important;
+        }
+        .section-statistic .statistic-slider {
+          overflow: visible !important;
+        }
+        .section-statistic .swiper.swiper-progressbar {
+          overflow: visible !important;
+        }
+        .section-statistic .swiper .title {
+          overflow: visible !important;
+        }
+      `}</style>
       <div className="line"></div>
       <div className="container">
         <div className="row justify-content-between">
@@ -51,10 +82,10 @@ function Statistic() {
                     ></div>
                   </div>
                   <div className="group-btn-slider">
-                    <div className="btn-slider progressbar-prev" role="button" onClick={prev}>
+                    <div className="btn-slider progressbar-prev" role="button" onClick={() => { prev(); playClick(); }}>
                       <i className="icon icon-angle-left-solid"></i>
                     </div>
-                    <div className="btn-slider progressbar-next" role="button" onClick={next}>
+                    <div className="btn-slider progressbar-next" role="button" onClick={() => { next(); playClick(); }}>
                       <i className="icon icon-angle-right-solid"></i>
                     </div>
                   </div>

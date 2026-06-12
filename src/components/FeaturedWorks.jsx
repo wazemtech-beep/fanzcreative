@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useEffect } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
+import { playList, playHover } from '../hooks/useSound';
 
 /* ── Cursor-follow image wrapper ───────────────────────────────────────
    Reproduces jQuery mouseHover() from main.js.
@@ -58,7 +59,7 @@ function MouseFollowImage({ src, alt }) {
       {/* Button follows cursor — pointerEvents ON so click works */}
       <a
         ref={buttonRef}
-        href="/work-single"
+        href="#contact"
         className="tf-mouse view-project h6"
         style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }}
       >
@@ -132,6 +133,14 @@ function FeaturedWorks() {
     if (!section || !pin || cards.length < 2) return undefined;
 
     const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      mm.add('(max-width: 991px)', () => {
+        gsap.set(cards, { clearProps: 'all' });
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      });
+
+      mm.add('(min-width: 992px)', () => {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       if (reduceMotion) {
@@ -160,6 +169,7 @@ function FeaturedWorks() {
         });
       });
 
+      let lastActiveIndex = 0;
       const timeline = gsap.timeline({
         defaults: { ease: 'none' },
         scrollTrigger: {
@@ -170,6 +180,13 @@ function FeaturedWorks() {
           pin,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const activeIndex = Math.round(self.progress * (cards.length - 1));
+            if (activeIndex !== lastActiveIndex) {
+              lastActiveIndex = activeIndex;
+              playList();
+            }
+          }
         },
       });
 
@@ -204,6 +221,9 @@ function FeaturedWorks() {
           step
         );
       }
+      });
+
+      return () => mm.revert();
     }, section);
 
     return () => ctx.revert();
@@ -232,7 +252,7 @@ function FeaturedWorks() {
                     cardsRef.current[i] = el;
                   }}
                 >
-                  <div className={`featured-works-item${i === 0 ? ' effectFade fadeUp no-div' : ''}`}>
+                  <div className={`featured-works-item${i === 0 ? ' effectFade fadeUp no-div' : ''}`} onMouseEnter={playHover}>
                     <MouseFollowImage src={work.img} alt={work.title.replace('\n', ' ')} />
 
                     <div className="content">

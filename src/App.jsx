@@ -3,6 +3,7 @@ import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
 import Partner from './components/Partner';
 import Services from './components/Services';
+import { playSpiral, playClose, useSoundState, playSwitch, playHover, useAudioConfig, playClick } from './hooks/useSound';
 import FeaturedWorks from './components/FeaturedWorks';
 import Process from './components/Process';
 import Benefits from './components/Benefits';
@@ -15,11 +16,12 @@ import Pricing from './components/Pricing';
 import FAQs from './components/FAQs';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Lenis from 'lenis';
 
 function App() {
   useEffect(() => {
+    playSpiral();
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -32,6 +34,7 @@ function App() {
 
     let scrollTriggerUpdate;
     let gsapTicker;
+    let rafId;
 
     if (gsap && ScrollTrigger) {
       scrollTriggerUpdate = () => ScrollTrigger.update();
@@ -48,21 +51,37 @@ function App() {
       }, 500);
     } else {
       // Fallback requestAnimationFrame loop if GSAP isn't ready/loaded
-      let rafId;
       const raf = (time) => {
         lenis.raf(time);
         rafId = requestAnimationFrame(raf);
       };
       rafId = requestAnimationFrame(raf);
-
-      return () => {
-        cancelAnimationFrame(rafId);
-      };
     }
+
+    // Intercept any link clicking starting with '#' and smoothly scroll using Lenis
+    const handleAnchorClick = (e) => {
+      const target = e.target.closest('a');
+      if (!target) return;
+      const href = target.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        if (href === '#') {
+          lenis.scrollTo(0);
+        } else {
+          const element = document.querySelector(href);
+          if (element) {
+            lenis.scrollTo(element);
+          }
+        }
+      }
+    };
+    document.addEventListener('click', handleAnchorClick);
 
     return () => {
       if (scrollTriggerUpdate) lenis.off('scroll', scrollTriggerUpdate);
       if (gsap && gsapTicker) gsap.ticker.remove(gsapTicker);
+      if (rafId) cancelAnimationFrame(rafId);
+      document.removeEventListener('click', handleAnchorClick);
       lenis.destroy();
     };
   }, []);
@@ -93,7 +112,7 @@ function App() {
         <div className="box-black">
           <div className="light-box"></div>
           <img className="light-top" src="/assets/images/item/light-top.png" alt="" />
-          <img className="light-bot" src="/assets/images/item/light-bot.png" alt="" />
+          <img className="light-bot" src="/assets/images/item/light-bot.png" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
           <Statistic />
           <Awards />
           <Testimonials />
@@ -107,6 +126,8 @@ function App() {
       </main>
 
       <MobileMenu />
+
+      <SoundToggle />
     </>
   );
 }
@@ -120,13 +141,19 @@ function MobileMenu() {
           <div className="offcanvas-content_wrapin">
 
             <div className="canvas_head">
-              <a href="/" className="logo-site">
+              <a href="#" className="logo-site">
                 <i className="icon icon-davies-logo"></i>
               </a>
-              <div className="btn-mobile-menu close-mb-menu text-caption link" id="close-mb-menu">
+              <button
+                type="button"
+                className="btn-mobile-menu close-mb-menu mobile-close-button text-caption"
+                id="close-mb-menu"
+                aria-label="Close navigation menu"
+                onClick={playClose}
+              >
                 <i className="icon icon-close"></i>
-                CLOSE
-              </div>
+                Close Menu
+              </button>
             </div>
 
             <div className="canvas_center">
@@ -140,8 +167,8 @@ function MobileMenu() {
                       </a>
                       <div id="dropdown-menu-index" className="collapse" data-bs-parent="#mobile-menu">
                         <ul className="sub-nav-menu">
-                          <li><a href="/" className="sub-nav-link text-white">Home Gradient</a></li>
-                          <li><a href="/v2" className="sub-nav-link text-white">Home Animated</a></li>
+                          <li><a href="#" className="sub-nav-link text-white">Home Gradient</a></li>
+                          <li><a href="#" className="sub-nav-link text-white">Home Animated</a></li>
                         </ul>
                       </div>
                     </div>
@@ -149,7 +176,7 @@ function MobileMenu() {
                 </li>
                 <li>
                   <div className="item">
-                    <a href="/about" className="mb-menu-link text-display-1">
+                    <a href="#about" className="mb-menu-link text-display-1">
                       <span className="text">About</span>
                     </a>
                   </div>
@@ -163,8 +190,8 @@ function MobileMenu() {
                       </a>
                       <div id="dropdown-menu-1" className="collapse" data-bs-parent="#mobile-menu">
                         <ul className="sub-nav-menu">
-                          <li><a href="/work" className="sub-nav-link text-white">Works</a></li>
-                          <li><a href="/work-single" className="sub-nav-link text-white">Works Single</a></li>
+                          <li><a href="#works" className="sub-nav-link text-white">Works</a></li>
+                          <li><a href="#works" className="sub-nav-link text-white">Works Single</a></li>
                         </ul>
                       </div>
                     </div>
@@ -179,8 +206,8 @@ function MobileMenu() {
                       </a>
                       <div id="dropdown-menu-2" className="collapse" data-bs-parent="#mobile-menu">
                         <ul className="sub-nav-menu">
-                          <li><a href="/service" className="sub-nav-link text-white">Services</a></li>
-                          <li><a href="/service-single" className="sub-nav-link text-white">Services Single</a></li>
+                          <li><a href="#services" className="sub-nav-link text-white">Services</a></li>
+                          <li><a href="#services" className="sub-nav-link text-white">Services Single</a></li>
                         </ul>
                       </div>
                     </div>
@@ -195,10 +222,10 @@ function MobileMenu() {
                       </a>
                       <div id="dropdown-menu-3" className="collapse" data-bs-parent="#mobile-menu">
                         <ul className="sub-nav-menu">
-                          <li><a href="/blog-standard" className="sub-nav-link text-white">Blog Standard</a></li>
-                          <li><a href="/blog-two-columns" className="sub-nav-link text-white">Blog Grid 2</a></li>
-                          <li><a href="/blog-three-columns" className="sub-nav-link text-white">Blog Grid 3</a></li>
-                          <li><a href="/blog-single" className="sub-nav-link text-white">Blog Single</a></li>
+                          <li><a href="#" className="sub-nav-link text-white">Blog Standard</a></li>
+                          <li><a href="#" className="sub-nav-link text-white">Blog Grid 2</a></li>
+                          <li><a href="#" className="sub-nav-link text-white">Blog Grid 3</a></li>
+                          <li><a href="#" className="sub-nav-link text-white">Blog Single</a></li>
                         </ul>
                       </div>
                     </div>
@@ -206,7 +233,7 @@ function MobileMenu() {
                 </li>
                 <li>
                   <div className="item">
-                    <a href="/contact" className="mb-menu-link text-display-1">
+                    <a href="#contact" className="mb-menu-link text-display-1">
                       <span className="text">Contact</span>
                     </a>
                   </div>
@@ -214,31 +241,307 @@ function MobileMenu() {
               </ul>
             </div>
 
-            <div className="canvas_foot">
-              <div className="left">
-                <a href="mailto:FanzCreative@gmail.com" className="text-caption text-neutral-200">
-                  FanzCreative@gmail.com
-                </a>
-                <p className="text-caption text-neutral-200">
-                  CUP <span className="clock"></span>
-                </p>
-              </div>
-              <div className="right">
-                <a href="#" className="tf-link-icon text-caption text-neutral-200">
-                  <i className="icon icon-arrow-top-right"></i> TWITTER (X)
-                </a>
-                <a href="#" className="tf-link-icon text-caption text-neutral-200">
-                  <i className="icon icon-arrow-top-right"></i> DRIBBBLE
-                </a>
-                <a href="#" className="tf-link-icon text-caption text-neutral-200">
-                  <i className="icon icon-arrow-top-right"></i> LINKEDIN
-                </a>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
+      <style>{`
+        .offcanvas-menu .mobile-close-button {
+          appearance: none;
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          border-radius: 999px;
+          padding: 10px 16px;
+          background: rgba(255, 255, 255, 0.1);
+          color: #ffffff;
+          cursor: pointer;
+          font-weight: 700;
+          letter-spacing: 0;
+          line-height: 1;
+        }
+
+        .offcanvas-menu .mobile-close-button .icon {
+          font-size: 18px;
+        }
+
+        .offcanvas-menu .mobile-close-button:hover,
+        .offcanvas-menu .mobile-close-button:focus-visible {
+          background: #ffffff;
+          color: #18181b;
+          outline: none;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ─── Floating Sound Toggle Button ────────────────────────────────────────── */
+function SoundToggle() {
+  const [config, setConfig] = useAudioConfig();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const containerRef = useRef(null);
+
+  // Click away listener to close popover when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const toggleMaster = () => {
+    setConfig({ soundEnabled: !config.soundEnabled });
+    playSwitch();
+  };
+
+  const toggleMusic = () => {
+    setConfig({ musicEnabled: !config.musicEnabled });
+    playClick();
+  };
+
+  const toggleSFX = () => {
+    setConfig({ sfxEnabled: !config.sfxEnabled });
+    playClick();
+  };
+
+  const isMasterOn = config.soundEnabled;
+  const isMusicOn = config.musicEnabled;
+  const isSFXOn = config.sfxEnabled;
+
+  return (
+    <div className="sound-widget-container" ref={containerRef}>
+      {/* Sleek Glassmorphic Popover Control Panel */}
+      {menuOpen && (
+        <div className="sound-control-panel">
+          <div className="panel-header">
+            <span className="panel-title">Audio Settings</span>
+          </div>
+
+          <div className="control-rows">
+            {/* Master Sound Switch */}
+            <div className="control-row">
+              <span className="control-label">Master Sound</span>
+              <button
+                className={`switch-control ${isMasterOn ? 'active' : ''}`}
+                onClick={toggleMaster}
+                aria-label="Toggle Master Audio"
+              >
+                <span className="switch-slider"></span>
+              </button>
+            </div>
+
+            {/* Ambient Music Switch */}
+            <div className="control-row">
+              <span className="control-label">Ambient Theme</span>
+              <button
+                className={`switch-control ${isMusicOn ? 'active' : ''}`}
+                onClick={toggleMusic}
+                disabled={!isMasterOn}
+                aria-label="Toggle Ambient Theme"
+              >
+                <span className="switch-slider"></span>
+              </button>
+            </div>
+
+            {/* Sound Effects Switch */}
+            <div className="control-row">
+              <span className="control-label">Sound Effects</span>
+              <button
+                className={`switch-control ${isSFXOn ? 'active' : ''}`}
+                onClick={toggleSFX}
+                disabled={!isMasterOn}
+                aria-label="Toggle Sound Effects"
+              >
+                <span className="switch-slider"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Primary Floating Switch Button */}
+      <button
+        className={`floating-sound-toggle ${menuOpen ? 'active' : ''}`}
+        onClick={() => { setMenuOpen(!menuOpen); playClick(); }}
+        onMouseEnter={playHover}
+        aria-label="Audio controls"
+      >
+        <span className="icon-wrap">
+          {!isMasterOn || (!isMusicOn && !isSFXOn) ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="playing-waves">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          )}
+        </span>
+      </button>
+
+      <style>{`
+        .sound-widget-container {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          z-index: 9999;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+
+        .floating-sound-toggle {
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          background-color: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+          color: #000000;
+          outline: none;
+        }
+
+        .floating-sound-toggle:hover,
+        .floating-sound-toggle.active {
+          transform: scale(1.08);
+          background-color: #000000;
+          color: #ffffff;
+          border-color: #000000;
+          box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
+        }
+
+        .floating-sound-toggle .icon-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        @keyframes wave-pulse-float {
+          0%, 100% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.15); opacity: 1; }
+        }
+
+        .floating-sound-toggle .playing-waves path {
+          animation: wave-pulse-float 1s ease-in-out infinite;
+        }
+
+        /* Sleek Glassmorphic Popover Control Panel */
+        .sound-control-panel {
+          position: absolute;
+          bottom: 72px;
+          right: 0;
+          width: 220px;
+          background: rgba(15, 15, 17, 0.88);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+          border-radius: 16px;
+          padding: 16px;
+          color: #ffffff;
+          animation: popoverFadeIn 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+          transform-origin: bottom right;
+        }
+
+        @keyframes popoverFadeIn {
+          from { opacity: 0; transform: scale(0.9) translateY(10px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .panel-header {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          padding-bottom: 8px;
+          margin-bottom: 12px;
+        }
+
+        .panel-title {
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        .control-rows {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .control-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 13px;
+          font-weight: 600;
+        }
+
+        .control-row .control-label {
+          color: #f4f4f5;
+        }
+
+        /* Switch Control Slider Switch */
+        .switch-control {
+          position: relative;
+          width: 38px;
+          height: 20px;
+          background-color: rgba(255, 255, 255, 0.15);
+          border-radius: 99px;
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          padding: 0;
+          outline: none;
+        }
+
+        .switch-control[disabled] {
+          opacity: 0.35;
+          cursor: not-allowed;
+        }
+
+        .switch-control.active {
+          background-color: #df2d6d;
+        }
+
+        .switch-slider {
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background-color: #ffffff;
+          transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .switch-control.active .switch-slider {
+          transform: translateX(18px);
+        }
+
+        @media (max-width: 767px) {
+          .sound-widget-container {
+            bottom: 20px;
+            right: 20px;
+          }
+          .floating-sound-toggle {
+            width: 46px;
+            height: 46px;
+          }
+          .sound-control-panel {
+            bottom: 60px;
+          }
+        }
+      `}</style>
     </div>
   );
 }

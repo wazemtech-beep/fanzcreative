@@ -166,8 +166,17 @@ export default function Aurora({ colorStops = ['#e91e8c', '#ffffff', '#9c27b0'],
     interactionArea.addEventListener('pointerleave', onPointerLeave);
 
     let animId = 0;
+    let isVisible = true;
+
+    const observer = new IntersectionObserver((entries) => {
+      isVisible = entries[0].isIntersecting;
+    });
+    observer.observe(ctn);
+
     const update = t => {
       animId = requestAnimationFrame(update);
+      if (!isVisible) return; // Skip rendering when offscreen to save GPU
+      
       const p = propsRef.current;
       mouseCurrent.x += (mouseTarget.x - mouseCurrent.x) * 0.035;
       mouseCurrent.y += (mouseTarget.y - mouseCurrent.y) * 0.035;
@@ -184,6 +193,7 @@ export default function Aurora({ colorStops = ['#e91e8c', '#ffffff', '#9c27b0'],
 
     return () => {
       cancelAnimationFrame(animId);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       interactionArea.removeEventListener('pointermove', onPointerMove);
       interactionArea.removeEventListener('pointerleave', onPointerLeave);

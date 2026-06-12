@@ -1,20 +1,45 @@
 import { useRef, useState } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
 import Orb from './Orb';
+import { playClick, playLongClick, playHover } from '../hooks/useSound';
 
 function Contact() {
   const sectionRef = useRef(null);
   useScrollFade(sectionRef);
 
   const [form, setForm] = useState({ name: '', phone: '', message: '' });
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleChange = (e) =>
+  const handleChange = (e) => {
+    const { name } = e.target;
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /* Wire to your backend / email service here */
-    alert('Message sent!');
+    if (submitting) return;
+    const nextErrors = {};
+
+    if (!form.name.trim()) nextErrors.name = 'Please enter your name.';
+    if (!form.phone.trim()) nextErrors.phone = 'Please enter your phone or email.';
+    if (!form.message.trim()) nextErrors.message = 'Please tell us a little about your project.';
+
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      playClick();
+      return;
+    }
+
+    setSubmitting(true);
+    playLongClick();
+
+    setTimeout(() => {
+      setSubmitting(false);
+      alert('Message sent!');
+      setForm({ name: '', phone: '', message: '' });
+    }, 1500);
   };
 
   return (
@@ -63,6 +88,7 @@ function Contact() {
               <form
                 className="form-contact effectFade fadeUp"
                 onSubmit={handleSubmit}
+                noValidate
                 style={{
                   background: 'rgba(255, 255, 255, 0.07)',
                   backdropFilter: 'blur(16px)',
@@ -84,12 +110,19 @@ function Contact() {
                     placeholder="Enter your full name"
                     value={form.name}
                     onChange={handleChange}
-                    required
+                    onMouseEnter={playHover}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'contact-name-error' : undefined}
                     style={{
                       color: '#ffffff',
                       borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     }}
                   />
+                  {errors.name && (
+                    <div id="contact-name-error" className="contact-field-error">
+                      {errors.name}
+                    </div>
+                  )}
                 </fieldset>
 
                 <fieldset className="mb-21">
@@ -100,12 +133,19 @@ function Contact() {
                     placeholder="Enter the e-mail"
                     value={form.phone}
                     onChange={handleChange}
-                    required
+                    onMouseEnter={playHover}
+                    aria-invalid={Boolean(errors.phone)}
+                    aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
                     style={{
                       color: '#ffffff',
                       borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     }}
                   />
+                  {errors.phone && (
+                    <div id="contact-phone-error" className="contact-field-error">
+                      {errors.phone}
+                    </div>
+                  )}
                 </fieldset>
 
                 <fieldset className="mb-18">
@@ -114,25 +154,54 @@ function Contact() {
                     name="message"
                     value={form.message}
                     onChange={handleChange}
+                    onMouseEnter={playHover}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? 'contact-message-error' : undefined}
                     style={{
                       color: '#ffffff',
                       borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     }}
                   ></textarea>
+                  {errors.message && (
+                    <div id="contact-message-error" className="contact-field-error">
+                      {errors.message}
+                    </div>
+                  )}
                 </fieldset>
 
-                <div className="attachment d-flex gap-8 align-items-center" style={{ color: '#ffffff' }}>
+                <div
+                  className="attachment d-flex gap-8 align-items-center"
+                  style={{ color: '#ffffff', cursor: 'pointer' }}
+                  onMouseEnter={playHover}
+                  onClick={playClick}
+                >
                   <i className="icon icon-paperclip-solid fs-24"></i>
                   <div className="fw-semibold text-body-3">Add an Attachment</div>
                 </div>
 
-                <button type="submit" className="tf-btn w-100">Submit Message</button>
+                <button
+                  type="submit"
+                  className="tf-btn w-100"
+                  disabled={submitting}
+                  onMouseEnter={playHover}
+                >
+                  {submitting ? 'Sending...' : 'Submit Message'}
+                </button>
               </form>
             </div>
 
           </div>
         </div>
       </div>
+      <style>{`
+        .contact-field-error {
+          margin-top: 8px;
+          color: #ff7aa8;
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 600;
+        }
+      `}</style>
     </div>
   );
 }

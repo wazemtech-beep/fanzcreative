@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { playTick, playWhoosh, playPop, playHomeLink, playAboutLink, playHover, playClose } from '../hooks/useSound';
 
 /**
  * Navbar — converted from `.tf-header.header2` in index-v2.html
@@ -50,9 +51,24 @@ function Navbar() {
 
     // Wire the close button rendered inside the offcanvas
     const closeBtn = document.getElementById('close-mb-menu');
-    const handleClose = () => setMenuOpen(false);
+    const handleClose = () => {
+      setMenuOpen(false);
+      playClose();
+    };
     closeBtn?.addEventListener('click', handleClose);
-    return () => closeBtn?.removeEventListener('click', handleClose);
+
+    // Wire closing when clicking a menu link inside offcanvas
+    const links = offcanvas.querySelectorAll('a');
+    const handleLinkClick = () => {
+      setMenuOpen(false);
+      playClose();
+    };
+    links.forEach((link) => link.addEventListener('click', handleLinkClick));
+
+    return () => {
+      closeBtn?.removeEventListener('click', handleClose);
+      links.forEach((link) => link.removeEventListener('click', handleLinkClick));
+    };
   }, [menuOpen]);
 
   return (
@@ -62,7 +78,7 @@ function Navbar() {
       <div className="header-inner" style={{ background: '#ffffff' }}>
 
         {/* Logo — filter: invert makes the white/light logo black */}
-        <a href="/" className="logo-site">
+        <a href="#" className="logo-site" onClick={playHomeLink} onMouseEnter={playHover}>
           <img
             src="/assets/images/logo/fanz-logo.png"
             alt="FanzCreative"
@@ -80,41 +96,41 @@ function Navbar() {
           <ul className="nav-menu-main">
 
             <li className="menu-item">
-              <a href="/" className="item-link link1 active">Home</a>
+              <a href="#" className="item-link link1 active" onClick={playHomeLink} onMouseEnter={playHover}>Home</a>
             </li>
 
             <li className="menu-item">
-              <a href="/about" className="item-link link1">About</a>
+              <a href="#about" className="item-link link1" onClick={playAboutLink} onMouseEnter={playHover}>About</a>
             </li>
 
             <li className="menu-item">
-              <a href="/service" className="item-link link1">Services</a>
+              <a href="#services" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Services</a>
             </li>
 
             <li className="menu-item">
-              <a href="/work" className="item-link link1">Works</a>
+              <a href="#works" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Works</a>
             </li>
 
             <li className="menu-item">
-              <a href="/blog-standard" className="item-link link1">Blog</a>
+              <a href="#" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Blog</a>
             </li>
 
             <li className="menu-item">
-              <a href="/contact" className="item-link link1">Contact</a>
+              <a href="#contact" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Contact</a>
             </li>
 
           </ul>
         </nav>
 
         {/* CTA — desktop only */}
-        <a href="/contact" className="tf-btn d-lg-flex d-none">
+        <a href="#contact" className="tf-btn d-lg-flex d-none" onClick={playPop} onMouseEnter={playHover}>
           Start a Project
         </a>
 
         {/* Hamburger — mobile only */}
         <button
           className="tf-btn open-mb-menu mobile-menu d-lg-none d-flex"
-          onClick={() => setMenuOpen(true)}
+          onClick={() => { setMenuOpen(true); playWhoosh(); }}
           aria-label="Open menu"
         >
           <i className="icon icon-grip-lines-solid"></i>

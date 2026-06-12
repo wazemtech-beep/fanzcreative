@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
+import { playPop, playHover } from '../hooks/useSound';
 
 function Pricing() {
   const sectionRef = useRef(null);
@@ -62,7 +63,7 @@ function Pricing() {
                 </div>
 
                 <div className="heading" style={{ marginTop: 24, marginBottom: 24 }}>
-                  <a href="#contact" className="tf-btn w-100 justify-content-center text-center">Request Quote</a>
+                  <a href="#contact" className="tf-btn w-100 justify-content-center text-center" onClick={playPop} onMouseEnter={playHover}>Request Quote</a>
                 </div>
 
                 <div className="line"></div>

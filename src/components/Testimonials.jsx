@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
+import { playList, playHover } from '../hooks/useSound';
 
 const TESTIMONIALS = [
   {
@@ -32,9 +33,24 @@ function Testimonials() {
   const sectionRef = useRef(null);
   useScrollFade(sectionRef);
   const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(1);
 
-  const prev = () => setActive((a) => (a - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
-  const next = () => setActive((a) => (a + 1) % TESTIMONIALS.length);
+  const prev = () => {
+    setDirection(-1);
+    setActive((a) => (a - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
+  const next = () => {
+    setDirection(1);
+    setActive((a) => (a + 1) % TESTIMONIALS.length);
+  };
+
+  const goTo = (index) => {
+    if (index === active) return;
+    setDirection(index > active ? 1 : -1);
+    setActive(index);
+  };
+
   const t = TESTIMONIALS[active];
 
   return (
@@ -52,7 +68,10 @@ function Testimonials() {
                 </div>
               </div>
 
-              <div className="swiper-testimonial_wrap effectFade fadeUp">
+              <div
+                key={active}
+                className={`swiper-testimonial_wrap testimonial-copy-slide ${direction < 0 ? 'from-left' : 'from-right'}`}
+              >
                 {/* Icon */}
                 <div className="top-icon d-flex gap-4">
                   {t.type === 'stars' ? (
@@ -80,10 +99,10 @@ function Testimonials() {
                 {/* Nav + dots */}
                 <div className="group-slider" style={{ marginTop: 24 }}>
                   <div className="group-btn-slider">
-                    <div className="btn-slider nav-prev-swiper" role="button" onClick={prev}>
+                    <div className="btn-slider nav-prev-swiper" role="button" onClick={() => { prev(); playList(); }} onMouseEnter={playHover}>
                       <i className="icon icon-angle-left-solid"></i>
                     </div>
-                    <div className="btn-slider nav-next-swiper" role="button" onClick={next}>
+                    <div className="btn-slider nav-next-swiper" role="button" onClick={() => { next(); playList(); }} onMouseEnter={playHover}>
                       <i className="icon icon-angle-right-solid"></i>
                     </div>
                   </div>
@@ -91,7 +110,8 @@ function Testimonials() {
                     {TESTIMONIALS.map((_, i) => (
                       <span
                         key={i}
-                        onClick={() => setActive(i)}
+                        onClick={() => { goTo(i); playList(); }}
+                        onMouseEnter={playHover}
                         style={{
                           width: 8, height: 8, borderRadius: '50%',
                           background: i === active ? '#fff' : 'rgba(255,255,255,0.3)',
@@ -109,12 +129,14 @@ function Testimonials() {
           {/* Right — photo */}
           <div className="col-lg-6">
             <div className="effectFade fadeUp">
-              <div className="testimonial-image">
+              <div
+                className={`testimonial-image testimonial-image-slide ${direction < 0 ? 'from-left' : 'from-right'}`}
+                key={t.name}
+              >
                 <img
                   src={t.img}
                   alt={t.name}
-                  style={{ 
-                    transition: 'opacity 0.3s ease', 
+                  style={{
                     width: '100%',
                     objectPosition: t.imgPosition || 'center center'
                   }}
@@ -125,6 +147,77 @@ function Testimonials() {
 
         </div>
       </div>
+      <style>{`
+        .testimonial-copy-slide {
+          animation: testimonialCopyIn 0.42s ease both;
+        }
+
+        .testimonial-image {
+          overflow: hidden;
+        }
+
+        .testimonial-image-slide {
+          animation: testimonialImageIn 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .testimonial-image-slide img {
+          animation: testimonialPhotoIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+          will-change: transform, opacity;
+        }
+
+        .testimonial-copy-slide.from-left,
+        .testimonial-image-slide.from-left {
+          --testimonial-x: -26px;
+          --testimonial-rotate: -1.4deg;
+        }
+
+        .testimonial-copy-slide.from-right,
+        .testimonial-image-slide.from-right {
+          --testimonial-x: 26px;
+          --testimonial-rotate: 1.4deg;
+        }
+
+        @keyframes testimonialCopyIn {
+          from {
+            opacity: 0;
+            transform: translate3d(var(--testimonial-x), 12px, 0);
+          }
+          to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+
+        @keyframes testimonialImageIn {
+          from {
+            opacity: 0;
+            transform: translate3d(var(--testimonial-x), 18px, 0) rotate(var(--testimonial-rotate));
+          }
+          to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotate(0deg);
+          }
+        }
+
+        @keyframes testimonialPhotoIn {
+          from {
+            opacity: 0.7;
+            transform: scale(1.08);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .testimonial-copy-slide,
+          .testimonial-image-slide,
+          .testimonial-image-slide img {
+            animation: none;
+          }
+        }
+      `}</style>
     </div>
   );
 }

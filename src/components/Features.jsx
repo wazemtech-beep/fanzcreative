@@ -63,7 +63,7 @@ function Features() {
             {/* Left column */}
             <div className="features-col col-left lg-mb-24">
               {LEFT_FEATURES.map((f) => (
-                <div key={f.title} className="features-item effectFade fadeUp">
+                <div key={f.title} className="features-item effectFade fadeUp no-div">
                   <i className={`icon ${f.icon}`}></i>
                   <h6 className="title fw-semibold">{f.title}</h6>
                   <p className="text-secondary">{f.text}</p>
@@ -88,7 +88,7 @@ function Features() {
             {/* Right column */}
             <div className="features-col col-right">
               {RIGHT_FEATURES.map((f) => (
-                <div key={f.title} className="features-item effectFade fadeUp" data-delay="0.1">
+                <div key={f.title} className="features-item effectFade fadeUp no-div" data-delay="0.1">
                   <i className={`icon ${f.icon}`}></i>
                   <h6 className="title fw-semibold">{f.title}</h6>
                   <p className="text-secondary">{f.text}</p>

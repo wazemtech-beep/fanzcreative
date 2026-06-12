@@ -18,16 +18,6 @@ const PARTNERS = [
   '/assets/images/partner/brand-1-3.png',
   '/assets/images/partner/brand-1-4.png',
   '/assets/images/partner/brand-1-5.png',
-  '/assets/images/partner/brand-1-1-1.png',
-  '/assets/images/partner/brand-1-1-2.png',
-  '/assets/images/partner/brand-1-2-1.png',
-  '/assets/images/partner/brand-1-2-2.png',
-  '/assets/images/partner/brand-1-3-1.png',
-  '/assets/images/partner/brand-1-3-2.png',
-  '/assets/images/partner/brand-1-4-1.png',
-  '/assets/images/partner/brand-1-4-2.png',
-  '/assets/images/partner/brand-1-5-1.png',
-  '/assets/images/partner/brand-1-5-2.png',
 ];
 
 function Partner() {
@@ -36,9 +26,12 @@ function Partner() {
   /* Inject CSS marquee keyframe once */
   useEffect(() => {
     const id = 'partner-marquee-style';
-    if (document.getElementById(id)) return;
-    const style = document.createElement('style');
-    style.id = id;
+    let style = document.getElementById(id);
+    if (!style) {
+      style = document.createElement('style');
+      style.id = id;
+      document.head.appendChild(style);
+    }
     style.textContent = `
       @keyframes partner-marquee {
         0%   { transform: translateX(0); }
@@ -52,10 +45,10 @@ function Partner() {
       .partner-track:hover { animation-play-state: paused; }
       .partner-track img {
         flex-shrink: 0;
-        height: 50px;
+        height: 70px;
         width: auto;
-        max-width: 140px;
-        margin: 0 36px;
+        max-width: 180px;
+        margin: 0 40px;
         object-fit: contain;
         filter: brightness(0);
         opacity: 0.7;
@@ -65,11 +58,13 @@ function Partner() {
         opacity: 1;
       }
     `;
-    document.head.appendChild(style);
+    return () => {
+      style.remove();
+    };
   }, []);
 
   /* Duplicate the list to create seamless loop */
-  const items = [...PARTNERS, ...PARTNERS];
+  const items = [...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS];
 
   return (
     <div className="section-partner">
@@ -78,7 +73,7 @@ function Partner() {
           <div className="col-12">
             <div className="partner-wrap">
               <p className="text-secondary text fw-semibold">
-                Trusted by 100+ <br /> top-tier brands
+                Trusted by 100+ <br /> logos
               </p>
               <div className="infiniteSlide_tech_main d-grid" style={{ overflow: 'hidden' }}>
                 <div className="partner-track" ref={trackRef}>

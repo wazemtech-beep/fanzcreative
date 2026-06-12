@@ -77,7 +77,7 @@ function AboutUs() {
                 <h5 className="title fw-semibold text-white">
                   Based in <span className="text-brand">Montréal, Canada</span>
                 </h5>
-                <a href="/contact" className="tf-btn">Start a Project</a>
+                <a href="#contact" className="tf-btn">Start a Project</a>
               </div>
               <img
                 className="effectFade fadeRotateX"

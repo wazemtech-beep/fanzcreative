@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
+import { playClick, playHover } from '../hooks/useSound';
 
 const FAQS = [
   { id: 1, q: "How long does a branding project take?",              a: 'A standard brand identity project takes 2–4 weeks depending on scope. We start with a discovery session to understand your business, then move through concepts, refinements, and final delivery.' },
@@ -40,7 +41,8 @@ function FAQs() {
                       <button
                         className={`accordion-button text-body-1 fw-semibold${isOpen ? '' : ' collapsed'}`}
                         type="button"
-                        onClick={() => toggle(faq.id)}
+                        onClick={() => { toggle(faq.id); playClick(); }}
+                        onMouseEnter={playHover}
                         aria-expanded={isOpen}
                       >
                         {faq.q}
@@ -48,10 +50,11 @@ function FAQs() {
                       </button>
                     </div>
                     <div
-                      className={`accordion-collapse collapse${isOpen ? ' show' : ''}`}
-                      style={isOpen ? {} : { display: 'none' }}
+                      className={`faq-answer-panel${isOpen ? ' show' : ''}`}
                     >
-                      <div className="accordion-body">{faq.a}</div>
+                      <div className="faq-answer-inner">
+                        <div className="accordion-body">{faq.a}</div>
+                      </div>
                     </div>
                   </div>
                 );
@@ -60,6 +63,46 @@ function FAQs() {
           </div>
         </div>
       </div>
+      <style>{`
+        .accordion-asked .faq-answer-panel {
+          display: grid;
+          grid-template-rows: 0fr;
+          opacity: 0;
+          transform: translateY(-6px);
+          transition:
+            grid-template-rows 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.28s ease,
+            transform 0.36s ease;
+        }
+
+        .accordion-asked .faq-answer-panel.show {
+          grid-template-rows: 1fr;
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .accordion-asked .faq-answer-inner {
+          min-height: 0;
+          overflow: hidden;
+        }
+
+        .accordion-asked .faq-answer-panel .accordion-body {
+          transform: translateY(-8px);
+          transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .accordion-asked .faq-answer-panel.show .accordion-body {
+          transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .accordion-asked .faq-answer-panel,
+          .accordion-asked .faq-answer-panel .accordion-body {
+            transition: none;
+            transform: none;
+          }
+        }
+      `}</style>
     </div>
   );
 }

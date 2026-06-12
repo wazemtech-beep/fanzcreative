@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { playPop } from '../hooks/useSound';
 import { useScrollFade } from '../hooks/useScrollFade';
 import DarkVeil from './DarkVeil';
 
@@ -75,8 +76,8 @@ function Hero() {
 
           {/* CTA buttons */}
           <div className="bot-btns hero-actions effectFade fadeRotateX">
-            <a href="#services" className="tf-btn">Explore Services</a>
-            <a href="#pricing" className="tf-btn-2">View Pricing Plans</a>
+            <a href="#services" className="tf-btn" onClick={playPop}>Explore Services</a>
+            <a href="#pricing" className="tf-btn-2" onClick={playPop}>View Pricing Plans</a>
           </div>
 
         </div>
