@@ -377,7 +377,8 @@ function SoundToggle() {
           ) : (
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="playing-waves">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" className="wave-inner"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" className="wave-outer"></path>
             </svg>
           )}
         </span>
@@ -425,13 +426,19 @@ function SoundToggle() {
           justify-content: center;
         }
 
-        @keyframes wave-pulse-float {
-          0%, 100% { transform: scale(1); opacity: 0.8; }
-          50% { transform: scale(1.15); opacity: 1; }
+        @keyframes sound-wave-pulse {
+          0% { opacity: 0.35; }
+          50% { opacity: 1; }
+          100% { opacity: 0.35; }
         }
 
-        .floating-sound-toggle .playing-waves path {
-          animation: wave-pulse-float 1s ease-in-out infinite;
+        .playing-waves .wave-inner {
+          animation: sound-wave-pulse 1.2s ease-in-out infinite;
+        }
+
+        .playing-waves .wave-outer {
+          animation: sound-wave-pulse 1.2s ease-in-out infinite;
+          animation-delay: 0.3s;
         }
 
         /* Sleek Glassmorphic Popover Control Panel */
