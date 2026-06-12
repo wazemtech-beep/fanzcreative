@@ -13,11 +13,11 @@ import { useEffect, useRef } from 'react';
  */
 
 const PARTNERS = [
-  '/assets/images/partner/brand-1-1.png',
-  '/assets/images/partner/brand-1-2.png',
-  '/assets/images/partner/brand-1-3.png',
-  '/assets/images/partner/brand-1-4.png',
-  '/assets/images/partner/brand-1-5.png',
+  '/assets/images/partner/brand-1-1.webp',
+  '/assets/images/partner/brand-1-2.webp',
+  '/assets/images/partner/brand-1-3.webp',
+  '/assets/images/partner/brand-1-4.webp',
+  '/assets/images/partner/brand-1-5.webp',
 ];
 
 function Partner() {

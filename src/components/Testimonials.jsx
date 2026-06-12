@@ -8,7 +8,7 @@ const TESTIMONIALS = [
     text: 'FanzCreative completely revolutionized our digital presence. Within just three weeks, they delivered a stunning brand identity and a high-performance web platform that truly captures our vision. The results speak for themselves: our inbound client inquiries doubled in less than a month and user engagement is at an all-time high.',
     name: 'Elena Ruiz',
     role: 'CEO, Bloom Studio',
-    img: '/assets/images/section/Elena-Ruiz.jpg',
+    img: '/assets/images/section/Elena-Ruiz.webp',
     imgPosition: 'center 35%'
   },
   {
@@ -16,7 +16,7 @@ const TESTIMONIALS = [
     text: "Working with the FanzCreative team was a game-changer for our e-commerce business. The bespoke platform they designed is exceptionally fast, visually captivating, and optimized for conversions. Since launch, our conversion rate has climbed by 34%, and our customer feedback has been overwhelmingly positive. Simply the best investment we've made this year.",
     name: 'Marcus Tan',
     role: 'Founder, Northway Retail',
-    img: '/assets/images/section/Marcus-Tan.png',
+    img: '/assets/images/section/Marcus-Tan.webp',
     imgPosition: 'center 15%'
   },
   {
@@ -24,7 +24,7 @@ const TESTIMONIALS = [
     text: 'Their digital marketing assets and 3D motion graphics brought our flagship product launch to life. The interactive storytelling and high-quality explainer videos they created generated over 100k views on day one and significantly boosted our sign-ups. Their attention to detail and creative execution exceeded all our expectations.',
     name: 'David Kim',
     role: 'Marketing Director, PulseWave',
-    img: '/assets/images/section/David-Kim.jpg',
+    img: '/assets/images/section/David-Kim.webp',
     imgPosition: 'center 15%'
   },
 ];
@@ -90,7 +90,7 @@ function Testimonials() {
 
                 {/* Cite */}
                 <div className="cite">
-                  <img className="line-left" src="/assets/images/item/line-1.png" alt="" />
+                  <img className="line-left" src="/assets/images/item/line-1.webp" alt="" />
                   <div className="name text-body-3 text-neutral-400 fw-semibold">{t.name}</div>
                   <div className="line"></div>
                   <div className="sub text-body-3 text-neutral-400">{t.role}</div>

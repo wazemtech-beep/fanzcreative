@@ -82,7 +82,7 @@ function MouseFollowImage({ src, alt }) {
 
 const WORKS = [
   {
-    img: '/assets/images/section/featured-works-1.png',
+    img: '/assets/images/section/featured-works-1.webp',
     activeDot: 0,
     title: 'Lumière\nBrand Identity',
     desc: 'Full brand identity for a luxury skincare startup — logo system, colour palette, packaging, and social media kit. Launched in 3 markets within 6 weeks.',
@@ -90,7 +90,7 @@ const WORKS = [
     industry: 'Beauty & Skincare',
   },
   {
-    img: '/assets/images/section/featured-works-2.png',
+    img: '/assets/images/section/featured-works-2.webp',
     activeDot: 1,
     title: 'Vortex\nSaaS Website',
     desc: 'Custom marketing website for a B2B SaaS platform — UI/UX design, Webflow development, and conversion-optimised landing pages. 42% lift in sign-ups.',
@@ -98,7 +98,7 @@ const WORKS = [
     industry: 'Tech / SaaS',
   },
   {
-    img: '/assets/images/section/featured-works-3.png',
+    img: '/assets/images/section/featured-works-3.webp',
     activeDot: 2,
     title: 'Forté\nProduct Launch Film',
     desc: '90-second animated product launch video for a fitness equipment brand. 280K organic views in the first 72 hours across Instagram and YouTube.',
@@ -106,7 +106,7 @@ const WORKS = [
     industry: 'Health & Fitness',
   },
   {
-    img: '/assets/images/section/featured-works-4.png',
+    img: '/assets/images/section/featured-works-4.webp',
     activeDot: 3,
     title: 'Oakwell\nE-commerce Store',
     desc: 'End-to-end Shopify store for a premium furniture brand — custom theme, product photography direction, and UX optimisation. 34% increase in conversion rate.',

@@ -81,7 +81,7 @@ function AboutUs() {
               </div>
               <img
                 className="effectFade fadeRotateX"
-                src="/assets/images/item/earth.png"
+                src="/assets/images/item/earth.webp"
                 alt=""
               />
             </div>
@@ -128,7 +128,7 @@ function AboutUs() {
             {/* Quote card */}
             <div className="box-quotes effectFade fadeRotateX">
               <div className="image">
-                <img src="/assets/images/image.jpg" alt="" />
+                <img src="/assets/images/image.webp" alt="" />
               </div>
               <div className="content">
                 <div className="icon mb-8">

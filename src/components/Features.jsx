@@ -74,7 +74,7 @@ function Features() {
             {/* Center logo — CSS handles size/shape; we just put the logo inside */}
             <div className="features-center flex-shrink">
               <img
-                src="/assets/images/logo/fanz-logo.png"
+                src="/assets/images/logo/fanz-logo.webp"
                 alt="FanzCreative"
                 style={{
                   width: 120,

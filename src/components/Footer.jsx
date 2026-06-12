@@ -22,7 +22,7 @@ function Footer() {
               boxShadow: '0 3px 3px rgba(0,0,0,0.14), 0 2.77px 2.21px rgba(0,0,0,0.12)',
             }}>
               <img
-                src="/assets/images/logo/fanz-logo.png"
+                src="/assets/images/logo/fanz-logo.webp"
                 alt="FanzCreative"
                 style={{ width: 52, height: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
               />

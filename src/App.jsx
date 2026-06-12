@@ -111,8 +111,8 @@ function App() {
         {/* box-black — dark background block (Team → Testimonials) */}
         <div className="box-black">
           <div className="light-box"></div>
-          <img className="light-top" src="/assets/images/item/light-top.png" alt="" />
-          <img className="light-bot" src="/assets/images/item/light-bot.png" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
+          <img className="light-top" src="/assets/images/item/light-top.webp" alt="" />
+          <img className="light-bot" src="/assets/images/item/light-bot.webp" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
           <Statistic />
           <Awards />
           <Testimonials />

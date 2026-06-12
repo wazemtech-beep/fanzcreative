@@ -80,7 +80,7 @@ function Navbar() {
         {/* Logo — filter: invert makes the white/light logo black */}
         <a href="#" className="logo-site" onClick={playHomeLink} onMouseEnter={playHover}>
           <img
-            src="/assets/images/logo/fanz-logo.png"
+            src="/assets/images/logo/fanz-logo.webp"
             alt="FanzCreative"
             style={{
               height: 44,
