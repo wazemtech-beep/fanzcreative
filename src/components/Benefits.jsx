@@ -1,23 +1,23 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
 
 const PROGRESS_ITEMS = [
-  { icon: 'icon-star-solid', label: 'Design Quality', value: 95 },
-  { icon: 'icon-clock-solid', label: 'On-Time Delivery', value: 98 },
-  { icon: 'icon-heart-solid', label: 'Client Satisfaction', value: 100 },
-  { icon: 'icon-chart-line-solid', label: 'Brand Impact', value: 85 },
+  { icon: 'icon-star-solid',       label: 'Design Quality',    value: 95  },
+  { icon: 'icon-clock-solid',      label: 'On-Time Delivery',  value: 98  },
+  { icon: 'icon-heart-solid',      label: 'Client Satisfaction', value: 100 },
+  { icon: 'icon-chart-line-solid', label: 'Brand Impact',      value: 85  },
 ];
 
-const DURATION = 1800; // ms
+const DURATION = 2000; // ms — animation length
 
 /**
- * SyncedProgressItem
- * Label physically follows the leading edge of the progress bar.
- * Both the bar width and the label's `left` position are driven
- * by the same rAF loop so they are always perfectly in sync.
+ * ProgressItem — loader-style design
+ * Rectangular track with pink border, pink fill grows left → right.
+ * Percentage text is ALWAYS centered on the full track (white, bold).
  */
-function SyncedProgressItem({ icon, label, value }) {
-  const fillRef    = useRef(null); // pink fill bar (label lives inside)
+function ProgressItem({ icon, label, value }) {
+  const fillRef    = useRef(null);
+  const pctRef     = useRef(null);
   const startedRef = useRef(false);
 
   const runAnimation = useCallback(() => {
@@ -25,24 +25,37 @@ function SyncedProgressItem({ icon, label, value }) {
     startedRef.current = true;
 
     const fill = fillRef.current;
-    if (!fill) return;
+    const pct  = pctRef.current;
+    if (!fill || !pct) return;
 
     const startTime = performance.now();
 
     const tick = (now) => {
       const elapsed    = now - startTime;
       const progress   = Math.min(elapsed / DURATION, 1);
-      // ease-out cubic
       const eased      = 1 - Math.pow(1 - progress, 3);
-      const currentPct = eased * value;
+      const currentPct = Math.round(eased * value);
 
-      // Grow the pink fill — label inside moves with it automatically
       fill.style.width = currentPct + '%';
+      pct.textContent  = currentPct + '%';
+
+      // Toggle text color dynamically when fill crosses the middle
+      if (currentPct >= 50) {
+        pct.style.color = '#ffffff';
+      } else {
+        pct.style.color = 'var(--brand)';
+      }
 
       if (progress < 1) {
         requestAnimationFrame(tick);
       } else {
         fill.style.width = value + '%';
+        pct.textContent  = value + '%';
+        if (value >= 50) {
+          pct.style.color = '#ffffff';
+        } else {
+          pct.style.color = 'var(--brand)';
+        }
       }
     };
 
@@ -55,51 +68,35 @@ function SyncedProgressItem({ icon, label, value }) {
     fill.style.width = '0%';
 
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { runAnimation(); observer.disconnect(); } },
-      { threshold: 0.4 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          runAnimation();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
     );
     observer.observe(fill);
     return () => observer.disconnect();
   }, [runAnimation]);
 
   return (
-    <div className="benefits-progress-item" style={{ marginTop: '16px' }}>
-      <div style={{ position: 'relative', flex: 1, marginRight: 12 }}>
+    <div className="benefits-progress-item">
 
-        {/* Pink fill bar — label sits INSIDE at the right edge */}
-        <div
-          ref={fillRef}
-          className="progress-line"
-          style={{ width: '0%', position: 'relative', overflow: 'visible' }}
-        >
-          {/* Label: absolutely pinned to the right end of the fill */}
-          <span
-            style={{
-              position      : 'absolute',
-              right         : 0,
-              top           : '50%',
-              transform     : 'translate(50%, -50%)',
-              fontSize      : '13px',
-              fontWeight    : '800',
-              color         : '#df2d6d',
-              background    : 'var(--white, #fff)',
-              border        : '2px solid #df2d6d',
-              borderRadius  : '20px',
-              padding       : '2px 8px',
-              whiteSpace    : 'nowrap',
-              pointerEvents : 'none',
-              zIndex        : 6,
-              lineHeight    : 1.4,
-              boxShadow     : '0 2px 8px rgba(223,45,109,0.18)',
-            }}
-          >{value}%</span>
-        </div>
-      </div>
-
-      <div className="progress-text fw-semibold">
+      {/* ── Label row (icon + name) ── */}
+      <div className="progress-label">
         <i className={`icon ${icon}`}></i>
-        {label}
+        <span>{label}</span>
       </div>
+
+      {/* ── Loader-style track ── */}
+      <div className="progress-track">
+        {/* Growing pink fill */}
+        <div ref={fillRef} className="progress-fill" style={{ width: '0%' }} />
+        {/* Percentage — always centered on the FULL track */}
+        <span ref={pctRef} className="progress-pct">0%</span>
+      </div>
+
     </div>
   );
 }
@@ -125,7 +122,7 @@ function Benefits() {
             <div className="benefits-box benefits-progress">
               <div className="benefits-progress-inner">
                 {PROGRESS_ITEMS.map((item) => (
-                  <SyncedProgressItem key={item.label} {...item} />
+                  <ProgressItem key={item.label} {...item} />
                 ))}
               </div>
               <div className="content">

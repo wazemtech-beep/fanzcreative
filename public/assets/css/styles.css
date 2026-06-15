@@ -9683,45 +9683,69 @@ button.animate-btn::after,
   margin-bottom: -26px;
 }
 
+/* ── Progress bar: loader-style ────────────────────────────────── */
 .benefits-progress-inner {
   margin-bottom: 40px;
-  display: grid;
-  gap: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+/* Outer row — no background, just stacks label + track */
 .benefits-progress-inner .benefits-progress-item {
-  display: grid;
-  grid-template-columns: 1fr 190px;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  align-items: center;
-  background-color: var(--neutral-200);
-  border-radius: 12px;
-  padding-right: 8px;
 }
 
-.benefits-progress-inner .benefits-progress-item .progress-line {
-  height: 40px;
+/* Label + icon above the bar */
+.benefits-progress-inner .benefits-progress-item .progress-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--on-surface, #111);
+}
+
+.benefits-progress-inner .benefits-progress-item .progress-label .icon {
+  font-size: 18px;
+  color: var(--brand);
+}
+
+/* Rectangular track — dark bg + pink border (like the loader) */
+.benefits-progress-inner .benefits-progress-item .progress-track {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  background-color: transparent;
+  border: 3px solid var(--brand);
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* Pink fill that grows left → right */
+.benefits-progress-inner .benefits-progress-item .progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 0%;
   background-color: var(--brand);
-  position: relative;
-  border-radius: 12px;
-  box-shadow: 0px -4px 0px 0px rgba(0, 0, 0, 0.05) inset, 0px 7.77px 16px 0px rgba(0, 0, 0, 0.05), 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  transition: none; /* rAF handles motion */
 }
 
-.benefits-progress-inner .benefits-progress-item .progress-text {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  padding: 8px 16px;
-  border-radius: 12px;
-  background-color: var(--neutral-50);
-  width: 100%;
-  box-shadow: 0px 7.77px 16px 0px rgba(0, 0, 0, 0.05), 0px 3px 3px 0px rgba(0, 0, 0, 0.1), 0px -4px 0px 0px rgba(0, 0, 0, 0.05) inset, 0px 4px 0px 0px rgba(255, 255, 255, 0.6) inset;
-}
-
-.benefits-progress-inner .benefits-progress-item .progress-text .icon {
-  font-size: 24px;
-  color: var(--neutral-500);
+/* Percentage — always centered on the FULL track width, white bold */
+.benefits-progress-inner .benefits-progress-item .progress-pct {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brand); /* initial color */
+  pointer-events: none;
+  z-index: 5;
 }
 
 .benefits-step {
