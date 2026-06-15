@@ -9686,7 +9686,7 @@ button.animate-btn::after,
 .benefits-progress-inner {
   margin-bottom: 40px;
   display: grid;
-  gap: 12px;
+  gap: 28px;
 }
 
 .benefits-progress-inner .benefits-progress-item {
