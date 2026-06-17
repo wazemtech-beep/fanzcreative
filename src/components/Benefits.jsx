@@ -5,7 +5,7 @@ const PROGRESS_ITEMS = [
   { icon: 'icon-star-solid',       label: 'Design Quality',    value: 95  },
   { icon: 'icon-clock-solid',      label: 'On-Time Delivery',  value: 98  },
   { icon: 'icon-heart-solid',      label: 'Client Satisfaction', value: 100 },
-  { icon: 'icon-chart-line-solid', label: 'Brand Impact',      value: 85  },
+  { icon: 'icon-chart-line-solid', label: 'Brand Impact',      value: 92  },
 ];
 
 const DURATION = 2000; // ms — animation length
