@@ -10,7 +10,11 @@ function Footer() {
 
       <div className="container">
         <div className="footer-content">
-          <a href="/" className="footer-logo" onClick={playTick} onMouseEnter={playHover}>
+          <a href="/" className="footer-logo" onClick={(e) => {
+            e.preventDefault();
+            playTick();
+            if (window.setCurrentPage) window.setCurrentPage('home');
+          }} onMouseEnter={playHover}>
             <div style={{
               width: 80,
               height: 80,
@@ -55,7 +59,11 @@ function Footer() {
 
         <div className="footer-bottom">
           <ul className="footer-links d-flex gap-24 align-items-center">
-            <li><a href="#about"   className="fw-semibold link-underline link1" onClick={playTick} onMouseEnter={playHover}>About</a></li>
+            <li><a href="/about"   className="fw-semibold link-underline link1" onClick={(e) => {
+              e.preventDefault();
+              playTick();
+              if (window.setCurrentPage) window.setCurrentPage('about');
+            }} onMouseEnter={playHover}>About</a></li>
             <li><a href="#services" className="fw-semibold link-underline link1" onClick={playTick} onMouseEnter={playHover}>Services</a></li>
             <li><a href="#works"    className="fw-semibold link-underline link1" onClick={playTick} onMouseEnter={playHover}>Works</a></li>
             <li><a href="#contact" className="fw-semibold link-underline link1" onClick={playTick} onMouseEnter={playHover}>Contact</a></li>

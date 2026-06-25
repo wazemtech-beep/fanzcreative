@@ -13,11 +13,17 @@ import { useEffect, useRef } from 'react';
  */
 
 const PARTNERS = [
-  '/assets/images/partner/brand-1-1.webp',
-  '/assets/images/partner/brand-1-2.webp',
-  '/assets/images/partner/brand-1-3.webp',
-  '/assets/images/partner/brand-1-4.webp',
-  '/assets/images/partner/brand-1-5.webp',
+  '/assets/images/partner/1.svg',
+  '/assets/images/partner/2.svg',
+  '/assets/images/partner/3.svg',
+  '/assets/images/partner/4.svg',
+  '/assets/images/partner/5.svg',
+  '/assets/images/partner/6.svg',
+  '/assets/images/partner/7.svg',
+  '/assets/images/partner/8.svg',
+  '/assets/images/partner/9.svg',
+  '/assets/images/partner/10.svg',
+  '/assets/images/partner/11.svg',
 ];
 
 function Partner() {
@@ -45,9 +51,9 @@ function Partner() {
       .partner-track:hover { animation-play-state: paused; }
       .partner-track img {
         flex-shrink: 0;
-        height: 70px;
+        height: 95px;
         width: auto;
-        max-width: 180px;
+        max-width: 220px;
         margin: 0 40px;
         object-fit: contain;
         filter: brightness(0);

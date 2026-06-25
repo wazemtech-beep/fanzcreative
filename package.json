@@ -13,6 +13,7 @@
         "react": "latest",
         "react-dom": "latest",
         "swiper": "^12.2.0",
+        "three": "^0.185.0",
         "vite": "latest"
     },
     "devDependencies": {

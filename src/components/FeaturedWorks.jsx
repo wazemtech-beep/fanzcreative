@@ -1,12 +1,13 @@
 import { useLayoutEffect, useRef, useEffect } from 'react';
 import { useScrollFade } from '../hooks/useScrollFade';
 import { playList, playHover } from '../hooks/useSound';
+import { SLUGS } from '../App';
 
 /* ── Cursor-follow image wrapper ───────────────────────────────────────
    Reproduces jQuery mouseHover() from main.js.
    The "View Project" button smoothly follows the cursor inside the image.
 ─────────────────────────────────────────────────────────────────────── */
-function MouseFollowImage({ src, alt }) {
+export function MouseFollowImage({ src, alt, onClick, href = "#" }) {
   const wrapRef   = useRef(null);
   const buttonRef = useRef(null);
   const rafRef    = useRef(null);
@@ -54,12 +55,23 @@ function MouseFollowImage({ src, alt }) {
   }, []);
 
   return (
-    <div ref={wrapRef} className="image" style={{ position: 'relative', overflow: 'hidden' }}>
+    <div 
+      ref={wrapRef} 
+      className="image main-mouse-hover" 
+      style={{ position: 'relative', overflow: 'hidden', cursor: 'pointer' }}
+      onClick={onClick}
+    >
       <img src={src} alt={alt} />
       {/* Button follows cursor — pointerEvents ON so click works */}
       <a
         ref={buttonRef}
-        href="#contact"
+        href={href}
+        onClick={(e) => {
+          if (onClick) {
+            e.preventDefault();
+            onClick(e);
+          }
+        }}
         className="tf-mouse view-project h6"
         style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }}
       >
@@ -82,36 +94,36 @@ function MouseFollowImage({ src, alt }) {
 
 const WORKS = [
   {
-    img: '/assets/images/section/featured-works-1.webp',
+    img: '/assets/images/section/cora-beauty-ecommerce-mockup.jpg',
     activeDot: 0,
-    title: 'Lumière\nBrand Identity',
-    desc: 'Full brand identity for a luxury skincare startup — logo system, colour palette, packaging, and social media kit. Launched in 3 markets within 6 weeks.',
-    deliverables: 'Logo Design, Brand Guidelines,\nPackaging, Social Kit',
-    industry: 'Beauty & Skincare',
+    title: 'Cora Beauty\nSkincare Store',
+    desc: 'A luxury skincare and cosmetics e-commerce storefront showcasing clean, organic beauty products and optimized conversion funnels.',
+    deliverables: 'UI/UX Design, E-commerce\nStorefront, Brand Identity',
+    industry: 'Skincare & Beauty',
   },
   {
-    img: '/assets/images/section/featured-works-2.webp',
+    img: '/assets/images/section/revolution-fashion-store-mockup.jpg',
     activeDot: 1,
-    title: 'Vortex\nSaaS Website',
-    desc: 'Custom marketing website for a B2B SaaS platform — UI/UX design, Webflow development, and conversion-optimised landing pages. 42% lift in sign-ups.',
-    deliverables: 'UI/UX Design, Webflow Dev,\nCopywriting',
-    industry: 'Tech / SaaS',
+    title: 'Revolution\nFashion Store',
+    desc: 'A bold, dynamic e-commerce experience for a fast-fashion apparel brand, featuring interactive lookbooks and an optimized quick-cart system.',
+    deliverables: 'UI/UX Design, E-commerce\nPlatform, Web Development',
+    industry: 'Fashion & Retail',
   },
   {
-    img: '/assets/images/section/featured-works-3.webp',
+    img: '/assets/images/section/marble-fashion-ecommerce-mockup.jpg',
     activeDot: 2,
-    title: 'Forté\nProduct Launch Film',
-    desc: '90-second animated product launch video for a fitness equipment brand. 280K organic views in the first 72 hours across Instagram and YouTube.',
-    deliverables: '2D/3D Animation,\nMotion Graphics, Sound Design',
-    industry: 'Health & Fitness',
+    title: 'Marble\nFashion E-commerce',
+    desc: 'An editorial-driven digital storefront for an upscale clothing collection, emphasizing high-resolution photography and custom grids.',
+    deliverables: 'UI/UX Design, Webflow\nDevelopment, Motion Design',
+    industry: 'Luxury Fashion',
   },
   {
-    img: '/assets/images/section/featured-works-4.webp',
+    img: '/assets/images/section/mojave-clothing-store-mockup.jpg',
     activeDot: 3,
-    title: 'Oakwell\nE-commerce Store',
-    desc: 'End-to-end Shopify store for a premium furniture brand — custom theme, product photography direction, and UX optimisation. 34% increase in conversion rate.',
-    deliverables: 'Shopify Development,\nUI Design, SEO Setup',
-    industry: 'Home & Furniture',
+    title: 'Mojave\nClothing Store',
+    desc: 'Minimal and functional e-commerce design highlighting sustainable outerwear fabric narratives and optimized mobile checkouts.',
+    deliverables: 'Shopify Development,\nUI Design, Brand Storytelling',
+    industry: 'Apparel & Outerwear',
   },
 ];
 
@@ -253,7 +265,17 @@ function FeaturedWorks() {
                   }}
                 >
                   <div className={`featured-works-item${i === 0 ? ' effectFade fadeUp no-div' : ''}`} onMouseEnter={playHover}>
-                    <MouseFollowImage src={work.img} alt={work.title.replace('\n', ' ')} />
+                    <MouseFollowImage 
+                      src={work.img} 
+                      alt={work.title.replace('\n', ' ')} 
+                      href={`/project/${SLUGS[i]}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (window.setCurrentPage) {
+                          window.setCurrentPage('work-single', i);
+                        }
+                      }}
+                    />
 
                     <div className="content">
                       <div className="pagi-dot">

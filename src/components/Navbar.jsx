@@ -11,7 +11,7 @@ import { playTick, playWhoosh, playPop, playHomeLink, playAboutLink, playHover, 
  *  - Close button inside the offcanvas closes it
  *  - body overflow-hidden toggled while menu is open
  */
-function Navbar() {
+function Navbar({ is404 = false, currentPage = 'home' }) {
   const headerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -73,12 +73,16 @@ function Navbar() {
 
   return (
     <header className="tf-header header2" ref={headerRef}>
-      {/* Force nav link text black inside this header */}
-      <style>{`.tf-header .header-inner .item-link { color: #000000; }`}</style>
-      <div className="header-inner" style={{ background: '#ffffff' }}>
+      {/* Force nav link text color inside this header */}
+      <style>{`.tf-header .header-inner .item-link { color: ${is404 ? '#ffffff' : '#000000'}; }`}</style>
+      <div className="header-inner" style={{ background: is404 ? '#09090b' : '#ffffff' }}>
 
         {/* Logo — filter: invert makes the white/light logo black */}
-        <a href="#" className="logo-site" onClick={playHomeLink} onMouseEnter={playHover}>
+        <a href="#" className="logo-site" onClick={(e) => {
+          e.preventDefault();
+          playHomeLink();
+          if (window.setCurrentPage) window.setCurrentPage('home');
+        }} onMouseEnter={playHover}>
           <img
             src="/assets/images/logo/fanz-logo.webp"
             alt="FanzCreative"
@@ -86,7 +90,7 @@ function Navbar() {
               height: 44,
               width: 'auto',
               objectFit: 'contain',
-              filter: 'brightness(0)',   /* turns any colour → pure black */
+              filter: is404 ? 'none' : 'brightness(0)',
             }}
           />
         </a>
@@ -96,11 +100,19 @@ function Navbar() {
           <ul className="nav-menu-main">
 
             <li className="menu-item">
-              <a href="#" className="item-link link1 active" onClick={playHomeLink} onMouseEnter={playHover}>Home</a>
+              <a href="#" className={`item-link link1 ${currentPage === 'home' ? 'active' : ''}`} onClick={(e) => {
+                e.preventDefault();
+                playHomeLink();
+                if (window.setCurrentPage) window.setCurrentPage('home');
+              }} onMouseEnter={playHover}>Home</a>
             </li>
 
             <li className="menu-item">
-              <a href="#about" className="item-link link1" onClick={playAboutLink} onMouseEnter={playHover}>About</a>
+              <a href="/about" className={`item-link link1 ${currentPage === 'about' ? 'active' : ''}`} onClick={(e) => {
+                e.preventDefault();
+                playAboutLink();
+                if (window.setCurrentPage) window.setCurrentPage('about');
+              }} onMouseEnter={playHover}>About</a>
             </li>
 
             <li className="menu-item">
@@ -123,7 +135,13 @@ function Navbar() {
         </nav>
 
         {/* CTA — desktop only */}
-        <a href="#contact" className="tf-btn d-lg-flex d-none" onClick={playPop} onMouseEnter={playHover}>
+        <a 
+          href="#contact" 
+          className="tf-btn d-lg-flex d-none" 
+          onClick={playPop} 
+          onMouseEnter={playHover}
+          style={is404 ? { background: '#ffffff', color: '#09090b', borderColor: '#ffffff' } : {}}
+        >
           Start a Project
         </a>
 
@@ -132,6 +150,10 @@ function Navbar() {
           className="tf-btn open-mb-menu mobile-menu d-lg-none d-flex"
           onClick={() => { setMenuOpen(true); playWhoosh(); }}
           aria-label="Open menu"
+          style={{ 
+            color: is404 ? '#ffffff' : '#000000', 
+            borderColor: is404 ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)' 
+          }}
         >
           <i className="icon icon-grip-lines-solid"></i>
         </button>

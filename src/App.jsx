@@ -18,8 +18,120 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { useEffect, useState, useRef } from 'react';
 import Lenis from 'lenis';
+import WorkSingle from './components/WorkSingle';
+import NotFound from './components/NotFound';
+import AboutPage from './components/AboutPage';
+
+export const SLUGS = [
+  'cora-beauty-skincare',
+  'revolution-fashion-store',
+  'marble-fashion-ecommerce',
+  'mojave-clothing-store'
+];
+
+const parseLocation = () => {
+  const path = window.location.pathname;
+  if (path === '/' || path === '') {
+    return { page: 'home', projectIndex: 0 };
+  }
+  if (path === '/about') {
+    return { page: 'about', projectIndex: 0 };
+  }
+  if (path.startsWith('/project/')) {
+    const slug = path.replace('/project/', '');
+    const index = SLUGS.indexOf(slug);
+    if (index !== -1) {
+      return { page: 'work-single', projectIndex: index };
+    }
+  }
+  return { page: '404', projectIndex: 0 };
+};
 
 function App() {
+  const initial = parseLocation();
+  const [currentPage, setCurrentPage] = useState(initial.page);
+  const [selectedProject, setSelectedProject] = useState(initial.projectIndex);
+  const [pendingAnchor, setPendingAnchor] = useState(null);
+  const lenisRef = useRef(null);
+
+  // Expose global page switcher with optional anchor target or project index
+  useEffect(() => {
+    window.setCurrentPage = (page, target = null) => {
+      if (page === 'work-single' && typeof target === 'number') {
+        const slug = SLUGS[target] || SLUGS[0];
+        window.history.pushState({ page: 'work-single', projectIndex: target }, '', `/project/${slug}`);
+        setCurrentPage('work-single');
+        setSelectedProject(target);
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } else if (page === 'about') {
+        window.history.pushState({ page: 'about' }, '', '/about');
+        setCurrentPage('about');
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo(0, 0);
+        }
+      } else if (page === 'home') {
+        // Keep the address bar cleanly at '/' (no trailing hash or /#)
+        window.history.pushState({ page: 'home' }, '', '/');
+        setCurrentPage('home');
+        if (typeof target === 'string' && target.startsWith('#')) {
+          setPendingAnchor(target);
+        } else {
+          if (lenisRef.current) {
+            lenisRef.current.scrollTo(0, { immediate: true });
+          } else {
+            window.scrollTo(0, 0);
+          }
+        }
+      }
+    };
+
+    const handlePopState = (e) => {
+      const state = e.state || parseLocation();
+      if (state.page === 'work-single') {
+        setCurrentPage('work-single');
+        setSelectedProject(state.projectIndex);
+      } else if (state.page === 'about') {
+        setCurrentPage('about');
+      } else if (state.page === '404') {
+        setCurrentPage('404');
+      } else {
+        setCurrentPage('home');
+        const hash = window.location.hash;
+        if (hash) {
+          setPendingAnchor(hash);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      delete window.setCurrentPage;
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  // Handle scrolling to pending anchors when home page loads
+  useEffect(() => {
+    if (currentPage === 'home' && pendingAnchor) {
+      setTimeout(() => {
+        const element = document.querySelector(pendingAnchor);
+        if (element && lenisRef.current) {
+          lenisRef.current.scrollTo(element);
+        } else if (pendingAnchor === '#') {
+          if (lenisRef.current) lenisRef.current.scrollTo(0);
+        }
+        setPendingAnchor(null);
+      }, 150);
+    }
+  }, [currentPage, pendingAnchor]);
+
   useEffect(() => {
     playSpiral();
     const lenis = new Lenis({
@@ -28,6 +140,7 @@ function App() {
       gestureDirection: 'vertical',
       smooth: true,
     });
+    lenisRef.current = lenis;
 
     const gsap = window.gsap;
     const ScrollTrigger = window.ScrollTrigger;
@@ -60,11 +173,19 @@ function App() {
 
     // Intercept any link clicking starting with '#' and smoothly scroll using Lenis
     const handleAnchorClick = (e) => {
+      if (e.defaultPrevented) return;
       const target = e.target.closest('a');
       if (!target) return;
       const href = target.getAttribute('href');
       if (href && href.startsWith('#')) {
         e.preventDefault();
+        
+        // If we are not on the home page, redirect to home page with pending anchor
+        if (window.currentPage !== 'home' && window.setCurrentPage) {
+          window.setCurrentPage('home', href);
+          return;
+        }
+
         if (href === '#') {
           lenis.scrollTo(0);
         } else {
@@ -84,44 +205,61 @@ function App() {
       document.removeEventListener('click', handleAnchorClick);
       lenis.destroy();
     };
-  }, []);
+  }, [currentPage]);
+
+  // Keep window.currentPage updated so handleAnchorClick has correct value
+  useEffect(() => {
+    window.currentPage = currentPage;
+  }, [currentPage]);
 
   return (
     <>
       <canvas className="cursor-trail" id="trail" style={{ display: 'none' }} />
 
       <main id="wrapper">
-        <Navbar />
-        <Hero />
-        <AboutUs />
-        <Partner />
+        <Navbar is404={currentPage === '404'} currentPage={currentPage} />
 
-        {/* box-white — light background block (Services → Features) */}
-        <div className="box-white">
-          <Services />
-          <FeaturedWorks />
-          <Process />
-          <Benefits />
-          <Features />
-        </div>
+        {currentPage === 'home' ? (
+          <>
+            <Hero />
+            <AboutUs />
+            <Partner />
 
-        {/* Tools sits outside box-white, before box-black */}
-        <Tools />
+            {/* box-white — light background block (Services → Features) */}
+            <div className="box-white">
+              <Services />
+              <FeaturedWorks />
+              <Process />
+              <Benefits />
+              <Features />
+            </div>
 
-        {/* box-black — dark background block (Team → Testimonials) */}
-        <div className="box-black">
-          <div className="light-box"></div>
-          <img className="light-top" src="/assets/images/item/light-top.webp" alt="" />
-          <img className="light-bot" src="/assets/images/item/light-bot.webp" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
-          <Statistic />
-          <Awards />
-          <Testimonials />
-        </div>
+            {/* Tools sits outside box-white, before box-black */}
+            <Tools />
 
-        {/* Remaining sections on default background */}
-        <Pricing />
-        <FAQs />
-        <Contact />
+            {/* box-black — dark background block (Team → Testimonials) */}
+            <div className="box-black">
+              <div className="light-box"></div>
+              <img className="light-top" src="/assets/images/item/light-top.webp" alt="" />
+              <img className="light-bot" src="/assets/images/item/light-bot.webp" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
+              <Statistic />
+              <Awards />
+              <Testimonials />
+            </div>
+
+            {/* Remaining sections on default background */}
+            <Pricing />
+            <FAQs />
+            <Contact />
+          </>
+        ) : currentPage === 'work-single' ? (
+          <WorkSingle projectIndex={selectedProject} />
+        ) : currentPage === 'about' ? (
+          <AboutPage />
+        ) : (
+          <NotFound />
+        )}
+
         <Footer />
       </main>
 
@@ -176,7 +314,11 @@ function MobileMenu() {
                 </li>
                 <li>
                   <div className="item">
-                    <a href="#about" className="mb-menu-link text-display-1">
+                    <a href="/about" className="mb-menu-link text-display-1" onClick={(e) => {
+                      e.preventDefault();
+                      playAboutLink();
+                      if (window.setCurrentPage) window.setCurrentPage('about');
+                    }}>
                       <span className="text">About</span>
                     </a>
                   </div>

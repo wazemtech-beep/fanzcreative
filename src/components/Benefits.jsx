@@ -16,8 +16,8 @@ const DURATION = 2000; // ms — animation length
  * Percentage text is ALWAYS centered on the full track (white, bold).
  */
 function ProgressItem({ icon, label, value }) {
-  const fillRef    = useRef(null);
-  const pctRef     = useRef(null);
+  const fillRef = useRef(null);
+  const pctRef = useRef(null);
   const startedRef = useRef(false);
 
   const runAnimation = useCallback(() => {
@@ -25,19 +25,19 @@ function ProgressItem({ icon, label, value }) {
     startedRef.current = true;
 
     const fill = fillRef.current;
-    const pct  = pctRef.current;
+    const pct = pctRef.current;
     if (!fill || !pct) return;
 
     const startTime = performance.now();
 
     const tick = (now) => {
-      const elapsed    = now - startTime;
-      const progress   = Math.min(elapsed / DURATION, 1);
-      const eased      = 1 - Math.pow(1 - progress, 3);
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / DURATION, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
       const currentPct = Math.round(eased * value);
 
       fill.style.width = currentPct + '%';
-      pct.textContent  = currentPct + '%';
+      pct.textContent = currentPct + '%';
 
       // Toggle text color dynamically when fill crosses the middle
       if (currentPct >= 50) {
@@ -50,7 +50,7 @@ function ProgressItem({ icon, label, value }) {
         requestAnimationFrame(tick);
       } else {
         fill.style.width = value + '%';
-        pct.textContent  = value + '%';
+        pct.textContent = value + '%';
         if (value >= 50) {
           pct.style.color = '#ffffff';
         } else {

@@ -19,28 +19,28 @@ const SERVICE_ITEMS = [
   {
     id: 1,
     title: 'Web\nDesign',
-    img: '/assets/images/item/Web Design.webp',
+    img: '/assets/images/item/service-web-design.jpg',
     desc: 'Elevate your digital presence with a beautifully crafted website design.',
     tags: ['Concept', 'User flow', 'Wireframe', 'UI Design', 'Ux Design', 'Design Guidelines'],
   },
   {
     id: 2,
     title: 'Branding',
-    img: '/assets/images/item/Branding.webp',
+    img: '/assets/images/item/service-branding.jpg',
     desc: 'Your brand design is your business\'s first impression — make it count.',
     tags: ['Logo Design', 'Brand Identity', 'Social media kit', 'Stationery Items', 'Presentation Design', 'Packaging Design'],
   },
   {
     id: 3,
     title: 'Motion\nDesign',
-    img: '/assets/images/item/Motion Design.webp',
+    img: '/assets/images/item/service-motion-design.gif',
     desc: 'Motion graphics are a great way to add visual interest to your brand design.',
     tags: ['2d Animation', '3d Animation', 'Logo Animation', 'White Board Animation', 'Animate Your Presentations', 'Create Product Explainers'],
   },
   {
     id: 4,
     title: 'Website\nDevelopment',
-    img: '/assets/images/item/Website-Development.webp',
+    img: '/assets/images/item/service-web-dev.jpg',
     desc: 'From concept to reality, we bring your website to life.',
     tags: ['HTML', 'WordPress', 'Wix', 'Shopify', 'Squarespace', 'WooCommerce'],
   },
@@ -169,6 +169,8 @@ function Services() {
                 style={{
                   opacity: imgVisible ? 1 : 0,
                   transition: 'opacity 0.2s ease',
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06)',
+                  border: '1px solid rgba(0, 0, 0, 0.05)',
                 }}
               />
             </div>
