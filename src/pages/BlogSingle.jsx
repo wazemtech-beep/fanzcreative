@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useScrollFade } from '../hooks/useScrollFade';
 import Contact from '../components/Contact';
 import NotFound from './NotFound';
+import { playClick, playHover, playPop } from '../hooks/useSound';
 
 const BLOG_DATA = {
   'future-of-ui-ux': {
@@ -94,7 +95,7 @@ function BlogSingle() {
         <div className="container text-center">
           <h1 className="page-title fw-semibold effectFade fadeZoom">FanzCreative</h1>
           <div className="breadcrumbs effectFade fadeUp">
-            <Link to="/" className="link1">Home</Link>
+            <Link to="/" className="link1" onClick={playClick} onMouseEnter={playHover}>Home</Link>
             <div>/</div>
             <div>Blog</div>
           </div>
@@ -142,21 +143,21 @@ function BlogSingle() {
                   <div className="tags-links">
                     <h6 className="text-body-1">Tags:</h6>
                     <div className="list-tags">
-                      <Link to="#" className="tags-item fw-semibold">Technology</Link>
-                      <Link to="#" className="tags-item fw-semibold">Design</Link>
-                      <Link to="#" className="tags-item fw-semibold">Innovation</Link>
+                      <Link to="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Technology</Link>
+                      <Link to="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Design</Link>
+                      <Link to="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Innovation</Link>
                     </div>
                   </div>
                   <div className="d-flex align-items-center gap-12">
                     <h6 className="text-body-1">Share:</h6>
                     <div className="tf-social justify-content-center">
-                      <a href="https://x.com/" target="_blank" rel="noreferrer" className="social-item">
+                      <a href="https://x.com/" target="_blank" rel="noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-twitter-x"></i>
                       </a>
-                      <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="social-item">
+                      <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-linkedin-in"></i>
                       </a>
-                      <a href="https://github.com/" target="_blank" rel="noreferrer" className="social-item">
+                      <a href="https://github.com/" target="_blank" rel="noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-github"></i>
                       </a>
                     </div>
@@ -172,11 +173,11 @@ function BlogSingle() {
                     <div className="content">
                       <div className="info">
                         <h6 className="name fw-semibold text-body-1">
-                          <Link className="link1" to="#">Davies</Link>
+                          <Link className="link1" to="#" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Davies</Link>
                         </h6>
                         <p className="time text-body-3 text-white-64">July 8, 2026 at 7:35 am</p>
                       </div>
-                      <a href="#post-comment" className="reply link1">Reply<i className="icon icon-arrow-top-right"></i></a>
+                      <a href="#post-comment" className="reply link1" onClick={playClick} onMouseEnter={playHover}>Reply<i className="icon icon-arrow-top-right"></i></a>
                       <p className="desc">“ Sed vitae velit erat. Pellentesque lobortis felis vel mi congue, in
                           sollicitudin orci tincidunt. Praesent turpis justo, posuere eget justo sit
                           amet, efficitur suscipit elit. “</p>
@@ -203,7 +204,7 @@ function BlogSingle() {
                       </fieldset>
                     </div>
                     <div className="form-action">
-                      <button type="submit" className="tf-btn w-100">Submit Message</button>
+                      <button type="submit" className="tf-btn w-100" onClick={playPop} onMouseEnter={playHover}>Submit Message</button>
                     </div>
                   </form>
                 </div>
@@ -218,7 +219,7 @@ function BlogSingle() {
                     <fieldset className="text">
                       <input type="text" placeholder="Search" name="search" required />
                     </fieldset>
-                    <button type="submit" className="link1 text-white">
+                    <button type="submit" className="link1 text-white" onClick={playClick} onMouseEnter={playHover}>
                       <i className="icon icon-search-solid"></i>
                     </button>
                   </form>
@@ -232,7 +233,7 @@ function BlogSingle() {
                       </div>
                       <div className="content">
                         <h6 className="title text-body-1">
-                          <Link to="/blog/single/future-of-ui-ux" className="link1">
+                          <Link to="/blog/single/future-of-ui-ux" className="link1" onClick={playClick} onMouseEnter={playHover}>
                             The Future of UI/UX in E-Commerce
                           </Link>
                         </h6>
@@ -245,7 +246,7 @@ function BlogSingle() {
                       </div>
                       <div className="content">
                         <h6 className="title text-body-1">
-                          <Link to="/blog/single/ai-automation-game-changer" className="link1">
+                          <Link to="/blog/single/ai-automation-game-changer" className="link1" onClick={playClick} onMouseEnter={playHover}>
                             Why AI Automation is a Game Changer
                           </Link>
                         </h6>
@@ -258,11 +259,11 @@ function BlogSingle() {
                   <h5 className="sidebar-title">Category</h5>
                   <div className="sidebar-categories">
                     <div className="item">
-                      <Link to="#" className="text-body-1 link1">Developer</Link>
+                      <Link to="#" className="text-body-1 link1" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Developer</Link>
                       <span className="text-body-3 text-white-64">(4)</span>
                     </div>
                     <div className="item">
-                      <Link to="#" className="text-body-1 link1">Design</Link>
+                      <Link to="#" className="text-body-1 link1" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Design</Link>
                       <span className="text-body-3 text-white-64">(2)</span>
                     </div>
                   </div>
@@ -270,9 +271,9 @@ function BlogSingle() {
                 <div className="sidebar-item effectFade fadeUp no-div">
                   <h5 className="sidebar-title">Popular tag</h5>
                   <div className="list-tags">
-                    <Link to="#" className="tags-item fw-semibold">Stakeholder</Link>
-                    <Link to="#" className="tags-item fw-semibold">Value model</Link>
-                    <Link to="#" className="tags-item fw-semibold">Data readiness</Link>
+                    <Link to="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Stakeholder</Link>
+                    <Link to="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Value model</Link>
+                    <Link to="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Data readiness</Link>
                   </div>
                 </div>
               </div>

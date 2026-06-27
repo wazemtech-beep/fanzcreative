@@ -9,7 +9,7 @@ import Awards from '../components/Awards';
 import Testimonials from '../components/Testimonials';
 import FAQs from '../components/FAQs';
 import Contact from '../components/Contact';
-import { playTick, playPop, playHover } from '../hooks/useSound';
+import { playTick, playPop, playHover, playClick } from '../hooks/useSound';
 import AnimatedTitleIcon from '../components/AnimatedTitleIcon';
 
 function AboutPage() {
@@ -329,16 +329,16 @@ function AboutPage() {
                   <div className="image">
                     <img loading="lazy" src="/assets/images/team/team-1.jpg" alt="Ava Collins" />
                   </div>
-                  <a href="#" className="name h6 fw-semibold">Ava Collins</a>
+                  <a href="#" className="name h6 fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Ava Collins</a>
                   <div className="sub text-body-1">FanzCreative’s Design Lead</div>
                   <div className="tf-social justify-content-center">
-                    <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                    <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                       <i className="icon icon-twitter-x"></i>
                     </a>
-                    <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                    <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                       <i className="icon icon-linkedin-in"></i>
                     </a>
-                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                       <i className="icon icon-github"></i>
                     </a>
                   </div>
@@ -354,15 +354,15 @@ function AboutPage() {
                       <img loading="lazy" src="/assets/images/team/team-2.jpg" alt="Noah Reed" />
                     </div>
                     <div className="tf-social justify-content-center">
-                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-github"></i>
                       </a>
-                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-linkedin-in"></i>
                       </a>
                     </div>
                   </div>
-                  <a href="#" className="name text-body-1 fw-semibold">Noah Reed</a>
+                  <a href="#" className="name text-body-1 fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Noah Reed</a>
                   <div className="sub">Lead UI/UX Designer. Crafts pixel-perfect interfaces</div>
                 </div>
 
@@ -373,15 +373,15 @@ function AboutPage() {
                       <img loading="lazy" src="/assets/images/team/team-3.jpg" alt="Lucas Hayes" style={{ objectPosition: 'top' }} />
                     </div>
                     <div className="tf-social justify-content-center">
-                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-github"></i>
                       </a>
-                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-linkedin-in"></i>
                       </a>
                     </div>
                   </div>
-                  <a href="#" className="name text-body-1 fw-semibold">Lucas Hayes</a>
+                  <a href="#" className="name text-body-1 fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Lucas Hayes</a>
                   <div className="sub">Lead Frontend Developer. Turns designs into clean code</div>
                 </div>
               </div>
@@ -395,15 +395,15 @@ function AboutPage() {
                       <img loading="lazy" src="/assets/images/team/team-4.jpg" alt="Jordan Brooks" style={{ objectPosition: 'top' }} />
                     </div>
                     <div className="tf-social justify-content-center">
-                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-github"></i>
                       </a>
-                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-linkedin-in"></i>
                       </a>
                     </div>
                   </div>
-                  <a href="#" className="name text-body-1 fw-semibold">Jordan Brooks</a>
+                  <a href="#" className="name text-body-1 fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Jordan Brooks</a>
                   <div className="sub">Brand Strategist & Identity Specialist</div>
                 </div>
 
@@ -414,15 +414,15 @@ function AboutPage() {
                       <img loading="lazy" src="/assets/images/team/team-5.jpg" alt="Erin Park" />
                     </div>
                     <div className="tf-social justify-content-center">
-                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-github"></i>
                       </a>
-                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item">
+                      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
                         <i className="icon icon-linkedin-in"></i>
                       </a>
                     </div>
                   </div>
-                  <a href="#" className="name text-body-1 fw-semibold">Erin Park</a>
+                  <a href="#" className="name text-body-1 fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Erin Park</a>
                   <div className="sub">Motion & Interaction Designer. Adds micro-animations and transitions</div>
                 </div>
               </div>

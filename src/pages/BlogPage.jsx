@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useScrollFade } from '../hooks/useScrollFade';
 import Contact from '../components/Contact';
+import { playClick, playHover } from '../hooks/useSound';
 
 const BLOG_POSTS = [
   {
@@ -49,7 +50,7 @@ function BlogPage() {
         <div className="container text-center">
           <h1 className="page-title fw-semibold effectFade fadeZoom">FanzCreative</h1>
           <div className="breadcrumbs effectFade fadeUp">
-            <Link to="/" className="link1">Home</Link>
+            <Link to="/" className="link1" onClick={playClick} onMouseEnter={playHover}>Home</Link>
             <div>/</div>
             <div>Blog</div>
           </div>
@@ -63,7 +64,7 @@ function BlogPage() {
           <div className="tf-grid-layout sm-col-2">
             {BLOG_POSTS.map((post, i) => (
               <div key={post.id} className="article-blog hover-img effectFade fadeUp no-div" data-delay={(i * 0.1).toString()}>
-                <Link to={`/blog/single/${post.slug}`} className="blog-image img-style">
+                <Link to={`/blog/single/${post.slug}`} className="blog-image img-style" onClick={playClick} onMouseEnter={playHover}>
                   <img loading="lazy" width="426" height="307" src={post.img} alt={post.title} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                 </Link>
                 <div className="blog-content">
@@ -72,12 +73,12 @@ function BlogPage() {
                       {post.category}
                     </p>
                     <h6 className="fw-semibold">
-                      <Link to={`/blog/single/${post.slug}`} className="link1 infor_name">
+                      <Link to={`/blog/single/${post.slug}`} className="link1 infor_name" onClick={playClick} onMouseEnter={playHover}>
                         {post.title}
                       </Link>
                     </h6>
                   </div>
-                  <Link to={`/blog/single/${post.slug}`} className="tf-btn-2">
+                  <Link to={`/blog/single/${post.slug}`} className="tf-btn-2" onClick={playClick} onMouseEnter={playHover}>
                     Read more
                     <i className="icon icon-arrow-top-right"></i>
                   </Link>

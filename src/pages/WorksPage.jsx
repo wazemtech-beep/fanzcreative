@@ -6,8 +6,9 @@ import AnimatedTitleIcon from '../components/AnimatedTitleIcon';
 import Pricing from '../components/Pricing';
 import FAQs from '../components/FAQs';
 import Contact from '../components/Contact';
-import { MouseFollowImage, WORKS } from '../components/FeaturedWorks'; // Optional: if we want to use the same hover effect
+import { MouseFollowImage, WORKS } from '../components/FeaturedWorks';
 import { SLUGS } from '../constants';
+import { playClick, playHover } from '../hooks/useSound';
 
 function WorksPage() {
   const pageRef = useRef(null);
@@ -55,7 +56,8 @@ function WorksPage() {
             </div>
             <div className="layout-toggle d-flex gap-12 align-items-center effectFade fadeUp">
               <button 
-                onClick={() => setLayoutMode('single')}
+                onClick={() => { setLayoutMode('single'); playClick(); }}
+                onMouseEnter={playHover}
                 style={{
                   background: layoutMode === 'single' ? '#e91e8c' : 'transparent',
                   border: '1px solid #e91e8c',
@@ -76,7 +78,8 @@ function WorksPage() {
                 </svg>
               </button>
               <button 
-                onClick={() => setLayoutMode('grid')}
+                onClick={() => { setLayoutMode('grid'); playClick(); }}
+                onMouseEnter={playHover}
                 style={{
                   background: layoutMode === 'grid' ? '#e91e8c' : 'transparent',
                   border: '1px solid #e91e8c',

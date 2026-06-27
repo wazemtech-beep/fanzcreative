@@ -4,6 +4,7 @@ import { useScrollFade } from '../hooks/useScrollFade';
 import Process from '../components/Process';
 import FAQs from '../components/FAQs';
 import Contact from '../components/Contact';
+import { playClick, playHover, playPop } from '../hooks/useSound';
 
 function ServiceSinglePage() {
   useEffect(() => {
@@ -70,9 +71,9 @@ function ServiceSinglePage() {
                 The result is a well-defined, measurable AI strategy that drives innovation while minimizing risks and costs. With our AI Strategy & Mapping service, you gain not just a plan, but a partnership—empowering your organization to move confidently toward an intelligent, data-driven competitive future.
               </p>
               <div className="list-tags effectFade fadeUp">
-                <a href="#" className="tags-item fw-semibold" onClick={(e) => e.preventDefault()}>Prototype flows</a>
-                <a href="#" className="tags-item fw-semibold" onClick={(e) => e.preventDefault()}>Prompt UX patterns</a>
-                <a href="#" className="tags-item fw-semibold" onClick={(e) => e.preventDefault()}>Usability testing with real users</a>
+                <a href="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Prototype flows</a>
+                <a href="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Prompt UX patterns</a>
+                <a href="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Usability testing with real users</a>
               </div>
             </div>
           </div>
@@ -130,7 +131,7 @@ function ServiceSinglePage() {
                 <li className="effectFade fadeUp">+ Design System Architecture</li>
                 <li className="effectFade fadeUp">+ Continuous Optimization & Testing</li>
               </ul>
-              <a href="#contact" className="tf-btn effectFade fadeRotateX">
+              <a href="#contact" className="tf-btn effectFade fadeRotateX" onClick={playPop} onMouseEnter={playHover}>
                 Let’s Connect
               </a>
             </div>

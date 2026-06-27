@@ -6,7 +6,7 @@ import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import AnimatedTitleIcon from '../components/AnimatedTitleIcon';
 import { MouseFollowImage } from '../components/FeaturedWorks';
-import { playHover } from '../hooks/useSound';
+import { playClick, playHover, playPop } from '../hooks/useSound';
 import { SLUGS } from '../constants';
 
 const PROJECT_DATA = [
@@ -165,7 +165,7 @@ function WorkSingle() {
               </p>
               <div className="list-tags effectFade fadeUp">
                 {project.deliverables.map((item, idx) => (
-                  <a key={idx} href="#" className="tags-item fw-semibold" onClick={(e) => e.preventDefault()}>{item}</a>
+                  <a key={idx} href="#" className="tags-item fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>{item}</a>
                 ))}
               </div>
               <div className="mt-3 text-body-1 fw-semibold text-secondary effectFade fadeUp">
@@ -211,7 +211,7 @@ function WorkSingle() {
                   <li key={idx} className="effectFade fadeUp">+ {item}</li>
                 ))}
               </ul>
-              <a href="#contact" className="tf-btn effectFade fadeRotateX">
+              <a href="#contact" className="tf-btn effectFade fadeRotateX" onClick={playPop} onMouseEnter={playHover}>
                 Start a Project
               </a>
             </div>
