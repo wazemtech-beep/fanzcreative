@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project View Cursor Test</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #111;
+            /* Dark background to make it look cool */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            /* Prevent scrollbars from cursor movement */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 5vh;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Container that triggers the cursor visibility */
+        #hover-container {
+            width: 60%;
+            height: 50vh;
+            margin-top: 5vh;
+            background-color: #222;
+            border: 2px dashed #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #888;
+            border-radius: 20px;
+            cursor: none;
+            /* Hide default cursor when inside to show custom one better */
+        }
+
+        /* Custom Project View Box */
+        #project-view-cursor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 40px;
+            background-color: #e91e8c;
+            /* FanzCreative brand pink */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            pointer-events: none;
+            /* Make sure it doesn't block clicks */
+
+            /* Initial state: scale 0 */
+            transform: translate(-10%, 100%);
+            scale: 0;
+
+            /* Center the box exactly on the mouse point */
+            transition: scale 0.3s ease-in-out;
+            /* Smooth follow effect and bouncy scale effect */
+            z-index: 9999;
+        }
+
+        /* Class added via JS when inside the container */
+        #project-view-cursor.visible {
+            transform: translate(-10%, 100%);
+            scale: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Move your mouse around</h1>
+
+    <!-- Target Container -->
+    <div id="hover-container">
+        Hover inside this box
+    </div>
+
+    <!-- The Box that follows the mouse -->
+    <div id="project-view-cursor">Project View</div>
+
+    <script>
+        const cursorBox = document.getElementById('project-view-cursor');
+        const hoverContainer = document.getElementById('hover-container');
+
+        // Mouse Move Event (updates position everywhere)
+        document.addEventListener('mousemove', function (e) {
+            // USING pageX and pageY INSTEAD of clientX / clientY
+            const mouseX = e.pageX;
+            const mouseY = e.pageY;
+
+            // Apply coordinates to the box position
+            cursorBox.style.left = mouseX + 'px';
+            cursorBox.style.top = mouseY + 'px';
+        });
+
+        // Mouse enters the container
+        hoverContainer.addEventListener('mouseenter', function () {
+            cursorBox.classList.add('visible');
+        });
+
+        // Mouse leaves the container
+        hoverContainer.addEventListener('mouseleave', function () {
+            cursorBox.classList.remove('visible');
+        });
+    </script>
+</body>
+
+</html>

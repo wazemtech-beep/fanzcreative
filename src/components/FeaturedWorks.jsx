@@ -9,61 +9,55 @@ import { SLUGS } from '../constants';
    The "View Project" button smoothly follows the cursor inside the image.
 ─────────────────────────────────────────────────────────────────────── */
 export function MouseFollowImage({ src, alt, onClick, href = "#" }) {
-  const wrapRef   = useRef(null);
+  const wrapRef = useRef(null);
   const buttonRef = useRef(null);
-  const rafRef    = useRef(null);
-  const target    = useRef({ x: 0, y: 0 });
-  const current   = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const wrap   = wrapRef.current;
+    const wrap = wrapRef.current;
     const button = buttonRef.current;
     if (!wrap || !button) return;
 
-    current.current = { x: wrap.offsetWidth / 2, y: wrap.offsetHeight / 2 };
-    target.current  = { ...current.current };
-    button.style.left = `${current.current.x}px`;
-    button.style.top  = `${current.current.y}px`;
+    // Center button initially without showing it
+    button.style.left = `50%`;
+    button.style.top = `50%`;
 
     const onMove = (e) => {
       const rect = wrap.getBoundingClientRect();
-      target.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-      if (!rafRef.current) tick();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    };
+
+    const onEnter = () => {
+      button.style.scale = '1';
     };
 
     const onLeave = () => {
-      target.current = { x: wrap.offsetWidth / 2, y: wrap.offsetHeight / 2 };
-      if (!rafRef.current) tick();
-    };
-
-    const tick = () => {
-      current.current.x += (target.current.x - current.current.x) * 0.12;
-      current.current.y += (target.current.y - current.current.y) * 0.12;
-      button.style.left = `${current.current.x}px`;
-      button.style.top  = `${current.current.y}px`;
-      const dx = Math.abs(target.current.x - current.current.x);
-      const dy = Math.abs(target.current.y - current.current.y);
-      rafRef.current = (dx > 0.3 || dy > 0.3) ? requestAnimationFrame(tick) : null;
+      button.style.scale = '0';
     };
 
     wrap.addEventListener('mousemove', onMove);
+    wrap.addEventListener('mouseenter', onEnter);
     wrap.addEventListener('mouseleave', onLeave);
+
     return () => {
       wrap.removeEventListener('mousemove', onMove);
+      wrap.removeEventListener('mouseenter', onEnter);
       wrap.removeEventListener('mouseleave', onLeave);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
   return (
-    <div 
-      ref={wrapRef} 
-      className="image main-mouse-hover" 
-      style={{ position: 'relative', overflow: 'hidden', cursor: 'pointer' }}
+    <div
+      ref={wrapRef}
+      className="image main-mouse-hover"
+      style={{ position: 'relative', overflow: 'hidden', cursor: 'none' }}
       onClick={onClick}
     >
-      <img loading="lazy" src={src} alt={alt} />
-      {/* Button follows cursor — pointerEvents ON so click works */}
+      <img loading="lazy" src={src} alt={alt} style={{ pointerEvents: 'none' }} />
+      {/* Button follows cursor */}
       <a
         ref={buttonRef}
         href={href}
@@ -74,7 +68,14 @@ export function MouseFollowImage({ src, alt, onClick, href = "#" }) {
           }
         }}
         className="tf-mouse view-project h6"
-        style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }}
+        style={{
+          position: 'absolute',
+          transform: 'translate(-50%, -50%)',
+          scale: '0',
+          transition: 'scale 0.3s ease-in-out',
+          pointerEvents: 'none',
+          zIndex: 9999
+        }}
       >
         View Project
         <i className="icon icon-arrow-top-right"></i>
@@ -155,86 +156,86 @@ function FeaturedWorks() {
       });
 
       mm.add('(min-width: 992px)', () => {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if (reduceMotion) {
-        gsap.set(cards, { clearProps: 'all' });
-        return;
-      }
+        if (reduceMotion) {
+          gsap.set(cards, { clearProps: 'all' });
+          return;
+        }
 
-      const activeCardOffset = 78;
-      const stackPeek = 22;
+        const activeCardOffset = 78;
+        const stackPeek = 22;
 
-      // Initial stack state: first card is the fixed top limit, all next cards wait below.
-      gsap.set(cards, {
-        position: 'absolute',
-        inset: 0,
-        transformOrigin: 'center top',
-        willChange: 'transform, opacity',
-      });
-
-      cards.forEach((card, index) => {
-        gsap.set(card, {
-          zIndex: index + 1,
-          yPercent: index === 0 ? 0 : 115,
-          y: index === 0 ? 0 : 0,
-          scale: 1,
-          opacity: 1,
+        // Initial stack state: first card is the fixed top limit, all next cards wait below.
+        gsap.set(cards, {
+          position: 'absolute',
+          inset: 0,
+          transformOrigin: 'center top',
+          willChange: 'transform, opacity',
         });
-      });
 
-      let lastActiveIndex = 0;
-      const timeline = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => `+=${window.innerHeight * (cards.length - 1)}`,
-          scrub: 0.8,
-          pin,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const activeIndex = Math.round(self.progress * (cards.length - 1));
-            if (activeIndex !== lastActiveIndex) {
-              lastActiveIndex = activeIndex;
-              playList();
+        cards.forEach((card, index) => {
+          gsap.set(card, {
+            zIndex: index + 1,
+            yPercent: index === 0 ? 0 : 115,
+            y: index === 0 ? 0 : 0,
+            scale: 1,
+            opacity: 1,
+          });
+        });
+
+        let lastActiveIndex = 0;
+        const timeline = gsap.timeline({
+          defaults: { ease: 'none' },
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${window.innerHeight * (cards.length - 1)}`,
+            scrub: 0.8,
+            pin,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const activeIndex = Math.round(self.progress * (cards.length - 1));
+              if (activeIndex !== lastActiveIndex) {
+                lastActiveIndex = activeIndex;
+                playList();
+              }
             }
+          },
+        });
+
+        for (let i = 1; i < cards.length; i += 1) {
+          const step = i - 1;
+
+          // Previous cards form the background stack, but the first card never moves above its start.
+          for (let j = 0; j < i; j += 1) {
+            const distanceFromActive = i - j;
+            timeline.to(
+              cards[j],
+              {
+                y: j === 0 ? 0 : Math.min(activeCardOffset - stackPeek * distanceFromActive, activeCardOffset - stackPeek),
+                scale: Math.max(0.88, 1 - 0.045 * distanceFromActive),
+                opacity: Math.max(0.48, 1 - 0.16 * distanceFromActive),
+                duration: 1,
+              },
+              step
+            );
           }
-        },
-      });
 
-      for (let i = 1; i < cards.length; i += 1) {
-        const step = i - 1;
-
-        // Previous cards form the background stack, but the first card never moves above its start.
-        for (let j = 0; j < i; j += 1) {
-          const distanceFromActive = i - j;
+          // New card slides up over the existing stack.
           timeline.to(
-            cards[j],
+            cards[i],
             {
-              y: j === 0 ? 0 : Math.min(activeCardOffset - stackPeek * distanceFromActive, activeCardOffset - stackPeek),
-              scale: Math.max(0.88, 1 - 0.045 * distanceFromActive),
-              opacity: Math.max(0.48, 1 - 0.16 * distanceFromActive),
+              yPercent: 0,
+              y: activeCardOffset,
+              scale: 1,
+              opacity: 1,
               duration: 1,
             },
             step
           );
         }
-
-        // New card slides up over the existing stack.
-        timeline.to(
-          cards[i],
-          {
-            yPercent: 0,
-            y: activeCardOffset,
-            scale: 1,
-            opacity: 1,
-            duration: 1,
-          },
-          step
-        );
-      }
       });
 
       return () => mm.revert();
@@ -267,9 +268,9 @@ function FeaturedWorks() {
                   }}
                 >
                   <div className={`featured-works-item${i === 0 ? ' effectFade fadeUp no-div' : ''}`} onMouseEnter={playHover}>
-                    <MouseFollowImage 
-                      src={work.img} 
-                      alt={work.title.replace('\n', ' ')} 
+                    <MouseFollowImage
+                      src={work.img}
+                      alt={work.title.replace('\n', ' ')}
                       href={`/project/${SLUGS[i]}`}
                       onClick={(e) => {
                         e.preventDefault();
