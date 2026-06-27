@@ -6,6 +6,7 @@ export default defineConfig({
   // public/ is already the default; explicit for clarity
   publicDir: 'public',
   build: {
+    sourcemap: false, // Prevents source code from being visible in devtools in production
     rollupOptions: {
       output: {
         manualChunks(id) {
