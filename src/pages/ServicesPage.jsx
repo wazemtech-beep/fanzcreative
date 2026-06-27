@@ -58,12 +58,20 @@ function ServicesPage() {
         <title>Services - FanzCreative</title>
         <meta name="description" content="Explore FanzCreative's services — web design, branding, motion design, and website development for modern businesses." />
       </Helmet>
+      <style>{`
+        .services-page-wrapper .section-hero.v1 .hero-image {
+          background-image: none !important;
+        }
+      `}</style>
       {/* Hero Banner */}
-      <div className="section-hero v1" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="hero-image" style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+      <div className="section-hero v1">
+        <div
+          className="hero-image"
+          style={{ pointerEvents: 'none', zIndex: 0, borderRadius: 40, overflow: 'hidden', backgroundColor: '#000' }}
+        >
           <PrismaticBurst intensity={1.5} speed={0.4} animationType="rotate3d" colors={['#df2d6d', '#ff6b9d', '#1a1a2e', '#16213e']} mixBlendMode="screen" />
+          <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.45)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 1, pointerEvents: 'none' }}></div>
         </div>
-        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.45)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 1, pointerEvents: 'none' }}></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="content-wrap text-center">
             <div className="title text-display-2 effectFade fadeRotateX">
