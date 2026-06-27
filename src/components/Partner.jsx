@@ -79,7 +79,7 @@ function Partner() {
           <div className="col-12">
             <div className="partner-wrap">
               <p className="text-secondary text fw-semibold">
-                Trusted by 100+ <br /> logos
+                Trusted by 100+ <br /> Clients
               </p>
               <div className="infiniteSlide_tech_main d-grid" style={{ overflow: 'hidden' }}>
                 <div className="partner-track" ref={trackRef}>
