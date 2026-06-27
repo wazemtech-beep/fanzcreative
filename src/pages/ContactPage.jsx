@@ -178,7 +178,7 @@ function ContactPage() {
       {/* /map */}
 
       {/* section-faqs */}
-      <FAQs />
+      <FAQs className="" />
       {/* /section-faqs */}
       
       <style>{`

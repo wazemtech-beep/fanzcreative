@@ -57,7 +57,7 @@ function NotFound() {
         .section-404 .title {
           margin-bottom: 24px;
           font-size: clamp(48px, 6vw, 80px);
-          line-height: 1.1;
+          line-height: 1.25;
           letter-spacing: -0.03em;
           opacity: 0;
         }
