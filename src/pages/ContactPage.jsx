@@ -135,7 +135,12 @@ function ContactPage() {
                 </div>
               </div>
               <div className="col-lg-6">
-                <form className="form-contact m-0 effectFade fadeUp" onSubmit={handleSubmit} noValidate>
+                <style>{`
+                  .contact-page-form input, .contact-page-form textarea { color: #000 !important; border-bottom-color: rgba(0,0,0,0.2) !important; }
+                  .contact-page-form input::placeholder, .contact-page-form textarea::placeholder { color: #666 !important; }
+                  .contact-page-form .attachment, .contact-page-form .attachment i { color: #000 !important; }
+                `}</style>
+                <form className="form-contact m-0 effectFade fadeUp contact-page-form" onSubmit={handleSubmit} noValidate>
                   <h4 className="heading fw-semibold">Fill this form below</h4>
                   <fieldset className="mb-21">
                     <label className="fw-semibold text-body-3 mb-20">Your Name</label>
