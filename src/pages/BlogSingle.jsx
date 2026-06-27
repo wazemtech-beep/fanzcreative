@@ -11,7 +11,7 @@ const BLOG_DATA = {
     title: 'The Future of UI/UX in E-Commerce',
     date: 'Oct 15, 2026',
     category: 'Design',
-    img: '/assets/images/blog/blog_ui_ux.png',
+    img: '/assets/images/blog/blog_ui_ux.webp',
     content: (
       <>
         <p className="mb-24 text-secondary">
@@ -31,7 +31,7 @@ const BLOG_DATA = {
     title: 'Why AI Automation is a Game Changer',
     date: 'Sep 28, 2026',
     category: 'Technology',
-    img: '/assets/images/blog/blog_ai_automation.png',
+    img: '/assets/images/blog/blog_ai_automation.webp',
     content: (
       <>
         <p className="mb-24 text-secondary">
@@ -51,7 +51,7 @@ const BLOG_DATA = {
     title: 'Building Scalable Web Platforms',
     date: 'Sep 10, 2026',
     category: 'Development',
-    img: '/assets/images/blog/blog_web_dev.png',
+    img: '/assets/images/blog/blog_web_dev.webp',
     content: (
       <>
         <p className="mb-24 text-secondary">
@@ -168,7 +168,7 @@ function BlogSingle() {
                   <h4 className="heading fw-semibold">Comments</h4>
                   <div className="author">
                     <div className="image">
-                      <img loading="lazy" width="48" height="48" src="/assets/images/section/tes-1.jpg" alt="Image" />
+                      <img loading="lazy" width="48" height="48" src="/assets/images/section/tes-1.webp" alt="Image" />
                     </div>
                     <div className="content">
                       <div className="info">
@@ -229,7 +229,7 @@ function BlogSingle() {
                   <div className="list-relatest-post">
                     <div className="relatest-post-item">
                       <div className="image">
-                        <img loading="lazy" width="80" height="80" src="/assets/images/blog/blog_ui_ux.png" alt="Recent post" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                        <img loading="lazy" width="80" height="80" src="/assets/images/blog/blog_ui_ux.webp" alt="Recent post" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                       </div>
                       <div className="content">
                         <h6 className="title text-body-1">
@@ -242,7 +242,7 @@ function BlogSingle() {
                     </div>
                     <div className="relatest-post-item">
                       <div className="image">
-                        <img loading="lazy" width="80" height="80" src="/assets/images/blog/blog_ai_automation.png" alt="Recent post" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+                        <img loading="lazy" width="80" height="80" src="/assets/images/blog/blog_ai_automation.webp" alt="Recent post" style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
                       </div>
                       <div className="content">
                         <h6 className="title text-body-1">

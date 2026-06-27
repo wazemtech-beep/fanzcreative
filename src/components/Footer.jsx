@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer>
       <div className="footer-image">
-        <img loading="lazy" className="effectFade fadeUp" src="/assets/images/logo/logo-footer.png" alt="" />
+        <img loading="lazy" className="effectFade fadeUp" src="/assets/images/logo/logo-footer.webp" alt="" />
       </div>
 
       <div className="container">

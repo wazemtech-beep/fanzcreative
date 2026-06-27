@@ -14,11 +14,11 @@ const PROJECT_DATA = [
     title: "Cora Beauty",
     title2: "Skincare Store",
     tagline: "A luxury skincare and cosmetics e-commerce storefront designed to showcase clean, organic beauty products.",
-    image: "/assets/images/section/cora-beauty-ecommerce-mockup.jpg",
-    img1: "/assets/images/section/cora-beauty-1.jpg",
-    img2: "/assets/images/section/cora-beauty-2.jpg",
-    img3: "/assets/images/section/cora-beauty-3.jpg",
-    img4: "/assets/images/section/cora-beauty-4.jpg",
+    image: "/assets/images/section/cora-beauty-ecommerce-mockup.webp",
+    img1: "/assets/images/section/cora-beauty-1.webp",
+    img2: "/assets/images/section/cora-beauty-2.webp",
+    img3: "/assets/images/section/cora-beauty-3.webp",
+    img4: "/assets/images/section/cora-beauty-4.webp",
     details: "Cora Beauty is a premium skincare and cosmetics storefront designed to capture a clean, organic visual language. The brand emphasizes age-defying botanical formulations, clinical-grade skin health ingredients, and sustainable product design. The interface centers on soft tones, modern serif typography, and tactile visuals. The user experience is optimized to guide users from educational ingredient breakdowns to shopping collections with single-click purchases.",
     detailsContinued: "We designed a full design system including responsive landing pages, mobile shopping layouts, custom product displays, and stationary packaging mockups. In-depth research of skincare customer habits helped us design a frictionless product-comparison grid and a subscription funnel that makes re-ordering essential items incredibly easy.",
     deliverables: ["UI/UX Design", "E-commerce Storefront", "Brand Identity"],
@@ -30,17 +30,17 @@ const PROJECT_DATA = [
     nextProjectDesc: "A bold, dynamic e-commerce experience for a fast-fashion apparel brand, featuring interactive lookbooks and an optimized quick-cart system.",
     nextProjectDeliverables: "UI/UX Design, E-commerce Platform, Web Development",
     nextProjectIndustry: "Fashion & Retail",
-    nextProjectImage: "/assets/images/section/revolution-fashion-store-mockup.jpg"
+    nextProjectImage: "/assets/images/section/revolution-fashion-store-mockup.webp"
   },
   {
     title: "Revolution",
     title2: "Fashion Store",
     tagline: "A bold, dynamic e-commerce experience for a fast-fashion apparel brand.",
-    image: "/assets/images/section/revolution-fashion-store-mockup.jpg",
-    img1: "/assets/images/section/revolution-1.jpg",
-    img2: "/assets/images/section/revolution-2.jpg",
-    img3: "/assets/images/section/revolution-3.jpg",
-    img4: "/assets/images/section/revolution-4.jpg",
+    image: "/assets/images/section/revolution-fashion-store-mockup.webp",
+    img1: "/assets/images/section/revolution-1.webp",
+    img2: "/assets/images/section/revolution-2.webp",
+    img3: "/assets/images/section/revolution-3.webp",
+    img4: "/assets/images/section/revolution-4.webp",
     details: "Revolution is a high-performance fashion and apparel store designed to handle large retail catalogs while maintaining a fast, visual storefront. The design centers on high-contrast black-and-white grids, bold styling, and video lookbooks. It features an interactive grid where customers can preview models wearing clothing lines in real-time, select colors, and add items directly to a quick-access cart.",
     detailsContinued: "The website uses code splitting and lazy loading to maintain fast load times on mobile, ensuring seamless browsing during seasonal drops. The shopping checkout was customized to support multi-currency checkouts and express payment options, reducing friction for fashion-forward buyers worldwide.",
     deliverables: ["UI/UX Design", "E-commerce Platform", "Web Development"],
@@ -52,17 +52,17 @@ const PROJECT_DATA = [
     nextProjectDesc: "An editorial-driven digital storefront for an upscale clothing collection, emphasizing high-resolution photography and custom grids.",
     nextProjectDeliverables: "UI/UX Design, Webflow Development, Motion Design",
     nextProjectIndustry: "Luxury Fashion",
-    nextProjectImage: "/assets/images/section/marble-fashion-ecommerce-mockup.jpg"
+    nextProjectImage: "/assets/images/section/marble-fashion-ecommerce-mockup.webp"
   },
   {
     title: "Marble",
     title2: "Fashion E-commerce",
     tagline: "An editorial-driven digital storefront for an upscale clothing collection.",
-    image: "/assets/images/section/marble-fashion-ecommerce-mockup.jpg",
-    img1: "/assets/images/section/marble-1.jpg",
-    img2: "/assets/images/section/marble-2.jpg",
-    img3: "/assets/images/section/marble-3.jpg",
-    img4: "/assets/images/section/marble-4.jpg",
+    image: "/assets/images/section/marble-fashion-ecommerce-mockup.webp",
+    img1: "/assets/images/section/marble-1.webp",
+    img2: "/assets/images/section/marble-2.webp",
+    img3: "/assets/images/section/marble-3.webp",
+    img4: "/assets/images/section/marble-4.webp",
     details: "Marble is a premium digital experience created for a fashion e-commerce storefront looking to establish a strong storytelling narrative online. The visual theme uses elegant editorial layouts, large-format imagery, and micro-interactions. The interface presents clothing collections like an art gallery, inviting customers to explore fabric sources, designer interviews, and styling tips.",
     detailsContinued: "We built the site around optimized interactive grids that showcase fabric details under zoom. Smooth transitions and custom loading animations enhance the premium feel of the brand. This project demonstrates how e-commerce can transcend simple product listings to build brand prestige and customer desire.",
     deliverables: ["UI/UX Design", "Webflow Development", "Motion Design"],
@@ -74,17 +74,17 @@ const PROJECT_DATA = [
     nextProjectDesc: "Minimal and functional e-commerce design highlighting sustainable outerwear fabric narratives and optimized mobile checkouts.",
     nextProjectDeliverables: "Shopify Development, UI Design, Brand Storytelling",
     nextProjectIndustry: "Apparel & Outerwear",
-    nextProjectImage: "/assets/images/section/mojave-clothing-store-mockup.jpg"
+    nextProjectImage: "/assets/images/section/mojave-clothing-store-mockup.webp"
   },
   {
     title: "Mojave",
     title2: "Clothing Store",
     tagline: "Minimal and functional e-commerce design highlighting sustainable outerwear fabric narratives.",
-    image: "/assets/images/section/mojave-clothing-store-mockup.jpg",
-    img1: "/assets/images/section/mojave-1.jpg",
-    img2: "/assets/images/section/mojave-2.jpg",
-    img3: "/assets/images/section/mojave-3.jpg",
-    img4: "/assets/images/section/mojave-4.jpg",
+    image: "/assets/images/section/mojave-clothing-store-mockup.webp",
+    img1: "/assets/images/section/mojave-1.webp",
+    img2: "/assets/images/section/mojave-2.webp",
+    img3: "/assets/images/section/mojave-3.webp",
+    img4: "/assets/images/section/mojave-4.webp",
     details: "Mojave is a highly functional storefront designed for an outerwear and everyday essentials brand. Built with Shopify, the storefront focuses on sustainability storytelling, showing the lifecycle of organic materials and outerwear construction. The interface is clean and minimalist, allowing product photography and textile close-ups to stand out.",
     detailsContinued: "We optimized mobile checkouts, shipping calculators, and lazy-loading grids. The site includes sustainable material icons, detail cards, and customer reviews linked directly to sizing data to help customers choose outerwear that fits correctly.",
     deliverables: ["Shopify Development", "UI Design", "Brand Storytelling"],
@@ -96,7 +96,7 @@ const PROJECT_DATA = [
     nextProjectDesc: "A luxury skincare and cosmetics e-commerce storefront showcasing clean, organic beauty products and optimized conversion funnels.",
     nextProjectDeliverables: "UI/UX Design, E-commerce Storefront, Brand Identity",
     nextProjectIndustry: "Skincare & Beauty",
-    nextProjectImage: "/assets/images/section/cora-beauty-ecommerce-mockup.jpg"
+    nextProjectImage: "/assets/images/section/cora-beauty-ecommerce-mockup.webp"
   }
 ];
 

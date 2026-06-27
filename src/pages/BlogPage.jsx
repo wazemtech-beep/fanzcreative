@@ -15,7 +15,7 @@ const BLOG_POSTS = [
     excerpt: 'Discover how emerging design trends and smart automation are redefining the way customers interact with online stores.',
     date: 'Oct 15, 2026',
     category: 'Design',
-    img: '/assets/images/blog/blog_ui_ux.png'
+    img: '/assets/images/blog/blog_ui_ux.webp'
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const BLOG_POSTS = [
     excerpt: 'Learn how integrating artificial intelligence into your daily workflows can save thousands of hours and boost revenue.',
     date: 'Sep 28, 2026',
     category: 'Technology',
-    img: '/assets/images/blog/blog_ai_automation.png'
+    img: '/assets/images/blog/blog_ai_automation.webp'
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const BLOG_POSTS = [
     excerpt: 'A deep dive into modern web development practices, focusing on performance, accessibility, and robust architecture.',
     date: 'Sep 10, 2026',
     category: 'Development',
-    img: '/assets/images/blog/blog_web_dev.png'
+    img: '/assets/images/blog/blog_web_dev.webp'
   }
 ];
 

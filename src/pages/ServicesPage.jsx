@@ -14,14 +14,14 @@ const SERVICE_ITEMS = [
   {
     id: 1,
     title: 'Web Design',
-    img: '/assets/images/item/service-web-design.jpg',
+    img: '/assets/images/item/service-web-design.webp',
     desc: 'Elevate your digital presence with a beautifully crafted website design. We focus on aesthetics, usability, and performance to create experiences that engage users.',
     tags: ['Concept', 'User flow', 'Wireframe', 'UI Design', 'Ux Design', 'Design Guidelines'],
   },
   {
     id: 2,
     title: 'Branding',
-    img: '/assets/images/item/service-branding.jpg',
+    img: '/assets/images/item/service-branding.webp',
     desc: 'Your brand design is your business\'s first impression — make it count. We develop strong visual identities that communicate your values and resonate with your audience.',
     tags: ['Logo Design', 'Brand Identity', 'Social media kit', 'Stationery Items', 'Presentation Design', 'Packaging Design'],
   },
@@ -35,7 +35,7 @@ const SERVICE_ITEMS = [
   {
     id: 4,
     title: 'Website Development',
-    img: '/assets/images/item/service-web-dev.jpg',
+    img: '/assets/images/item/service-web-dev.webp',
     desc: 'From concept to reality, we bring your website to life. Our clean, efficient code ensures that your site is fast, responsive, and easy to manage.',
     tags: ['HTML', 'WordPress', 'Wix', 'Shopify', 'Squarespace', 'WooCommerce'],
   },

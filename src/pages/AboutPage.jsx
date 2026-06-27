@@ -324,7 +324,7 @@ function AboutPage() {
               <div className="col-lg-4 col-md-8 lg-mb-24">
                 <div className="team-item h-100 effectFade fadeUp">
                   <div className="image">
-                    <img loading="lazy" src="/assets/images/team/team-1.jpg" alt="Ava Collins" />
+                    <img loading="lazy" src="/assets/images/team/team-1.webp" alt="Ava Collins" />
                   </div>
                   <a href="#" className="name h6 fw-semibold" onClick={(e) => { e.preventDefault(); playClick(); }} onMouseEnter={playHover}>Ava Collins</a>
                   <div className="sub text-body-1">FanzCreative’s Design Lead</div>
@@ -348,7 +348,7 @@ function AboutPage() {
                 <div className="team-item style-1 mb-24 effectFade fadeUp">
                   <div className="top">
                     <div className="image">
-                      <img loading="lazy" src="/assets/images/team/team-2.jpg" alt="Noah Reed" />
+                      <img loading="lazy" src="/assets/images/team/team-2.webp" alt="Noah Reed" />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
@@ -367,7 +367,7 @@ function AboutPage() {
                 <div className="team-item style-1 effectFade fadeUp">
                   <div className="top">
                     <div className="image">
-                      <img loading="lazy" src="/assets/images/team/team-3.jpg" alt="Lucas Hayes" style={{ objectPosition: 'top' }} />
+                      <img loading="lazy" src="/assets/images/team/team-3.webp" alt="Lucas Hayes" style={{ objectPosition: 'top' }} />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
@@ -389,7 +389,7 @@ function AboutPage() {
                 <div className="team-item style-1 mb-24 effectFade fadeUp" data-delay="0.1">
                   <div className="top">
                     <div className="image">
-                      <img loading="lazy" src="/assets/images/team/team-4.jpg" alt="Jordan Brooks" style={{ objectPosition: 'top' }} />
+                      <img loading="lazy" src="/assets/images/team/team-4.webp" alt="Jordan Brooks" style={{ objectPosition: 'top' }} />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>
@@ -408,7 +408,7 @@ function AboutPage() {
                 <div className="team-item style-1 effectFade fadeUp" data-delay="0.1">
                   <div className="top">
                     <div className="image">
-                      <img loading="lazy" src="/assets/images/team/team-5.jpg" alt="Erin Park" />
+                      <img loading="lazy" src="/assets/images/team/team-5.webp" alt="Erin Park" />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item" onMouseEnter={playHover}>

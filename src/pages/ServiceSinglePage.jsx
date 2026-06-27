@@ -53,7 +53,7 @@ function ServiceSinglePage() {
           <div className="row">
             <div className="col-12">
               <div className="top-image mb-40 effectFade fadeZoom">
-                <img loading="lazy" src="/assets/images/section/service-single-1.jpg" alt="" />
+                <img loading="lazy" src="/assets/images/section/service-single-1.webp" alt="" />
               </div>
             </div>
             <div className="col-12">
@@ -80,12 +80,12 @@ function ServiceSinglePage() {
           <div className="row mb-40">
             <div className="col-md-8 md-mb-24">
               <div className="image effectFade fadeUp">
-                <img loading="lazy" src="/assets/images/section/service-single-2.jpg" alt="" />
+                <img loading="lazy" src="/assets/images/section/service-single-2.webp" alt="" />
               </div>
             </div>
             <div className="col-md-4">
               <div className="image effectFade fadeUp" data-delay="0.1">
-                <img loading="lazy" src="/assets/images/section/service-single-3.jpg" alt="" />
+                <img loading="lazy" src="/assets/images/section/service-single-3.webp" alt="" />
               </div>
             </div>
           </div>
@@ -137,7 +137,7 @@ function ServiceSinglePage() {
             </div>
             <div className="col-md-5">
               <div className="image bot-image effectFade fadeUp">
-                <img loading="lazy" src="/assets/images/section/service-single-4.jpg" alt="" />
+                <img loading="lazy" src="/assets/images/section/service-single-4.webp" alt="" />
               </div>
             </div>
           </div>

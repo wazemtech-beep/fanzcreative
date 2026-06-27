@@ -19,14 +19,14 @@ const SERVICE_ITEMS = [
   {
     id: 1,
     title: 'Web\nDesign',
-    img: '/assets/images/item/service-web-design.jpg',
+    img: '/assets/images/item/service-web-design.webp',
     desc: 'Elevate your digital presence with a beautifully crafted website design.',
     tags: ['Concept', 'User flow', 'Wireframe', 'UI Design', 'Ux Design', 'Design Guidelines'],
   },
   {
     id: 2,
     title: 'Branding',
-    img: '/assets/images/item/service-branding.jpg',
+    img: '/assets/images/item/service-branding.webp',
     desc: 'Your brand design is your business\'s first impression — make it count.',
     tags: ['Logo Design', 'Brand Identity', 'Social media kit', 'Stationery Items', 'Presentation Design', 'Packaging Design'],
   },
@@ -40,7 +40,7 @@ const SERVICE_ITEMS = [
   {
     id: 4,
     title: 'Website\nDevelopment',
-    img: '/assets/images/item/service-web-dev.jpg',
+    img: '/assets/images/item/service-web-dev.webp',
     desc: 'From concept to reality, we bring your website to life.',
     tags: ['HTML', 'WordPress', 'Wix', 'Shopify', 'Squarespace', 'WooCommerce'],
   },
