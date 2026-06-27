@@ -78,7 +78,7 @@ function AboutPage() {
       <div className="section-hero v1">
         <div
           className="hero-image"
-          style={{ pointerEvents: 'none', zIndex: 0, borderRadius: 40, overflow: 'hidden' }}
+          style={{ pointerEvents: 'none', zIndex: 0, borderRadius: 40, overflow: 'hidden', backgroundColor: '#000' }}
         >
           <HeroBackground
             height={3.5}
@@ -95,14 +95,14 @@ function AboutPage() {
           <div className="content-wrap text-center">
             {/* No effectFade on hero — already in viewport on page load */}
             <div className="title text-display-2">
-              <span className="title1 fw-semibold text-gradient-1">FanzCreative Shaping</span>
+              <span className="title1 fw-semibold text-white">FanzCreative Shaping</span>
               <br />
               <div className="title2 d-flex gap-20 justify-content-center flex-wrap align-items-center">
-                <span className="fw-semibold text-gradient-1">Digital Brands</span>
+                <span className="fw-semibold text-white">Digital Brands</span>
                 <AnimatedTitleIcon />
               </div>
             </div>
-            <p className="text" style={{ marginTop: '55px', opacity: 1 }}>
+            <p className="text" style={{ marginTop: '55px', opacity: 1, color: 'rgba(255,255,255,0.8)' }}>
               We blend premium brand storytelling, visual design standards, and clean web development <br /> to build unforgettable digital experiences that elevate your business.
             </p>
           </div>

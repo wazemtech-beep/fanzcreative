@@ -89,10 +89,13 @@ void main(){
     q.y += centerShift;
     d = 0.1 + 0.2 * abs(sdPyramidUpInv(q));
     z -= d;
-    o += (sin((p.y + z) * cf + vec4(0.0, 1.0, 2.0, 3.0)) + 1.0) / d;
+    // Swapped phase for blue to align closer with red, turning blue regions into pink/magenta
+    o += (sin((p.y + z) * cf + vec4(0.0, 1.5, 0.2, 3.0)) + 1.0) / d;
   }
   o = tanh4(o * o * (uGlow * uBloom) / 1e5);
   vec3 col = o.rgb;
+  col.g *= 0.25; // Suppress green to emphasize pink/magenta
+  
   float n = rand(gl_FragCoord.xy + vec2(iTime));
   col += (n - 0.5) * uNoise;
   col = clamp(col, 0.0, 1.0);
