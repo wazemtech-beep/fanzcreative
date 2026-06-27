@@ -8283,6 +8283,7 @@ button.animate-btn::after,
   border-radius: 32px;
   background-color: var(--neutral-100);
   box-shadow: 0px 7.77px 16px 0px rgba(0, 0, 0, 0.0588235294), 0px 3px 3px 0px rgba(0, 0, 0, 0.1019607843), 0px -8px 0px 0px rgba(0, 0, 0, 0.0509803922) inset, 0px 4px 0px 0px rgba(255, 255, 255, 0.6) inset;
+  height: 100%;
 }
 
 .box-contact-item .icon {

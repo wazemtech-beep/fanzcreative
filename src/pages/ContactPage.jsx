@@ -94,9 +94,9 @@ function ContactPage() {
                 <div className="box-contact-item text-center effectFade fadeUp" data-delay="0.2">
                   <i className="icon icon-map-marker-solid"></i>
                   <h6 className="title fw-semibold">Our Location</h6>
-                  <p className="text-body-1 fw-semibold text-secondary">
+                  <div className="text">
                     United Kingdom, Company Number # 14391900
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
