@@ -1302,6 +1302,8 @@ h6,
   -webkit-background-clip: text;
   -webkit-text-stroke: 0px transparent;
   -webkit-text-fill-color: transparent;
+  padding-bottom: 24px;
+  margin-bottom: -24px;
 }
 
 .text-gradient-2 {

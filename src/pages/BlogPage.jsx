@@ -5,6 +5,8 @@ import { useScrollFade } from '../hooks/useScrollFade';
 import Contact from '../components/Contact';
 import { playClick, playHover } from '../hooks/useSound';
 
+import AnimatedTitleIcon from '../components/AnimatedTitleIcon';
+
 const BLOG_POSTS = [
   {
     id: 1,
@@ -45,18 +47,26 @@ function BlogPage() {
         <title>Blog - FanzCreative</title>
       </Helmet>
 
-      {/* page-title */}
-      <div className="section-page-title">
-        <div className="container text-center">
-          <h1 className="page-title fw-semibold effectFade fadeZoom">FanzCreative</h1>
-          <div className="breadcrumbs effectFade fadeUp">
-            <Link to="/" className="link1" onClick={playClick} onMouseEnter={playHover}>Home</Link>
-            <div>/</div>
-            <div>Blog</div>
+      {/* Hero Banner */}
+      <div className="section-hero v1">
+        <div className="hero-image"></div>
+        <div className="container">
+          <div className="content-wrap text-center">
+            <div className="title text-display-2 effectFade fadeZoom">
+              <span className="title1 fw-semibold text-gradient-1">Our Latest</span>
+              <br />
+              <div className="title2 d-flex gap-20 justify-content-center flex-wrap align-items-center">
+                <span className="fw-semibold text-gradient-1">Blog Posts</span>
+                <AnimatedTitleIcon style={{ transform: 'translateY(16px)' }} />
+              </div>
+            </div>
+            <p className="text effectFade fadeUp">
+              Discover insights, strategies, and trends shaping the future <br /> of digital experiences.
+            </p>
           </div>
         </div>
       </div>
-      {/* /page-title */}
+      {/* /Hero Banner */}
 
       {/* Blog Grid 2 */}
       <section className="section-blog flat-spacing">

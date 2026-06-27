@@ -78,7 +78,7 @@ function ServicesPage() {
               <span className="title1 fw-semibold" style={{ color: '#ffffff' }}>Design Better with</span>
               <br />
               <div className="title2 d-flex gap-20 justify-content-center flex-wrap align-items-center">
-                <span className="fw-semibold" style={{ color: '#df2d6d' }}>Creative Services</span>
+                <span className="fw-semibold" style={{ color: '#ffffff' }}>Creative Services</span>
                 <AnimatedTitleIcon style={{ transform: 'translateY(16px)' }} />
               </div>
             </div>

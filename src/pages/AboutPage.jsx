@@ -65,10 +65,7 @@ function AboutPage() {
           margin-bottom: -24px;
           vertical-align: middle;
         }
-        .about-page-wrapper .section-hero.v1 {
-          padding-top: 150px;
-          padding-bottom: 80px;
-        }
+
         .about-page-wrapper .section-hero.v1 .hero-image {
           background-image: none !important;
         }
