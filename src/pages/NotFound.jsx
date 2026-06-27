@@ -1,19 +1,24 @@
+import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 import { playClick, playHover } from '../hooks/useSound';
 
 function NotFound() {
+  const navigate = useNavigate();
+
   const handleHomeClick = (e) => {
     e.preventDefault();
     playClick();
-    if (window.setCurrentPage) {
-      window.setCurrentPage('home');
-    }
+    navigate('/');
   };
 
   return (
     <section className="section-404 flat-spacing">
-      {/* Glow effect background */}
+      <Helmet>
+        <title>404 Page Not Found - FanzCreative</title>
+        <meta name="description" content="Page not found. Return to FanzCreative homepage." />
+      </Helmet>
       <div className="glow-blur-orb"></div>
-      
+
       <div className="container text-center">
         <h1 className="title fw-semibold text-display-1 text-gradient-1">
           404 Page Not Found
@@ -23,9 +28,9 @@ function NotFound() {
           We suggest that you return to the homepage.
         </p>
         <div className="button-wrap">
-          <a 
-            href="/" 
-            className="tf-btn" 
+          <a
+            href="/"
+            className="tf-btn"
             onClick={handleHomeClick}
             onMouseEnter={playHover}
           >
@@ -45,12 +50,10 @@ function NotFound() {
           justify-content: center;
           min-height: 70vh;
         }
-
         .section-404 .container {
           position: relative;
           z-index: 2;
         }
-
         .section-404 .title {
           margin-bottom: 24px;
           font-size: clamp(48px, 6vw, 80px);
@@ -58,7 +61,6 @@ function NotFound() {
           letter-spacing: -0.03em;
           opacity: 0;
         }
-
         .section-404 .desc {
           margin-bottom: 40px;
           max-width: 600px;
@@ -68,20 +70,16 @@ function NotFound() {
           color: #52525b !important;
           opacity: 0;
         }
-
         .section-404 .button-wrap {
           display: flex;
           justify-content: center;
           opacity: 0;
         }
-
         .section-404 .tf-btn {
           max-width: 200px;
           width: 100%;
           justify-content: center;
         }
-
-        /* Subtle glowing background orb for premium aesthetic */
         .glow-blur-orb {
           position: absolute;
           top: 50%;
@@ -96,47 +94,23 @@ function NotFound() {
           filter: blur(40px);
           animation: pulseGlow 8s ease-in-out infinite alternate;
         }
-
         @keyframes pulseGlow {
-          0% {
-            transform: translate(-50%, -50%) scale(0.9);
-            opacity: 0.8;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(1.1);
-            opacity: 1;
-          }
+          0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.8; }
+          100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
         }
-
         @keyframes fadeInNotFound {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-
         .section-404 .title,
         .section-404 .desc,
         .section-404 .button-wrap {
           animation: fadeInNotFound 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
-
-        .section-404 .desc {
-          animation-delay: 0.15s;
-        }
-
-        .section-404 .button-wrap {
-          animation-delay: 0.3s;
-        }
-
+        .section-404 .desc { animation-delay: 0.15s; }
+        .section-404 .button-wrap { animation-delay: 0.3s; }
         @media (max-width: 767px) {
-          .section-404 {
-            padding: 160px 0 100px;
-          }
+          .section-404 { padding: 160px 0 100px; }
         }
       `}</style>
     </section>

@@ -84,7 +84,7 @@ function Partner() {
               <div className="infiniteSlide_tech_main d-grid" style={{ overflow: 'hidden' }}>
                 <div className="partner-track" ref={trackRef}>
                   {items.map((src, i) => (
-                    <img key={i} src={src} alt="" />
+                    <img loading="lazy" key={i} src={src} alt="" />
                   ))}
                 </div>
               </div>

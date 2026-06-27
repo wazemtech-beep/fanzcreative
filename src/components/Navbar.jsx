@@ -1,21 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { playTick, playWhoosh, playPop, playHomeLink, playAboutLink, playHover, playClose } from '../hooks/useSound';
 
-/**
- * Navbar — converted from `.tf-header.header2` in index-v2.html
- *
- * Original JS behaviour reproduced here:
- *  - Sticky + `header-sticky` class on scroll (background + shadow via CSS)
- *  - Desktop dropdown sub-menus (CSS :hover is kept; no extra JS needed)
- *  - Mobile hamburger opens the offcanvas overlay
- *  - Close button inside the offcanvas closes it
- *  - body overflow-hidden toggled while menu is open
- */
 function Navbar({ is404 = false, currentPage = 'home' }) {
   const headerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
-  /* ── Sticky header ─────────────────────────────────────────────────── */
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
@@ -32,13 +23,11 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* ── Body overflow when mobile menu is open ────────────────────────── */
   useEffect(() => {
     document.body.classList.toggle('overflow-hidden', menuOpen);
     return () => document.body.classList.remove('overflow-hidden');
   }, [menuOpen]);
 
-  /* ── Sync open/close with the offcanvas DOM node (rendered in App) ─── */
   useEffect(() => {
     const offcanvas = document.getElementById('offcanvas-menu');
     if (!offcanvas) return;
@@ -49,7 +38,6 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
       offcanvas.classList.remove('show');
     }
 
-    // Wire the close button rendered inside the offcanvas
     const closeBtn = document.getElementById('close-mb-menu');
     const handleClose = () => {
       setMenuOpen(false);
@@ -57,7 +45,6 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
     };
     closeBtn?.addEventListener('click', handleClose);
 
-    // Wire closing when clicking a menu link inside offcanvas
     const links = offcanvas.querySelectorAll('a');
     const handleLinkClick = () => {
       setMenuOpen(false);
@@ -73,16 +60,10 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
 
   return (
     <header className="tf-header header2" ref={headerRef}>
-      {/* Force nav link text color inside this header */}
       <style>{`.tf-header .header-inner .item-link { color: ${is404 ? '#ffffff' : '#000000'}; }`}</style>
       <div className="header-inner" style={{ background: is404 ? '#09090b' : '#ffffff' }}>
 
-        {/* Logo — filter: invert makes the white/light logo black */}
-        <a href="#" className="logo-site" onClick={(e) => {
-          e.preventDefault();
-          playHomeLink();
-          if (window.setCurrentPage) window.setCurrentPage('home');
-        }} onMouseEnter={playHover}>
+        <Link to="/" className="logo-site" aria-label="FanzCreative home" onClick={playHomeLink} onMouseEnter={playHover}>
           <img
             src="/assets/images/logo/fanz-logo.webp"
             alt="FanzCreative"
@@ -93,66 +74,49 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
               filter: is404 ? 'none' : 'brightness(0)',
             }}
           />
-        </a>
+        </Link>
 
-        {/* Desktop navigation */}
         <nav className="box-navigation">
           <ul className="nav-menu-main">
-
             <li className="menu-item">
-              <a href="#" className={`item-link link1 ${currentPage === 'home' ? 'active' : ''}`} onClick={(e) => {
-                e.preventDefault();
-                playHomeLink();
-                if (window.setCurrentPage) window.setCurrentPage('home');
-              }} onMouseEnter={playHover}>Home</a>
+              <Link to="/" className={`item-link link1 ${currentPage === 'home' ? 'active' : ''}`} aria-current={currentPage === 'home' ? 'page' : undefined} onClick={playHomeLink} onMouseEnter={playHover}>Home</Link>
             </li>
-
             <li className="menu-item">
-              <a href="/about" className={`item-link link1 ${currentPage === 'about' ? 'active' : ''}`} onClick={(e) => {
-                e.preventDefault();
-                playAboutLink();
-                if (window.setCurrentPage) window.setCurrentPage('about');
-              }} onMouseEnter={playHover}>About</a>
+              <Link to="/about" className={`item-link link1 ${currentPage === 'about' ? 'active' : ''}`} aria-current={currentPage === 'about' ? 'page' : undefined} onClick={playAboutLink} onMouseEnter={playHover}>About</Link>
             </li>
-
             <li className="menu-item">
-              <a href="#services" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Services</a>
+              <Link to="/services" className={`item-link link1 ${currentPage === 'services' ? 'active' : ''}`} aria-current={currentPage === 'services' ? 'page' : undefined} onClick={playTick} onMouseEnter={playHover}>Services</Link>
             </li>
-
             <li className="menu-item">
-              <a href="#works" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Works</a>
+              <Link to="/works" className={`item-link link1 ${currentPage === 'works' ? 'active' : ''}`} aria-current={currentPage === 'works' ? 'page' : undefined} onClick={playTick} onMouseEnter={playHover}>Works</Link>
             </li>
-
             <li className="menu-item">
-              <a href="#" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Blog</a>
+              <Link to="/blog" className={`item-link link1 ${location.pathname.startsWith('/blog') ? 'active' : ''}`} aria-current={location.pathname.startsWith('/blog') ? 'page' : undefined} onClick={playTick} onMouseEnter={playHover}>Blog</Link>
             </li>
-
             <li className="menu-item">
-              <a href="#contact" className="item-link link1" onClick={playTick} onMouseEnter={playHover}>Contact</a>
+              <Link to="/contact" className={`item-link link1 ${location.pathname === '/contact' ? 'active' : ''}`} onClick={playTick} onMouseEnter={playHover}>Contact</Link>
             </li>
-
           </ul>
         </nav>
 
-        {/* CTA — desktop only */}
-        <a 
-          href="#contact" 
-          className="tf-btn d-lg-flex d-none" 
-          onClick={playPop} 
+        <Link
+          to="/contact"
+          className="tf-btn d-lg-flex d-none"
+          aria-label="Start a Project"
+          onClick={playPop}
           onMouseEnter={playHover}
           style={is404 ? { background: '#ffffff', color: '#09090b', borderColor: '#ffffff' } : {}}
         >
           Start a Project
-        </a>
+        </Link>
 
-        {/* Hamburger — mobile only */}
         <button
           className="tf-btn open-mb-menu mobile-menu d-lg-none d-flex"
           onClick={() => { setMenuOpen(true); playWhoosh(); }}
           aria-label="Open menu"
-          style={{ 
-            color: is404 ? '#ffffff' : '#000000', 
-            borderColor: is404 ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)' 
+          style={{
+            color: is404 ? '#ffffff' : '#000000',
+            borderColor: is404 ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'
           }}
         >
           <i className="icon icon-grip-lines-solid"></i>

@@ -53,12 +53,12 @@ function Tools() {
       `}</style>
 
       {/* Decorative floating images with medium-level animation */}
-      <img className="img-1 float-anim-1" src="/assets/images/item/item-4.svg" alt="" onMouseEnter={() => playSmiley(0)} />
-      <img className="img-2 float-anim-2" src="/assets/images/item/item-5.svg" alt="" onMouseEnter={() => playSmiley(1)} />
-      <img className="img-3 float-anim-3" src="/assets/images/item/item-6.svg" alt="" onMouseEnter={() => playSmiley(2)} />
-      <img className="img-4 float-anim-4" src="/assets/images/item/item-7.svg" alt="" onMouseEnter={() => playSmiley(3)} />
-      <img className="img-5 float-anim-5" src="/assets/images/item/item-8.svg" alt="" onMouseEnter={() => playSmiley(0)} />
-      <img className="img-6 float-anim-6" src="/assets/images/item/item-9.svg" alt="" onMouseEnter={() => playSmiley(1)} />
+      <img loading="lazy" className="img-1 float-anim-1" src="/assets/images/item/item-4.svg" alt="" onMouseEnter={() => playSmiley(0)} />
+      <img loading="lazy" className="img-2 float-anim-2" src="/assets/images/item/item-5.svg" alt="" onMouseEnter={() => playSmiley(1)} />
+      <img loading="lazy" className="img-3 float-anim-3" src="/assets/images/item/item-6.svg" alt="" onMouseEnter={() => playSmiley(2)} />
+      <img loading="lazy" className="img-4 float-anim-4" src="/assets/images/item/item-7.svg" alt="" onMouseEnter={() => playSmiley(3)} />
+      <img loading="lazy" className="img-5 float-anim-5" src="/assets/images/item/item-8.svg" alt="" onMouseEnter={() => playSmiley(0)} />
+      <img loading="lazy" className="img-6 float-anim-6" src="/assets/images/item/item-9.svg" alt="" onMouseEnter={() => playSmiley(1)} />
 
       {/* Content */}
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>

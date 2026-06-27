@@ -9,7 +9,7 @@ const FAQS = [
   { id: 4, q: 'Are revisions included in the price?',                a: 'Yes. Every project includes a set number of revision rounds. We\'re flexible and want you to love the result — we won\'t stop until it\'s right.' },
 ];
 
-function FAQs() {
+function FAQs({ className = "pt-0" }) {
   const sectionRef = useRef(null);
   useScrollFade(sectionRef);
   const [openId, setOpenId] = useState(1);
@@ -17,7 +17,7 @@ function FAQs() {
   const toggle = (id) => setOpenId((cur) => (cur === id ? null : id));
 
   return (
-    <div className="section-faqs flat-spacing pt-0" ref={sectionRef}>
+    <div className={`section-faqs flat-spacing ${className}`} ref={sectionRef}>
       <div className="container">
         <div className="heading-section center mb-64">
           <div className="heading-sub fw-semibold effectFade fadeUp">FAQs</div>

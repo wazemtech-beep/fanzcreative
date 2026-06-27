@@ -26,7 +26,7 @@ function Awards() {
               data-delay={a.delay || undefined}
             >
               <div className="image">
-                <img src={a.img} alt="" />
+                <img loading="lazy" src={a.img} alt="" />
               </div>
               <div className="title text-body-1 text-white">{a.title}</div>
               <div className="text text-body-1 text-white">{a.text}</div>

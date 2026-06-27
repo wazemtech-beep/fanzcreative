@@ -38,7 +38,7 @@ const SLIDES = [
   },
 ];
 
-function Process() {
+function Process({ className = "pt-0" }) {
   const sectionRef = useRef(null);
   useScrollFade(sectionRef);
 
@@ -48,7 +48,7 @@ function Process() {
   const [isBeginning, setIsBeginning] = useState(true);
 
   return (
-    <div className="section-process flat-spacing pt-0" ref={sectionRef} style={{ position: 'relative' }}>
+    <div className={`section-process flat-spacing ${className}`} ref={sectionRef} style={{ position: 'relative' }}>
       {/* DotField background — pink/purple dots react to cursor */}
       <DotField
         dotRadius={1.5}

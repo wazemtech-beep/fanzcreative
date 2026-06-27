@@ -160,7 +160,7 @@ function Benefits() {
           <div className="col-lg-5">
             <div className="benefits-box benefits-secure">
               <div className="benefits-secure-inner text-center">
-                <img src="/assets/images/item/benefits-1.svg" alt="" />
+                <img loading="lazy" src="/assets/images/item/benefits-1.svg" alt="" />
               </div>
               <div className="content">
                 <h6 className="fw-semibold title">Brand Consistency</h6>
@@ -174,9 +174,9 @@ function Benefits() {
           <div className="col-lg-7">
             <div className="benefits-box benefits-design">
               <div className="benefits-design-inner">
-                <img className="item-img-1" src="/assets/images/item/benefits-2.svg" alt="" />
-                <img className="item-img-2 rightleft" src="/assets/images/item/benefits-3.svg" alt="" />
-                <img className="item-img-3 updown" src="/assets/images/item/benefits-4.svg" alt="" />
+                <img loading="lazy" className="item-img-1" src="/assets/images/item/benefits-2.svg" alt="" />
+                <img loading="lazy" className="item-img-2 rightleft" src="/assets/images/item/benefits-3.svg" alt="" />
+                <img loading="lazy" className="item-img-3 updown" src="/assets/images/item/benefits-4.svg" alt="" />
               </div>
               <div className="content">
                 <h6 className="fw-semibold title">Creative That Converts</h6>

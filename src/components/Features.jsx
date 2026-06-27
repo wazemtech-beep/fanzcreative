@@ -73,7 +73,7 @@ function Features() {
 
             {/* Center logo — CSS handles size/shape; we just put the logo inside */}
             <div className="features-center flex-shrink">
-              <img
+              <img loading="lazy"
                 src="/assets/images/logo/fanz-logo.webp"
                 alt="FanzCreative"
                 style={{

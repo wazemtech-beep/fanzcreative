@@ -79,7 +79,7 @@ function AboutUs() {
                 </h5>
                 <a href="#contact" className="tf-btn">Start a Project</a>
               </div>
-              <img
+              <img loading="lazy"
                 className="effectFade fadeRotateX"
                 src="/assets/images/item/earth.webp"
                 alt=""
@@ -128,7 +128,7 @@ function AboutUs() {
             {/* Quote card */}
             <div className="box-quotes effectFade fadeRotateX">
               <div className="image">
-                <img src="/assets/images/image.webp" alt="" />
+                <img loading="lazy" src="/assets/images/image.webp" alt="" />
               </div>
               <div className="content">
                 <div className="icon mb-8">

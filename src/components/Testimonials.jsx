@@ -29,7 +29,7 @@ const TESTIMONIALS = [
   },
 ];
 
-function Testimonials() {
+function Testimonials({ className = "pt-0" }) {
   const sectionRef = useRef(null);
   useScrollFade(sectionRef);
   const [active, setActive] = useState(0);
@@ -54,7 +54,7 @@ function Testimonials() {
   const t = TESTIMONIALS[active];
 
   return (
-    <div className="section-testimonials flat-spacing pt-0" ref={sectionRef}>
+    <div className={`section-testimonials flat-spacing ${className}`} ref={sectionRef}>
       <div className="container">
         <div className="row justify-content-between">
 
@@ -90,7 +90,7 @@ function Testimonials() {
 
                 {/* Cite */}
                 <div className="cite">
-                  <img className="line-left" src="/assets/images/item/line-1.webp" alt="" />
+                  <img loading="lazy" className="line-left" src="/assets/images/item/line-1.webp" alt="" />
                   <div className="name text-body-3 text-neutral-400 fw-semibold">{t.name}</div>
                   <div className="line"></div>
                   <div className="sub text-body-3 text-neutral-400">{t.role}</div>
@@ -133,7 +133,7 @@ function Testimonials() {
                 className={`testimonial-image testimonial-image-slide ${direction < 0 ? 'from-left' : 'from-right'}`}
                 key={t.name}
               >
-                <img
+                <img loading="lazy"
                   src={t.img}
                   alt={t.name}
                   style={{

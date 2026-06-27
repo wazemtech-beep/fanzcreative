@@ -163,7 +163,7 @@ function Services() {
 
             {/* Side image (swaps on accordion change) */}
             <div className="services-image effectFade fadeUp">
-              <img
+              <img loading="lazy"
                 src={activeItem.img}
                 alt=""
                 style={{

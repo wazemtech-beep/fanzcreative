@@ -1,9 +1,13 @@
 import { useRef, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useScrollFade } from '../hooks/useScrollFade';
-import Testimonials from './Testimonials';
-import { MouseFollowImage } from './FeaturedWorks';
+import Testimonials from '../components/Testimonials';
+import Contact from '../components/Contact';
+import AnimatedTitleIcon from '../components/AnimatedTitleIcon';
+import { MouseFollowImage } from '../components/FeaturedWorks';
 import { playHover } from '../hooks/useSound';
-import { SLUGS } from '../App';
+import { SLUGS } from '../constants';
 
 const PROJECT_DATA = [
   {
@@ -11,6 +15,10 @@ const PROJECT_DATA = [
     title2: "Skincare Store",
     tagline: "A luxury skincare and cosmetics e-commerce storefront designed to showcase clean, organic beauty products.",
     image: "/assets/images/section/cora-beauty-ecommerce-mockup.jpg",
+    img1: "/assets/images/section/cora-beauty-1.jpg",
+    img2: "/assets/images/section/cora-beauty-2.jpg",
+    img3: "/assets/images/section/cora-beauty-3.jpg",
+    img4: "/assets/images/section/cora-beauty-4.jpg",
     details: "Cora Beauty is a premium skincare and cosmetics storefront designed to capture a clean, organic visual language. The brand emphasizes age-defying botanical formulations, clinical-grade skin health ingredients, and sustainable product design. The interface centers on soft tones, modern serif typography, and tactile visuals. The user experience is optimized to guide users from educational ingredient breakdowns to shopping collections with single-click purchases.",
     detailsContinued: "We designed a full design system including responsive landing pages, mobile shopping layouts, custom product displays, and stationary packaging mockups. In-depth research of skincare customer habits helped us design a frictionless product-comparison grid and a subscription funnel that makes re-ordering essential items incredibly easy.",
     deliverables: ["UI/UX Design", "E-commerce Storefront", "Brand Identity"],
@@ -29,6 +37,10 @@ const PROJECT_DATA = [
     title2: "Fashion Store",
     tagline: "A bold, dynamic e-commerce experience for a fast-fashion apparel brand.",
     image: "/assets/images/section/revolution-fashion-store-mockup.jpg",
+    img1: "/assets/images/section/revolution-1.jpg",
+    img2: "/assets/images/section/revolution-2.jpg",
+    img3: "/assets/images/section/revolution-3.jpg",
+    img4: "/assets/images/section/revolution-4.jpg",
     details: "Revolution is a high-performance fashion and apparel store designed to handle large retail catalogs while maintaining a fast, visual storefront. The design centers on high-contrast black-and-white grids, bold styling, and video lookbooks. It features an interactive grid where customers can preview models wearing clothing lines in real-time, select colors, and add items directly to a quick-access cart.",
     detailsContinued: "The website uses code splitting and lazy loading to maintain fast load times on mobile, ensuring seamless browsing during seasonal drops. The shopping checkout was customized to support multi-currency checkouts and express payment options, reducing friction for fashion-forward buyers worldwide.",
     deliverables: ["UI/UX Design", "E-commerce Platform", "Web Development"],
@@ -47,6 +59,10 @@ const PROJECT_DATA = [
     title2: "Fashion E-commerce",
     tagline: "An editorial-driven digital storefront for an upscale clothing collection.",
     image: "/assets/images/section/marble-fashion-ecommerce-mockup.jpg",
+    img1: "/assets/images/section/marble-1.jpg",
+    img2: "/assets/images/section/marble-2.jpg",
+    img3: "/assets/images/section/marble-3.jpg",
+    img4: "/assets/images/section/marble-4.jpg",
     details: "Marble is a premium digital experience created for a fashion e-commerce storefront looking to establish a strong storytelling narrative online. The visual theme uses elegant editorial layouts, large-format imagery, and micro-interactions. The interface presents clothing collections like an art gallery, inviting customers to explore fabric sources, designer interviews, and styling tips.",
     detailsContinued: "We built the site around optimized interactive grids that showcase fabric details under zoom. Smooth transitions and custom loading animations enhance the premium feel of the brand. This project demonstrates how e-commerce can transcend simple product listings to build brand prestige and customer desire.",
     deliverables: ["UI/UX Design", "Webflow Development", "Motion Design"],
@@ -65,6 +81,10 @@ const PROJECT_DATA = [
     title2: "Clothing Store",
     tagline: "Minimal and functional e-commerce design highlighting sustainable outerwear fabric narratives.",
     image: "/assets/images/section/mojave-clothing-store-mockup.jpg",
+    img1: "/assets/images/section/mojave-1.jpg",
+    img2: "/assets/images/section/mojave-2.jpg",
+    img3: "/assets/images/section/mojave-3.jpg",
+    img4: "/assets/images/section/mojave-4.jpg",
     details: "Mojave is a highly functional storefront designed for an outerwear and everyday essentials brand. Built with Shopify, the storefront focuses on sustainability storytelling, showing the lifecycle of organic materials and outerwear construction. The interface is clean and minimalist, allowing product photography and textile close-ups to stand out.",
     detailsContinued: "We optimized mobile checkouts, shipping calculators, and lazy-loading grids. The site includes sustainable material icons, detail cards, and customer reviews linked directly to sizing data to help customers choose outerwear that fits correctly.",
     deliverables: ["Shopify Development", "UI Design", "Brand Storytelling"],
@@ -80,44 +100,37 @@ const PROJECT_DATA = [
   }
 ];
 
-function WorkSingle({ projectIndex = 0 }) {
+function WorkSingle() {
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const projectIndex = SLUGS.indexOf(slug);
   const rootRef = useRef(null);
   useScrollFade(rootRef);
 
   const project = PROJECT_DATA[projectIndex] || PROJECT_DATA[0];
+  const currentIndex = projectIndex >= 0 ? projectIndex : 0;
 
   return (
-    <div ref={rootRef}>
+    <div ref={rootRef} className="service-single-page-wrapper">
+      <Helmet>
+        <title>{project.title} - FanzCreative</title>
+        <meta name="description" content={`${project.title} ${project.title2} — project by FanzCreative.`} />
+      </Helmet>
       {/* Hero Banner */}
-      <div className="section-hero v2">
-        <div className="hero-image"></div>
-        <div className="container">
+      <div className="section-hero v2" style={{ position: 'relative' }}>
+        <div className="hero-image" style={{ position: 'absolute', inset: 0, zIndex: 0 }}></div>
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.45)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 1, pointerEvents: 'none' }}></div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="content-wrap text-center">
-            <div className="title text-display-2 effectFade fadeRotateX" key={projectIndex}>
+            <div className="title text-display-2 effectFade fadeRotateX" key={currentIndex}>
               <span className="title1 fw-semibold text-gradient-1">{project.title}</span>
               <br />
-              <div className="title2 d-flex gap-20 justify-content-center flex-wrap">
+              <div className="title2 d-flex gap-20 justify-content-center flex-wrap align-items-center">
                 <span className="fw-semibold text-gradient-1">{project.title2}</span>
-                  <div className="title-icon">
-                    <div className="box"></div>
-                    <div className="hero-shape-flight-zone-v2" aria-hidden="true">
-                      <div className="hero-falling-shape-v2 shape-1">
-                        <img src="/assets/images/item/hero-1.svg" alt="" />
-                        <img src="/assets/images/item/hero-1.svg" alt="" className="cloned" />
-                      </div>
-                      <div className="hero-falling-shape-v2 shape-2">
-                        <img src="/assets/images/item/hero-2.svg" alt="" />
-                        <img src="/assets/images/item/hero-2.svg" alt="" className="cloned" />
-                      </div>
-                      <div className="hero-falling-shape-v2 shape-3">
-                        <img src="/assets/images/item/hero-3.svg" alt="" />
-                        <img src="/assets/images/item/hero-3.svg" alt="" className="cloned" />
-                      </div>
-                    </div>
-                  </div>
+                <AnimatedTitleIcon style={{ transform: 'translateY(16px)' }} />
               </div>
             </div>
-            <p className="text effectFade fadeUp">
+            <p className="text text-body-3 effectFade fadeUp">
               {project.tagline}
             </p>
           </div>
@@ -125,96 +138,110 @@ function WorkSingle({ projectIndex = 0 }) {
       </div>
 
       {/* section-work-single */}
-      <div id="works" className="section-work-single flat-spacing pt-0">
+      <div id="works" className="section-services-single flat-spacing pt-0">
         <div className="container">
-          <div className="row mb-32">
+          {/* Top Image */}
+          <div className="row">
             <div className="col-12">
-              <div className="wrap-image mb-60 effectFade fadeZoom" key={`img-1-${projectIndex}`}>
-                <img src={project.image} alt={project.title} style={{ width: '100%', height: 'auto' }} />
+              <div className="top-image mb-40 effectFade fadeZoom" key={`img-top-${currentIndex}`}>
+                <img loading="lazy" src={project.image} alt={project.title} />
               </div>
-              <h2 className="heading fw-semibold mb-32 effectFade fadeUp">Project Details</h2>
-              <p className="text-secondary effectFade fadeUp">
-                {project.details}
-                <br /><br />
-                {project.detailsContinued}
-              </p>
+            </div>
+            <div className="col-12">
+              <div className="heading fw-semibold mb-20 effectFade fadeUp">Project Details</div>
             </div>
           </div>
-          <div className="row mb-60">
-            <div className="col-md-8 md-mb-24">
-              <div className="text-body-1 fw-semibold text-secondary mb-15 effectFade fadeUp">
-                DELIVERABLES
-              </div>
+
+          {/* Details Text + Tags */}
+          <div className="row mb-80">
+            <div className="col-md-7 md-mb-24">
+              <p className="text-secondary effectFade fadeUp">
+                {project.details}
+              </p>
+            </div>
+            <div className="col-md-5">
+              <p className="text-secondary mb-30 effectFade fadeUp">
+                {project.detailsContinued}
+              </p>
               <div className="list-tags effectFade fadeUp">
                 {project.deliverables.map((item, idx) => (
                   <a key={idx} href="#" className="tags-item fw-semibold" onClick={(e) => e.preventDefault()}>{item}</a>
                 ))}
               </div>
+              <div className="mt-3 text-body-1 fw-semibold text-secondary effectFade fadeUp">
+                INDUSTRY: <span className="text-white">{project.industry}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Two Images Side by Side */}
+          <div className="row mb-40">
+            <div className="col-md-8 md-mb-24">
+              <div className="image effectFade fadeUp" key={`img-2-${currentIndex}`}>
+                <img loading="lazy" src={project.img1} alt="" />
+              </div>
             </div>
             <div className="col-md-4">
-              <div className="text-body-1 fw-semibold text-secondary mb-15 effectFade fadeUp" data-delay={0.1}>
-                INDUSTRY
-              </div>
-              <div className="list-tags effectFade fadeUp" data-delay={0.1}>
-                <a href="#" className="tags-item fw-semibold" onClick={(e) => e.preventDefault()}>{project.industry}</a>
+              <div className="image effectFade fadeUp" data-delay="0.1" key={`img-3-${currentIndex}`}>
+                <img loading="lazy" src={project.img2} alt="" />
               </div>
             </div>
           </div>
-          <div className="row mb-60">
+
+          {/* Project Research */}
+          <div className="row mb-40">
             <div className="col-12">
-              <div className="wrap-image effectFade fadeZoom" key={`img-2-${projectIndex}`}>
-                <img src="/assets/images/section/work-single-2.jpg" alt="" style={{ width: '100%', height: 'auto' }} />
-              </div>
-            </div>
-          </div>
-          <div className="row mb-60">
-            <div className="col-12">
-              <h2 className="heading fw-semibold mb-20 effectFade fadeUp">Project Research</h2>
+              <div className="heading fw-semibold mb-20 effectFade fadeUp">Project Research</div>
               <p className="text-secondary effectFade fadeUp">
                 {project.research}
               </p>
             </div>
           </div>
-          <div className="row mb-60">
-            <div className="col-12">
-              <h2 className="heading fw-semibold mb-20 effectFade fadeUp">Project Results</h2>
-              <p className="text-secondary effectFade fadeUp">
+
+          {/* Key Deliverables + Image Sidebar */}
+          <div className="row justify-content-between mb-40">
+            <div className="col-md-6 md-mb-24">
+              <div className="heading fw-semibold mb-20 effectFade fadeUp">Project Results</div>
+              <p className="text-secondary mb-30 effectFade fadeUp">
                 {project.results}
               </p>
+              <h6 className="title fw-semibold mb-16 effectFade fadeUp">Key Deliverables</h6>
+              <ul className="d-grid gap-8 mb-30">
+                {project.deliverables.map((item, idx) => (
+                  <li key={idx} className="effectFade fadeUp">+ {item}</li>
+                ))}
+              </ul>
+              <a href="#contact" className="tf-btn effectFade fadeRotateX">
+                Start a Project
+              </a>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 md-mb-24">
-              <div className="image effectFade fadeUp">
-                <img src="/assets/images/section/work-single-3.jpg" alt="" style={{ width: '100%', height: 'auto' }} />
+            <div className="col-md-5">
+              <div className="image bot-image effectFade fadeUp" key={`img-4-${currentIndex}`}>
+                <img loading="lazy" src={project.img3} alt="" />
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="image effectFade fadeUp" data-delay={0.1}>
-                <img src="/assets/images/section/work-single-4.jpg" alt="" style={{ width: '100%', height: 'auto' }} />
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
 
-      {/* Testimonials block */}
+      {/* Testimonials */}
       <div className="box-black">
         <div className="light-box"></div>
-        <img className="light-top" src="/assets/images/item/light-top.webp" alt="" />
-        <img className="light-bot" src="/assets/images/item/light-bot.webp" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
-        <Testimonials />
+        <img loading="lazy" className="light-top" src="/assets/images/item/light-top.webp" alt="" />
+        <img loading="lazy" className="light-bot" src="/assets/images/item/light-bot.webp" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
+        <Testimonials className="" />
       </div>
 
-      {/* Next Project Section */}
+      {/* Next Project */}
       <div className="section-featured-works flat-spacing">
         <div className="container">
           <div className="heading-section center mb-64">
             <div className="heading-sub fw-semibold effectFade fadeUp">Project</div>
-            <div className="heading-title text-gradient-3 effectFade fadeRotateX" key={`next-${projectIndex}`}>Next Project</div>
+            <div className="heading-title text-gradient-3 effectFade fadeRotateX" key={`next-${currentIndex}`}>Next Project</div>
           </div>
           <div className="featured-works-list position-relative">
-            <div className="element effectFade fadeUp" key={`next-card-${projectIndex}`}>
+            <div className="element effectFade fadeUp" key={`next-card-${currentIndex}`}>
               <div className="featured-works-item" onMouseEnter={playHover}>
                 <MouseFollowImage
                   src={project.nextProjectImage}
@@ -222,9 +249,7 @@ function WorkSingle({ projectIndex = 0 }) {
                   href={`/project/${SLUGS[project.nextProjectIndex]}`}
                   onClick={(e) => {
                     e.preventDefault();
-                    if (window.setCurrentPage) {
-                      window.setCurrentPage('work-single', project.nextProjectIndex);
-                    }
+                    navigate(`/project/${SLUGS[project.nextProjectIndex]}`);
                   }}
                 />
                 <div className="content">
@@ -264,106 +289,17 @@ function WorkSingle({ projectIndex = 0 }) {
           position: relative;
           z-index: 1;
         }
-
         .section-hero.v2 .content-wrap .title-icon .box {
           position: relative;
           z-index: 2;
         }
-
-        .hero-shape-flight-zone-v2 {
-          position: absolute;
-          z-index: 3;
-          top: 0;
-          left: 0;
-          width: 255px;
-          height: 400px;
-          overflow: hidden;
-          pointer-events: none;
-        }
-
-        .hero-falling-shape-v2 {
-          position: absolute;
-          will-change: transform;
-          animation: heroShapeFallV2 6.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-        }
-
-        .hero-falling-shape-v2 img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: auto;
-          max-width: none;
-        }
-
-        /* Static rotations and scales for each shape channel to keep animation path straight */
-        .hero-falling-shape-v2.shape-1 img {
-          transform: rotate(-8deg) scale(0.92);
-        }
-        .hero-falling-shape-v2.shape-1 img.cloned {
-          transform: translateY(-400px) rotate(-8deg) scale(0.92);
-        }
-
-        .hero-falling-shape-v2.shape-2 img {
-          transform: rotate(8deg) scale(1);
-        }
-        .hero-falling-shape-v2.shape-2 img.cloned {
-          transform: translateY(-400px) rotate(8deg) scale(1);
-        }
-
-        .hero-falling-shape-v2.shape-3 img {
-          transform: rotate(-5deg) scale(0.94);
-        }
-        .hero-falling-shape-v2.shape-3 img.cloned {
-          transform: translateY(-400px) rotate(-5deg) scale(0.94);
-        }
-
-        .hero-falling-shape-v2.shape-1 {
-          top: -8px;
-          left: 49px;
-          animation-delay: 0s;
-        }
-
-        .hero-falling-shape-v2.shape-2 {
-          top: 22px;
-          left: 136px;
-          animation-delay: -2.2s;
-        }
-
-        .hero-falling-shape-v2.shape-3 {
-          top: 48px;
-          left: 66px;
-          animation-delay: -4.4s;
-        }
-
         .section-hero.v2 .content-wrap .text {
           position: relative;
           z-index: 4;
         }
-
-        .section-work-single {
+        .section-services-single {
           position: relative;
           z-index: 5;
-        }
-
-        @keyframes heroShapeFallV2 {
-          0% {
-            transform: translate3d(0, 0, 0);
-          }
-          100% {
-            transform: translate3d(0, 400px, 0);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .hero-falling-shape-v2 {
-            animation: none;
-          }
-        }
-
-        @media (max-width: 767px) {
-          .hero-falling-shape-v2 {
-            animation-duration: 7.2s;
-          }
         }
       `}</style>
     </div>

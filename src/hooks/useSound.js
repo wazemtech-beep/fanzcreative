@@ -113,9 +113,7 @@ export function playSFX(filename, volume = 0.15) {
   try {
     const audio = new Audio(`/assets/sound/${filename}`);
     audio.volume = volume;
-    audio.play().catch((err) => {
-      console.error(`Failed to play SFX: /assets/sound/${filename}`, err);
-    });
+    audio.play().catch(() => {});
   } catch (err) {
     console.error(`Error creating Audio for SFX: /assets/sound/${filename}`, err);
   }
@@ -130,9 +128,7 @@ export function playAmbient() {
       ambientAudio.loop = true;
       ambientAudio.volume = 0;
     }
-    ambientAudio.play().catch((err) => {
-      console.error('Failed to play ambient audio:', err);
-    });
+    ambientAudio.play().catch(() => {});
     fadeAudio(ambientAudio, ambientAudio.volume, 0.06, 1500); // Cinematic 1.5s fade-in
   } catch (err) {
     console.error('Error creating ambient audio:', err);

@@ -1,42 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useScrollFade } from '../hooks/useScrollFade';
-import HeroBackground from './HeroBackground';
-import Partner from './Partner';
-import Tools from './Tools';
-import Statistic from './Statistic';
-import Awards from './Awards';
-import Testimonials from './Testimonials';
-import FAQs from './FAQs';
-import Contact from './Contact';
+import HeroBackground from '../components/HeroBackground';
+import Partner from '../components/Partner';
+import Tools from '../components/Tools';
+import Statistic from '../components/Statistic';
+import Awards from '../components/Awards';
+import Testimonials from '../components/Testimonials';
+import FAQs from '../components/FAQs';
+import Contact from '../components/Contact';
 import { playTick, playPop, playHover } from '../hooks/useSound';
+import AnimatedTitleIcon from '../components/AnimatedTitleIcon';
 
 function AboutPage() {
   const pageRef = useRef(null);
   useScrollFade(pageRef);
 
-  const [fallingCards, setFallingCards] = useState([]);
-  const cardCounter = useRef(0);
-
-  useEffect(() => {
-    const spawnCard = () => {
-      const id = cardCounter.current++;
-      const type = Math.floor(Math.random() * 3) + 1;
-      const left = Math.floor(Math.random() * 100) + 15;
-      const rotate = Math.floor(Math.random() * 24) - 12;
-      const scale = 0.9 + Math.random() * 0.15;
-
-      const newCard = { id, type, left, rotate, scale };
-      setFallingCards(prev => [...prev, newCard]);
-
-      setTimeout(() => {
-        setFallingCards(prev => prev.filter(c => c.id !== id));
-      }, 3400);
-    };
-
-    spawnCard();
-    const interval = setInterval(spawnCard, 1600);
-    return () => clearInterval(interval);
-  }, []);
 
   // Trigger ScrollTrigger refresh after component mounts to align fade effects
   useEffect(() => {
@@ -51,6 +30,10 @@ function AboutPage() {
 
   return (
     <div ref={pageRef} className="about-page-wrapper">
+      <Helmet>
+        <title>About Us - FanzCreative</title>
+        <meta name="description" content="Learn about FanzCreative — a team of designers and developers passionate about crafting impactful digital experiences." />
+      </Helmet>
       {/* Pink dot override & custom section alignments for About view */}
       <style>{`
         .section-about-us .col-left .sub .dot,
@@ -89,68 +72,6 @@ function AboutPage() {
         .about-page-wrapper .section-hero.v1 .hero-image {
           background-image: none !important;
         }
-        /* Title icon — pill box with 3 falling landing-page SVGs */
-        .about-page-wrapper .section-hero.v1 .content-wrap .title-icon {
-          position: relative;
-          width: 255px;
-          height: 80px;
-          display: inline-block;
-          vertical-align: middle;
-          margin-left: 16px;
-          z-index: 1;
-        }
-        .about-page-wrapper .section-hero.v1 .content-wrap .title-icon .box {
-          position: relative;
-          z-index: 2;
-          display: flex;
-          width: 255px;
-          height: 80px;
-          border-radius: 999px;
-          background: linear-gradient(180deg, #ffffff 0%, #df2d6d 100%);
-          box-shadow: 0px 3.44px 5.57px 0px rgba(0,0,0,0.09),
-                      0px 22.91px 37.08px 0px rgba(223,45,109,0.16),
-                      0px 56px 83px 0px rgba(223,45,109,0.25),
-                      0px 14px 34px 0px rgba(223,45,109,0.25),
-                      0px 1px 2px 0px rgba(223,45,109,0.4);
-        }
-        .about-page-wrapper .hero-shape-flight-zone {
-          position: absolute;
-          z-index: 3;
-          top: 0;
-          left: 0;
-          width: 255px;
-          height: 180px;
-          overflow: hidden;
-          pointer-events: none;
-        }
-        .about-page-wrapper .hero-falling-shape {
-          position: absolute;
-          will-change: transform, opacity;
-          animation: heroShapeFallSequential 3.2s linear forwards;
-        }
-        .about-page-wrapper .hero-falling-shape img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: auto;
-          max-width: none;
-        }
-        @keyframes heroShapeFallSequential {
-          0% {
-            transform: translate3d(0, -140px, 0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translate3d(0, 180px, 0);
-            opacity: 0;
-          }
-        }
       `}</style>
 
       {/* 1. Hero Banner */}
@@ -178,32 +99,7 @@ function AboutPage() {
               <br />
               <div className="title2 d-flex gap-20 justify-content-center flex-wrap align-items-center">
                 <span className="fw-semibold text-gradient-1">Digital Brands</span>
-                <div className="title-icon">
-                  <div className="box"></div>
-                  <div className="hero-shape-flight-zone" aria-hidden="true">
-                    {fallingCards.map((card) => {
-                      const imgSrc = `/assets/images/item/hero-${card.type}.svg`;
-                      return (
-                        <div
-                          key={card.id}
-                          className="hero-falling-shape"
-                          style={{
-                            left: `${card.left}px`,
-                            transformOrigin: 'center center',
-                          }}
-                        >
-                          <img
-                            src={imgSrc}
-                            alt=""
-                            style={{
-                              transform: `rotate(${card.rotate}deg) scale(${card.scale})`,
-                            }}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+                <AnimatedTitleIcon />
               </div>
             </div>
             <p className="text" style={{ marginTop: '55px', opacity: 1 }}>
@@ -244,7 +140,7 @@ function AboutPage() {
                     Start a Project
                   </a>
                 </div>
-                <img className="effectFade fadeRotateX" src="/assets/images/item/earth.webp" alt="" />
+                <img loading="lazy" className="effectFade fadeRotateX" src="/assets/images/item/earth.webp" alt="" />
               </div>
             </div>
             <div className="col-xxl-5 col-lg-6">
@@ -257,7 +153,7 @@ function AboutPage() {
               </div>
               <div className="box-quotes effectFade fadeRotateX">
                 <div class="image">
-                  <img src="/assets/images/image.webp" alt="" />
+                  <img loading="lazy" src="/assets/images/image.webp" alt="" />
                 </div>
                 <div className="content">
                   <div className="icon mb-8">
@@ -414,8 +310,8 @@ function AboutPage() {
       {/* 6. Team, Statistic, Awards, Testimonials (in box-black wrapper) */}
       <div className="box-black">
         <div className="light-box"></div>
-        <img className="light-top" src="/assets/images/item/light-top.webp" alt="" />
-        <img className="light-bot" src="/assets/images/item/light-bot.webp" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
+        <img loading="lazy" className="light-top" src="/assets/images/item/light-top.webp" alt="" />
+        <img loading="lazy" className="light-bot" src="/assets/images/item/light-bot.webp" alt="" style={{ display: 'block', marginBottom: '-4px' }} />
 
         {/* Team Members Section */}
         <div className="section-team flat-spacing">
@@ -431,7 +327,7 @@ function AboutPage() {
               <div className="col-lg-4 col-md-8 lg-mb-24">
                 <div className="team-item h-100 effectFade fadeUp">
                   <div className="image">
-                    <img src="/assets/images/team/team-1.jpg" alt="Ava Collins" />
+                    <img loading="lazy" src="/assets/images/team/team-1.jpg" alt="Ava Collins" />
                   </div>
                   <a href="#" className="name h6 fw-semibold">Ava Collins</a>
                   <div className="sub text-body-1">FanzCreative’s Design Lead</div>
@@ -455,7 +351,7 @@ function AboutPage() {
                 <div className="team-item style-1 mb-24 effectFade fadeUp">
                   <div className="top">
                     <div className="image">
-                      <img src="/assets/images/team/team-2.jpg" alt="Noah Reed" />
+                      <img loading="lazy" src="/assets/images/team/team-2.jpg" alt="Noah Reed" />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
@@ -474,7 +370,7 @@ function AboutPage() {
                 <div className="team-item style-1 effectFade fadeUp">
                   <div className="top">
                     <div className="image">
-                      <img src="/assets/images/team/team-3.jpg" alt="Lucas Hayes" style={{ objectPosition: 'top' }} />
+                      <img loading="lazy" src="/assets/images/team/team-3.jpg" alt="Lucas Hayes" style={{ objectPosition: 'top' }} />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
@@ -496,7 +392,7 @@ function AboutPage() {
                 <div className="team-item style-1 mb-24 effectFade fadeUp" data-delay="0.1">
                   <div className="top">
                     <div className="image">
-                      <img src="/assets/images/team/team-4.jpg" alt="Jordan Brooks" style={{ objectPosition: 'top' }} />
+                      <img loading="lazy" src="/assets/images/team/team-4.jpg" alt="Jordan Brooks" style={{ objectPosition: 'top' }} />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">
@@ -515,7 +411,7 @@ function AboutPage() {
                 <div className="team-item style-1 effectFade fadeUp" data-delay="0.1">
                   <div className="top">
                     <div className="image">
-                      <img src="/assets/images/team/team-5.jpg" alt="Erin Park" />
+                      <img loading="lazy" src="/assets/images/team/team-5.jpg" alt="Erin Park" />
                     </div>
                     <div className="tf-social justify-content-center">
                       <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-item">

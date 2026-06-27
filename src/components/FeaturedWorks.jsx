@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useScrollFade } from '../hooks/useScrollFade';
 import { playList, playHover } from '../hooks/useSound';
-import { SLUGS } from '../App';
+import { SLUGS } from '../constants';
 
 /* ── Cursor-follow image wrapper ───────────────────────────────────────
    Reproduces jQuery mouseHover() from main.js.
@@ -61,7 +62,7 @@ export function MouseFollowImage({ src, alt, onClick, href = "#" }) {
       style={{ position: 'relative', overflow: 'hidden', cursor: 'pointer' }}
       onClick={onClick}
     >
-      <img src={src} alt={alt} />
+      <img loading="lazy" src={src} alt={alt} />
       {/* Button follows cursor — pointerEvents ON so click works */}
       <a
         ref={buttonRef}
@@ -92,7 +93,7 @@ export function MouseFollowImage({ src, alt, onClick, href = "#" }) {
  * - After the last card is shown, the section releases and the next section continues.
  */
 
-const WORKS = [
+export const WORKS = [
   {
     img: '/assets/images/section/cora-beauty-ecommerce-mockup.jpg',
     activeDot: 0,
@@ -128,6 +129,7 @@ const WORKS = [
 ];
 
 function FeaturedWorks() {
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
   const pinRef = useRef(null);
   const cardsRef = useRef([]);
@@ -271,9 +273,7 @@ function FeaturedWorks() {
                       href={`/project/${SLUGS[i]}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        if (window.setCurrentPage) {
-                          window.setCurrentPage('work-single', i);
-                        }
+                        navigate(`/project/${SLUGS[i]}`);
                       }}
                     />
 
