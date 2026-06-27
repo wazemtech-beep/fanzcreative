@@ -69,14 +69,14 @@ function Contact() {
                     <i className="icon icon-envelope-solid" style={{ color: '#000000' }}></i>
                     <div className="content">
                       <div className="title text-white fw-semibold mb-2">E-mail address</div>
-                      <div className="text text-neutral-300">hello@youraiagency.com</div>
+                      <div className="text text-neutral-300">hello@fanzcreative.design</div>
                     </div>
                   </div>
                   <div className="contact-item effectFade fadeRotateX" data-delay="0.1">
                     <i className="icon icon-headset-solid" style={{ color: '#000000' }}></i>
                     <div className="content">
                       <div className="title text-white fw-semibold mb-2">Phone number</div>
-                      <div className="text text-neutral-300">+1 (647) 555 0172</div>
+                      <div className="text text-neutral-300">+44 (0) 7378562333</div>
                     </div>
                   </div>
                 </div>

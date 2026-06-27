@@ -76,8 +76,8 @@ function ContactPage() {
                 <div className="box-contact-item text-center effectFade fadeUp">
                   <i className="icon icon-envelope-solid"></i>
                   <h6 className="title fw-semibold">E-mail address</h6>
-                  <a className="text" href="mailto:hello@youraiagency.com" onMouseEnter={playHover}>
-                    hello@youraiagency.com
+                  <a className="text" href="mailto:hello@fanzcreative.design" onMouseEnter={playHover}>
+                    hello@fanzcreative.design
                   </a>
                 </div>
               </div>
@@ -85,8 +85,8 @@ function ContactPage() {
                 <div className="box-contact-item text-center effectFade fadeUp" data-delay="0.1">
                   <i className="icon icon-headset-solid"></i>
                   <h6 className="title fw-semibold">Phone number</h6>
-                  <a href="tel:+1(647)5550172" className="text" onMouseEnter={playHover}>
-                    +1 (647) 555 0172
+                  <a href="tel:+4407378562333" className="text" onMouseEnter={playHover}>
+                    +44 (0) 7378562333
                   </a>
                 </div>
               </div>
@@ -94,8 +94,8 @@ function ContactPage() {
                 <div className="box-contact-item text-center effectFade fadeUp" data-delay="0.2">
                   <i className="icon icon-map-marker-solid"></i>
                   <h6 className="title fw-semibold">Our Location</h6>
-                  <p className="text">
-                    USA, New York – 1060 Str.
+                  <p className="text-body-1 fw-semibold text-secondary">
+                    United Kingdom, Company Number # 14391900
                   </p>
                 </div>
               </div>

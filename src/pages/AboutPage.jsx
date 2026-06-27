@@ -129,7 +129,7 @@ function AboutPage() {
                     Available for worldwide projects
                   </div>
                   <h5 className="title fw-semibold text-white">
-                    Based in <span className="text-brand">Montréal, Canada</span>
+                    Based in the <span className="text-brand">United Kingdom</span>
                   </h5>
                   <a
                     href="#contact"
@@ -148,7 +148,7 @@ function AboutPage() {
                 <h4 className="title fw-semibold effectFade fadeUp">Our Mission</h4>
                 <div className="line"></div>
                 <p className="text effectFade fadeUp">
-                  Based in Montréal, Canada, we are a premium creative design and development agency. Our mission is to combine compelling brand storytelling with pixel-perfect design standards and modern web technologies. We craft clean frontend code, premium visual identities, and interactive motion designs that engage audiences and solve real business challenges. By bridging design aesthetics and engineering precision, we help brands create lasting digital impressions.
+                  Based in the United Kingdom, we are a premium creative design and development agency. Our mission is to combine compelling brand storytelling with pixel-perfect design standards and modern web technologies. We craft clean frontend code, premium visual identities, and interactive motion designs that engage audiences and solve real business challenges. By bridging design aesthetics and engineering precision, we help brands create lasting digital impressions.
                 </p>
               </div>
               <div className="box-quotes effectFade fadeRotateX">

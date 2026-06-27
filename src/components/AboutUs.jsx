@@ -75,7 +75,7 @@ function AboutUs() {
                   Available for worldwide projects
                 </div>
                 <h5 className="title fw-semibold text-white">
-                  Based in <span className="text-brand">Montréal, Canada</span>
+                  Based in the <span className="text-brand">United Kingdom</span>
                 </h5>
                 <a href="#contact" className="tf-btn">Start a Project</a>
               </div>
