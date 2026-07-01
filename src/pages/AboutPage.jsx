@@ -14,8 +14,43 @@ import AnimatedTitleIcon from '../components/AnimatedTitleIcon';
 
 function AboutPage() {
   const pageRef = useRef(null);
+  const videoRef = useRef(null);
+  const promoContainerRef = useRef(null);
   useScrollFade(pageRef);
 
+  // Video scroll scaling animation using GSAP ScrollTrigger
+  useEffect(() => {
+    const gsap = window.gsap;
+    const ScrollTrigger = window.ScrollTrigger;
+    if (!gsap || !ScrollTrigger) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const video = videoRef.current;
+    const container = promoContainerRef.current;
+    if (!video || !container) return;
+
+    const anim = gsap.fromTo(video,
+      { scale: 0.5 },
+      {
+        scale: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: container,
+          start: 'top bottom', // Start scaling when top of container enters viewport bottom
+          end: 'bottom bottom', // Complete scale by the time bottom of container reaches viewport bottom
+          scrub: 2, // Smooth scroll scrubbing
+        }
+      }
+    );
+
+    return () => {
+      if (anim.scrollTrigger) {
+        anim.scrollTrigger.kill();
+      }
+      anim.kill();
+    };
+  }, []);
 
   // Trigger ScrollTrigger refresh after component mounts to align fade effects
   useEffect(() => {
@@ -299,6 +334,27 @@ function AboutPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Promo Reel (Full Width, Autoplay, Muted) */}
+      <div ref={promoContainerRef} className="section-promo-reel effectFade fadeUp" style={{ overflow: 'hidden', backgroundColor: '#fff' }}>
+        <video
+          ref={videoRef}
+          src="/assets/videos/promo-reel.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          onCanPlay={(e) => { e.target.playbackRate = 0.5; }}
+          style={{
+            width: '100%',
+            height: 'auto',
+            display: 'block',
+            transform: 'scale(0.5)',
+            transformOrigin: 'bottom center',
+            willChange: 'transform',
+          }}
+        />
       </div>
 
       {/* 5. Tools */}

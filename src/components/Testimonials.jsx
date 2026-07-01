@@ -5,26 +5,26 @@ import { playList, playHover } from '../hooks/useSound';
 const TESTIMONIALS = [
   {
     type: 'stars',
-    text: 'FanzCreative completely revolutionized our digital presence. Within just three weeks, they delivered a stunning brand identity and a high-performance web platform that truly captures our vision. The results speak for themselves: our inbound client inquiries doubled in less than a month and user engagement is at an all-time high.',
-    name: 'Elena Ruiz',
-    role: 'CEO, Bloom Studio',
-    img: '/assets/images/section/Elena-Ruiz.webp',
-    imgPosition: 'center 35%'
+    text: '"Working with FanzCreative was a fantastic experience. He built a beautiful, functional website for our homeopathic practice that perfectly matched the brief. Communication was smooth and clear throughout the entire process. Fanz was always responsible, reliable, and very easy to work with. What really stood out was the top-notch quality for a very reasonable price. The final result exceeded our expectations."',
+    name: 'Mariana Brighty',
+    role: 'Founder, Homeolistics',
+    video: '/assets/videos/mariana.webm',
+    imgPosition: 'center 10%'
   },
   {
     type: 'quote',
-    text: "Working with the FanzCreative team was a game-changer for our e-commerce business. The bespoke platform they designed is exceptionally fast, visually captivating, and optimized for conversions. Since launch, our conversion rate has climbed by 34%, and our customer feedback has been overwhelmingly positive. Simply the best investment we've made this year.",
-    name: 'Marcus Tan',
-    role: 'Founder, Northway Retail',
-    img: '/assets/images/section/Marcus-Tan.webp',
+    text: '"My company builds custom data platforms for marketing teams and agencies. We went to FanzCreative to refresh our brand and image, and we couldn\'t be happier. The logo he created for us perfectly captures our identity. The process was smooth and collaborative. I highly recommend FanzCreative to anyone who\'s just looking for a talented logo and designer."',
+    name: 'Gideon Fernandez',
+    role: 'Founder, Custom Data Platforms',
+    video: '/assets/videos/gideon.webm',
     imgPosition: 'center 15%'
   },
   {
     type: 'quote',
-    text: 'Their digital marketing assets and 3D motion graphics brought our flagship product launch to life. The interactive storytelling and high-quality explainer videos they created generated over 100k views on day one and significantly boosted our sign-ups. Their attention to detail and creative execution exceeded all our expectations.',
-    name: 'David Kim',
-    role: 'Marketing Director, PulseWave',
-    img: '/assets/images/section/David-Kim.webp',
+    text: '"We have a company called House of Korea where we sell Korean skincare and beauty products. We reached out to FanzCreative to look at building a website for us, and it was a very collaborative approach. He was very patient with the changes that we required. We ended up with a really amazing website; he got my brief spot on. I would highly recommend his services."',
+    name: 'Nadia',
+    role: 'Founder, House of Korea',
+    video: '/assets/videos/nadia.webm',
     imgPosition: 'center 15%'
   },
 ];
@@ -65,6 +65,11 @@ function Testimonials({ className = "pt-0" }) {
                 <div className="heading-sub fw-semibold style-1 effectFade fadeUp">Testimonials</div>
                 <div className="heading-title text-white effectFade fadeRotateX">
                   What Our <br /> Clients Says
+                </div>
+                <div className="effectFade fadeUp" style={{ marginTop: '24px' }}>
+                  <a href="https://uk.trustpilot.com/review/fanzcreative.design" target="_blank" rel="noreferrer" className="tf-btn" style={{ padding: '12px 24px', display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#00b67a', borderColor: '#00b67a', color: '#fff' }} onMouseEnter={playHover} onClick={playList}>
+                    <i className="icon icon-star-solid" style={{ color: '#fff' }}></i> Review us on Trustpilot
+                  </a>
                 </div>
               </div>
 
@@ -133,11 +138,17 @@ function Testimonials({ className = "pt-0" }) {
                 className={`testimonial-image testimonial-image-slide ${direction < 0 ? 'from-left' : 'from-right'}`}
                 key={t.name}
               >
-                <img loading="lazy"
-                  src={t.img}
-                  alt={t.name}
+                <video
+                  src={t.video}
+                  autoPlay
+                  loop
+                  controls
+                  playsInline
+                  preload="metadata"
                   style={{
                     width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
                     objectPosition: t.imgPosition || 'center center'
                   }}
                 />
@@ -154,13 +165,18 @@ function Testimonials({ className = "pt-0" }) {
 
         .testimonial-image {
           overflow: hidden;
+          width: 100%;
+          aspect-ratio: 4 / 5;
+          position: relative;
+          border-radius: 16px;
         }
 
         .testimonial-image-slide {
           animation: testimonialImageIn 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
-        .testimonial-image-slide img {
+        .testimonial-image-slide img,
+        .testimonial-image-slide video {
           animation: testimonialPhotoIn 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
           will-change: transform, opacity;
         }
@@ -213,7 +229,8 @@ function Testimonials({ className = "pt-0" }) {
         @media (prefers-reduced-motion: reduce) {
           .testimonial-copy-slide,
           .testimonial-image-slide,
-          .testimonial-image-slide img {
+          .testimonial-image-slide img,
+          .testimonial-image-slide video {
             animation: none;
           }
         }
