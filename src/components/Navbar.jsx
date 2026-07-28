@@ -6,12 +6,26 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
   const headerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const [scrolledPastHero, setScrolledPastHero] = useState(!isHomePage);
 
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
 
     const onScroll = () => {
+      const heroThreshold = window.innerHeight * 0.85;
+
+      if (isHomePage) {
+        if (window.scrollY >= heroThreshold) {
+          setScrolledPastHero(true);
+        } else {
+          setScrolledPastHero(false);
+        }
+      } else {
+        setScrolledPastHero(true);
+      }
+
       if (window.scrollY > 80) {
         header.classList.add('header-sticky');
       } else {
@@ -19,9 +33,11 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
       }
     };
 
+    onScroll();
+
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [isHomePage]);
 
   useEffect(() => {
     document.body.classList.toggle('overflow-hidden', menuOpen);
@@ -59,7 +75,14 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
   }, [menuOpen]);
 
   return (
-    <header className="tf-header header2" ref={headerRef}>
+    <header
+      className="tf-header header2"
+      ref={headerRef}
+      style={{
+        transform: isHomePage && !scrolledPastHero ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease',
+      }}
+    >
       <style>{`.tf-header .header-inner .item-link { color: ${is404 ? '#ffffff' : '#000000'}; }`}</style>
       <div className="header-inner" style={{ background: is404 ? '#09090b' : '#ffffff' }}>
 

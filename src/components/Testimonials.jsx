@@ -140,7 +140,6 @@ function Testimonials({ className = "pt-0" }) {
               >
                 <video
                   src={t.video}
-                  autoPlay
                   loop
                   controls
                   playsInline
