@@ -79,6 +79,11 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
       className="tf-header header2"
       ref={headerRef}
       style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 99999,
         transform: isHomePage && !scrolledPastHero ? 'translateY(-100%)' : 'translateY(0)',
         transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease',
       }}

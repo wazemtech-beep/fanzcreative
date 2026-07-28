@@ -396,3 +396,11 @@
   opacity: 1 !important;
   transform: none !important;
 }
+
+/* Sticky Navbar Styling */
+.tf-header.header-sticky .header-inner {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
