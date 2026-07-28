@@ -2,14 +2,6 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { playClick, playHover, playSwoosh } from '../hooks/useSound';
 
-const EXPERIENCES = [
-  { role: 'Creative Director', company: 'GreenLeaf Co', date: 'Currently' },
-  { role: 'Brand Designer', company: 'UrbanFit Studio', date: '2023–24' },
-  { role: 'Package Designer', company: 'GreenK Studio', date: '2020–22' },
-];
-
-const SKILL_TAGS = ['Packaging Design', 'Brand Identity', 'UI/UX & Web', 'Motion Design'];
-
 const CASE_STUDIES = [
   {
     id: 'cora-beauty',
@@ -65,56 +57,14 @@ function RecentWorks() {
   };
 
   return (
-    <section className="recent-works-section" style={{ backgroundColor: '#09090b', color: '#ffffff', padding: '90px 0 100px', overflow: 'hidden' }}>
+    <section className="recent-works-section" style={{ backgroundColor: '#09090b', color: '#ffffff', padding: '70px 0 80px', overflow: 'hidden' }}>
       <style>{`
-        .rw-tag-pill {
-          padding: 8px 18px;
-          border-radius: 999px;
-          background: rgba(255, 255, 255, 0.07);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          color: #e4e4e7;
-          font-size: 13px;
-          font-weight: 500;
-          transition: all 0.25s ease;
-          cursor: pointer;
-        }
-        .rw-tag-pill:hover {
-          background: rgba(255, 255, 255, 0.18);
-          border-color: #df2d6d;
-          color: #ffffff;
-        }
-        .rw-exp-row {
-          padding: 16px 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 15px;
-          color: #a1a1aa;
-        }
-        .rw-exp-row:last-child {
-          border-bottom: none;
-        }
-        .rw-exp-role {
-          color: #ffffff;
-          font-weight: 600;
-          width: 35%;
-        }
-        .rw-exp-company {
-          color: #e4e4e7;
-          width: 40%;
-        }
-        .rw-exp-date {
-          color: #71717a;
-          text-align: right;
-          width: 25%;
-        }
         .rw-card-wrapper {
           position: relative;
-          border-radius: 20px;
+          border-radius: 24px;
           overflow: hidden;
           background: #18181b;
-          height: 360px;
+          height: 380px;
           min-width: 290px;
           flex: 0 0 calc(25% - 18px);
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
@@ -129,14 +79,14 @@ function RecentWorks() {
         @media (max-width: 768px) {
           .rw-card-wrapper {
             flex: 0 0 calc(50% - 12px);
-            height: 290px;
+            height: 310px;
             min-width: 240px;
           }
         }
         @media (max-width: 480px) {
           .rw-card-wrapper {
-            flex: 0 0 85%;
-            height: 280px;
+            flex: 0 0 88%;
+            height: 300px;
           }
         }
         .rw-card-wrapper:hover {
@@ -156,7 +106,7 @@ function RecentWorks() {
         .rw-card-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
@@ -213,46 +163,7 @@ function RecentWorks() {
       `}</style>
 
       <div className="container">
-        {/* 1. Top Experience & Showcase Hero Row */}
-        <div className="row align-items-center mb-60">
-          <div className="col-lg-6 mb-4 mb-lg-0">
-            {/* Skill Tags */}
-            <div className="d-flex flex-wrap gap-2 mb-4">
-              {SKILL_TAGS.map((tag) => (
-                <span key={tag} className="rw-tag-pill" onMouseEnter={playHover}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Experience List */}
-            <div className="rw-exp-list pe-lg-4">
-              {EXPERIENCES.map((exp) => (
-                <div key={exp.company} className="rw-exp-row">
-                  <span className="rw-exp-role">{exp.role}</span>
-                  <span className="rw-exp-company">{exp.company}</span>
-                  <span className="rw-exp-date">{exp.date}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="col-lg-6">
-            <div style={{ borderRadius: '24px', overflow: 'hidden', height: '240px', position: 'relative', border: '1px solid rgba(255, 255, 255, 0.12)' }}>
-              <img
-                src="/assets/images/section/cora-beauty-ecommerce-mockup.webp"
-                alt="Showcase"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(9,9,11,0.6), transparent)' }} />
-            </div>
-          </div>
-        </div>
-
-        {/* 2. Full-Width Separator Line */}
-        <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.12)', margin: '40px 0' }} />
-
-        {/* 3. Section Heading + Arrow Controls Row */}
+        {/* Section Heading + Arrow Controls Row */}
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h3 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '12px' }}>
             Recent Works
@@ -281,7 +192,7 @@ function RecentWorks() {
           </div>
         </div>
 
-        {/* 4. Horizontal Carousel Track */}
+        {/* Horizontal Carousel Track */}
         <div
           ref={scrollContainerRef}
           onScroll={checkScroll}
@@ -290,7 +201,7 @@ function RecentWorks() {
             overflowX: 'auto',
             scrollSnapType: 'x mandatory',
             scrollbarWidth: 'none',
-            paddingBottom: '20px',
+            paddingBottom: '15px',
           }}
         >
           {CASE_STUDIES.map((item) => (
