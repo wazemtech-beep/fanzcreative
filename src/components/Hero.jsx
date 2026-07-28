@@ -15,6 +15,7 @@ import { useScrollFade } from '../hooks/useScrollFade';
 function Hero() {
   const sectionRef = useRef(null);
   const [stage, setStage] = useState(0); // 0: loading sweep, 1: morphing to position, 2: active
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
   useScrollFade(sectionRef);
 
   useEffect(() => {
@@ -47,10 +48,12 @@ function Hero() {
         <div className="palmer-quick-links">
           <div className="quick-links-title">Quick Links</div>
           <nav className="quick-links-nav">
-            <a href="#home" onClick={playTick} onMouseEnter={playHover}>Home</a>,{' '}
-            <a href="#services" onClick={playTick} onMouseEnter={playHover}>Gallery</a>,{' '}
-            <a href="#works" onClick={playTick} onMouseEnter={playHover}>Work</a>,{' '}
-            <a href="#contact" onClick={playTick} onMouseEnter={playHover}>Contact</a>
+            <a href="/" onClick={playTick} onMouseEnter={playHover}>Home</a>,{' '}
+            <a href="/about" onClick={playTick} onMouseEnter={playHover}>About</a>,{' '}
+            <a href="#services" onClick={playTick} onMouseEnter={playHover}>Services</a>,{' '}
+            <a href="/works" onClick={playTick} onMouseEnter={playHover}>Works</a>,{' '}
+            <a href="/blog" onClick={playTick} onMouseEnter={playHover}>Blog</a>,{' '}
+            <a href="/contact" onClick={playTick} onMouseEnter={playHover}>Contact</a>
           </nav>
         </div>
       </div>
@@ -82,22 +85,27 @@ function Hero() {
 
         {/* Right Column: Featured Video Showcase Card */}
         <div className="palmer-hero-video-col">
-          <div className="palmer-video-card">
+          <div
+            className="palmer-video-card"
+            style={{ cursor: 'pointer' }}
+            onClick={() => setVideoModalOpen(true)}
+            onMouseEnter={playHover}
+          >
             <video
-              src="/assets/videos/gideon.webm"
+              src="/assets/videos/promo-reel.mp4"
               autoPlay
               loop
               muted
               playsInline
               className="palmer-video-element"
             />
-            {/* Center Brand Overlay Icon */}
+            {/* Center Play Overlay Icon */}
             <div className="palmer-video-brand-icon">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+                <path d="M8 5v14l11-7z" />
               </svg>
             </div>
-            <div className="video-card-badge">VIEW</div>
+            <div className="video-card-badge">PLAY REEL</div>
           </div>
         </div>
       </div>
@@ -117,12 +125,82 @@ function Hero() {
           © CURATED DIGITAL EXPERIENCES
         </div>
         <div className="palmer-bottom-center">
-          (WDX® — 02)
+          (CREATIVE STUDIO)
         </div>
         <div className="palmer-bottom-right">
           DIGITAL CREATIVE AGENCY
         </div>
       </div>
+
+      {/* Full-screen Video Modal Popup */}
+      {videoModalOpen && (
+        <div
+          className="hero-video-modal-backdrop"
+          onClick={() => setVideoModalOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.92)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            zIndex: 100000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '24px',
+          }}
+        >
+          <div
+            className="hero-video-modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: '960px',
+              aspectRatio: '16 / 9',
+              backgroundColor: '#000000',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(223, 45, 109, 0.3)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+            }}
+          >
+            <button
+              className="hero-video-modal-close"
+              onClick={() => setVideoModalOpen(false)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                width: '44px',
+                height: '44px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                color: '#ffffff',
+                fontSize: '20px',
+                cursor: 'pointer',
+                zIndex: 10,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#df2d6d')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)')}
+            >
+              ✕
+            </button>
+            <video
+              src="/assets/videos/promo-reel.mp4"
+              autoPlay
+              controls
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Scoped CSS Animations */}
       <style>{`
