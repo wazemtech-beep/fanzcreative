@@ -102,7 +102,7 @@ function Services() {
           color: #111111;
         }
         .framer-tab-btn.active {
-          color: #FF5500;
+          color: #df2d6d;
           font-weight: 600;
         }
         .framer-pill-badge {
@@ -143,6 +143,7 @@ function Services() {
           overflow: hidden;
           pointer-events: none;
           z-index: 1;
+          padding: 20px 0;
           /* Signature Framer edge fade gradient mask */
           -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
           mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
@@ -226,7 +227,7 @@ function Services() {
                       width: '7px',
                       height: '7px',
                       borderRadius: '50%',
-                      backgroundColor: '#FF5500',
+                      backgroundColor: '#df2d6d',
                       display: 'inline-block',
                     }}
                   />
@@ -253,15 +254,18 @@ function Services() {
                     alignItems: 'center',
                     gap: '2.5rem',
                     paddingRight: '2.5rem',
+                    paddingBottom: '0.15em',
                   }}
                 >
                   <span
                     style={{
                       fontSize: 'clamp(4.5rem, 9vw, 7.5rem)',
                       fontWeight: 800,
-                      color: '#FF5500',
+                      color: '#df2d6d',
                       letterSpacing: '-0.02em',
-                      lineHeight: 1,
+                      lineHeight: 1.25,
+                      paddingBottom: '0.1em',
+                      display: 'inline-block',
                     }}
                   >
                     {txt}
@@ -270,7 +274,7 @@ function Services() {
                   <span
                     style={{
                       fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                      color: '#FF5500',
+                      color: '#df2d6d',
                       fontWeight: 300,
                       opacity: 0.85,
                       lineHeight: 1,
