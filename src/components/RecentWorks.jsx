@@ -59,6 +59,11 @@ function RecentWorks() {
   return (
     <section className="recent-works-section" style={{ backgroundColor: '#09090b', color: '#ffffff', padding: '70px 0 80px', overflow: 'hidden' }}>
       <style>{`
+        .recent-works-section,
+        .recent-works-section h3,
+        .recent-works-section h5 {
+          color: #ffffff !important;
+        }
         .rw-card-wrapper {
           position: relative;
           border-radius: 24px;
@@ -166,10 +171,13 @@ function RecentWorks() {
       <div className="container">
         {/* Section Heading + Arrow Controls Row */}
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h3 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <h3 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '14px', color: '#ffffff' }}>
             Recent Works
-            <span style={{ display: 'inline-flex', width: '36px', height: '36px', borderRadius: '50%', border: '1.5px solid rgba(255, 255, 255, 0.3)', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>
-              ↓
+            <span style={{ display: 'inline-flex', width: '38px', height: '38px', borderRadius: '50%', border: '1.5px solid rgba(255, 255, 255, 0.4)', alignItems: 'center', justifyContent: 'center', color: '#ffffff', backgroundColor: 'rgba(255, 255, 255, 0.06)' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
             </span>
           </h3>
 
