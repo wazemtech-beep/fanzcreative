@@ -114,27 +114,28 @@ function RecentWorks() {
           z-index: 2;
         }
         .rw-casestudy-btn {
-          display: inline-flex;
+          display: flex;
           align-items: center;
+          justify-content: center;
           gap: 8px;
-          padding: 10px 20px;
+          width: 100%;
+          padding: 14px 20px;
           border-radius: 999px;
           background: rgba(255, 255, 255, 0.15);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           border: 1px solid rgba(255, 255, 255, 0.3);
           color: #ffffff;
-          font-size: 13px;
-          font-weight: 600;
-          letter-spacing: 0.02em;
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: 0.01em;
           text-decoration: none;
           transition: all 0.3s ease;
-          width: fit-content;
         }
         .rw-card-wrapper:hover .rw-casestudy-btn {
           background: #df2d6d;
           border-color: #df2d6d;
-          box-shadow: 0 4px 15px rgba(223, 45, 109, 0.4);
+          box-shadow: 0 6px 20px rgba(223, 45, 109, 0.45);
         }
         .rw-nav-arrow {
           width: 44px;
