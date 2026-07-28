@@ -1,0 +1,1 @@
+This folder is for your portfolio sound assets (ambient.ogg, click.ogg, tick.ogg, hover.ogg, close.ogg, longclick.ogg, list.ogg, spiral.ogg, switch.ogg).
