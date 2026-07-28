@@ -75,8 +75,6 @@ function Layout() {
     document.addEventListener('click', handleAnchorClick);
 
     return () => {
-      if (scrollTriggerUpdate) lenis.off('scroll', scrollTriggerUpdate);
-      if (gsap && gsapTicker) gsap.ticker.remove(gsapTicker);
       if (rafId) cancelAnimationFrame(rafId);
       document.removeEventListener('click', handleAnchorClick);
       lenis.destroy();
