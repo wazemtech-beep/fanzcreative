@@ -61,20 +61,20 @@ function Hero() {
         <div className="palmer-hero-headline-col">
           <h1 className="palmer-hero-title">
             <span className="line-mask">
-              <span className="line-text text-delay-1">Pattern Dimensions</span>
+              <span className="line-text text-delay-1">We Design</span>
             </span>
             <br />
             <span className="line-mask">
-              <span className="line-text text-delay-2">and Moments that</span>
+              <span className="line-text text-delay-2">Digital Experiences</span>
             </span>
             <br />
             <span className="line-mask">
-              <span className="line-text text-delay-3">Connect and Leave a</span>
+              <span className="line-text text-delay-3">That Make Your Brand</span>
             </span>
             <br />
             <span className="line-mask">
               <span className="line-text text-delay-4">
-                Bold <span className="japanese-accent">イメージ.</span>
+                Unforgettable.
               </span>
             </span>
           </h1>
@@ -114,7 +114,7 @@ function Hero() {
       {/* Bottom Footer Metadata */}
       <div className="palmer-hero-bottombar">
         <div className="palmer-bottom-left">
-          © CURATED INTERFACES ビジュアル
+          © CURATED DIGITAL EXPERIENCES
         </div>
         <div className="palmer-bottom-center">
           (WDX® — 02)
