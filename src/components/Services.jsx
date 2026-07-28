@@ -172,7 +172,7 @@ function Services() {
             letterSpacing: '0.01em',
           }}
         >
-          (Services)
+          (Capabilities)
         </div>
 
         {/* Section Heading */}
@@ -187,7 +187,7 @@ function Services() {
             lineHeight: 1.1,
           }}
         >
-          What we do
+          What We Offer
         </h2>
       </div>
 

@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero';
 import Partner from '../components/Partner';
 import Services from '../components/Services';
+import RecentWorks from '../components/RecentWorks';
 import FeaturedWorks from '../components/FeaturedWorks';
 import Process from '../components/Process';
 import Benefits from '../components/Benefits';
@@ -25,6 +26,7 @@ function HomePage() {
 
       <div className="box-white">
         <Services />
+        <RecentWorks />
         <FeaturedWorks />
         <Process />
         <Benefits />
