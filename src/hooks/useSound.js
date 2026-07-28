@@ -202,10 +202,9 @@ export function playAboutLink() {
   playSFX('menu/aboutlink.ogg', 0.15);
 }
 
-// Sticker hovers for stack icons (indices 0 to 3)
-export function playSmiley(index) {
-  const file = index === 3 ? 'smiley/smiley4.ogg' : `smiley/smiley${index + 1}.ogg`;
-  playSFX(file, 0.15);
+// Sticker hovers for stack icons (legacy fallback)
+export function playSmiley() {
+  playHover();
 }
 
 /* ── Backward-compatible Aliases for Legacy Component Calls ──────────── */
