@@ -40,40 +40,20 @@ function Layout() {
   useEffect(() => {
     playSpiral();
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       gestureDirection: 'vertical',
       smooth: true,
+      wheelMultiplier: 1,
     });
     lenisRef.current = lenis;
 
-    const gsap = window.gsap;
-    const ScrollTrigger = window.ScrollTrigger;
-
-    let scrollTriggerUpdate;
-    let gsapTicker;
     let rafId;
-
-    if (gsap && ScrollTrigger) {
-      scrollTriggerUpdate = () => ScrollTrigger.update();
-      lenis.on('scroll', scrollTriggerUpdate);
-
-      gsapTicker = (time) => {
-        lenis.raf(time * 1000);
-      };
-      gsap.ticker.add(gsapTicker);
-      gsap.ticker.lagSmoothing(0);
-
-      setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 500);
-    } else {
-      const raf = (time) => {
-        lenis.raf(time);
-        rafId = requestAnimationFrame(raf);
-      };
+    const raf = (time) => {
+      lenis.raf(time);
       rafId = requestAnimationFrame(raf);
-    }
+    };
+    rafId = requestAnimationFrame(raf);
 
     const handleAnchorClick = (e) => {
       if (e.defaultPrevented) return;
