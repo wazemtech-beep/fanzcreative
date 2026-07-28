@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { useScrollFade } from '../hooks/useScrollFade';
 import HeroBackground from '../components/HeroBackground';
 import Partner from '../components/Partner';
-import Tools from '../components/Tools';
 import Statistic from '../components/Statistic';
 import Awards from '../components/Awards';
 import Testimonials from '../components/Testimonials';
@@ -357,8 +356,7 @@ function AboutPage() {
         />
       </div>
 
-      {/* 5. Tools */}
-      <Tools />
+
 
       {/* 6. Team, Statistic, Awards, Testimonials (in box-black wrapper) */}
       <div className="box-black">
