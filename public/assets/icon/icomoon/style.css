@@ -385,12 +385,30 @@
   will-change: opacity, transform;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.effectFade.fadeUp { transform: translateY(40px) translateZ(0); }
-.effectFade.fadeDown { transform: translateY(-40px) translateZ(0); }
-.effectFade.fadeLeft { transform: translateX(-40px) translateZ(0); }
-.effectFade.fadeRight { transform: translateX(40px) translateZ(0); }
-.effectFade.fadeRotateX { transform: perspective(400px) rotateX(25deg) translateY(25px) translateZ(0); }
-.effectFade.fadeZoom { transform: scale(0.92) translateZ(0); }
+
+.effectFade.fadeUp {
+  transform: translateY(40px) translateZ(0);
+}
+
+.effectFade.fadeDown {
+  transform: translateY(-40px) translateZ(0);
+}
+
+.effectFade.fadeLeft {
+  transform: translateX(-40px) translateZ(0);
+}
+
+.effectFade.fadeRight {
+  transform: translateX(40px) translateZ(0);
+}
+
+.effectFade.fadeRotateX {
+  transform: perspective(400px) rotateX(25deg) translateY(25px) translateZ(0);
+}
+
+.effectFade.fadeZoom {
+  transform: scale(0.92) translateZ(0);
+}
 
 .effectFade.is-visible {
   opacity: 1 !important;
@@ -403,4 +421,8 @@
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.sticky-works-pin .container {
+  padding-bottom: 40px;
 }

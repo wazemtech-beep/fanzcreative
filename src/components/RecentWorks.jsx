@@ -57,7 +57,7 @@ function RecentWorks() {
   };
 
   return (
-    <section className="recent-works-section" style={{ backgroundColor: '#09090b', color: '#ffffff', padding: '70px 0 80px', overflow: 'hidden' }}>
+    <section className="recent-works-section" style={{ backgroundColor: '#09090b', color: '#ffffff', padding: '90px 0 100px', overflow: 'hidden' }}>
       <style>{`
         .recent-works-section,
         .recent-works-section h3,
@@ -70,8 +70,8 @@ function RecentWorks() {
           overflow: hidden;
           background: #18181b;
           height: 380px;
-          min-width: 290px;
-          flex: 0 0 calc(25% - 18px);
+          min-width: 295px;
+          flex: 0 0 calc(25% - 16px);
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
           border: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -95,9 +95,12 @@ function RecentWorks() {
           }
         }
         .rw-card-wrapper:hover {
-          transform: translateY(-6px);
+          transform: translateY(0px) !important;
           box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 45, 109, 0.25);
           border-color: rgba(223, 45, 109, 0.4);
+        }
+        .rw-scroll-container.d-flex.gap-4 {
+          gap: 20px !important;
         }
         .rw-card-img {
           width: 100%;
@@ -160,8 +163,9 @@ function RecentWorks() {
           border-color: #df2d6d;
         }
         .rw-nav-arrow:disabled {
-          opacity: 0.3;
+          opacity: 0.35;
           cursor: not-allowed;
+          pointer-events: none;
         }
         .rw-scroll-container::-webkit-scrollbar {
           display: none;
@@ -170,7 +174,7 @@ function RecentWorks() {
 
       <div className="container">
         {/* Section Heading + Arrow Controls Row */}
-        <div className="d-flex justify-content-between align-items-center mb-4">
+        <div className="d-flex justify-content-between align-items-center" style={{ marginBottom: '52px' }}>
           <h3 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '14px', color: '#ffffff' }}>
             Recent Works
             <span style={{ display: 'inline-flex', width: '38px', height: '38px', borderRadius: '50%', border: '1.5px solid rgba(255, 255, 255, 0.4)', alignItems: 'center', justifyContent: 'center', color: '#ffffff', backgroundColor: 'rgba(255, 255, 255, 0.06)' }}>
@@ -185,7 +189,7 @@ function RecentWorks() {
             <button
               className="rw-nav-arrow"
               onClick={() => handleScroll('left')}
-              disabled={!canScrollLeft}
+              disabled={true}
               aria-label="Scroll left"
             >
               ←
@@ -193,7 +197,7 @@ function RecentWorks() {
             <button
               className="rw-nav-arrow"
               onClick={() => handleScroll('right')}
-              disabled={!canScrollRight}
+              disabled={true}
               aria-label="Scroll right"
             >
               →

@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import PageLoader from './PageLoader';
 import ScrollProgress from './ScrollProgress';
+import CustomCursor from './CustomCursor';
 import { playSpiral } from '../hooks/useSound';
 
 const is404Page = (pathname) => {
@@ -96,6 +97,7 @@ function Layout() {
     <>
       {navigating && <PageLoader />}
       <ScrollProgress />
+      <CustomCursor />
 
       <canvas className="cursor-trail" id="trail" style={{ display: 'none' }} />
 

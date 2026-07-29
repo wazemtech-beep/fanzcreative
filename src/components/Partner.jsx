@@ -81,7 +81,11 @@ function Partner() {
               <p className="text-secondary text fw-semibold">
                 Trusted by 100+ <br /> Clients
               </p>
-              <div className="infiniteSlide_tech_main d-grid" style={{ overflow: 'hidden' }}>
+              <div className="infiniteSlide_tech_main d-grid" style={{
+                overflow: 'hidden',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
+                maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
+              }}>
                 <div className="partner-track" ref={trackRef}>
                   {items.map((src, i) => (
                     <img loading="lazy" key={i} src={src} alt="" />

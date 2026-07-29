@@ -350,6 +350,12 @@ function FeaturedWorks() {
 
         .sticky-works-card {
           width: 100%;
+          transform-origin: center top;
+          transition: transform-origin 0.4s ease;
+        }
+
+        .sticky-works-card:hover {
+          transform-origin: center bottom;
         }
 
         .sticky-works-card .featured-works-item {
@@ -365,11 +371,11 @@ function FeaturedWorks() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center bottom;
+          object-position: center top;
           transition: object-position 2s ease;
         }
         .sticky-works-card .featured-works-item .image:hover img {
-          object-position: center top;
+          object-position: center bottom;
         }
 
         @media (max-width: 991px) {

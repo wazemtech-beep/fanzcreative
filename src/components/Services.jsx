@@ -308,7 +308,7 @@ function Services() {
           <div
             className="text-center effectFade fadeUp"
             style={{
-              marginTop: '32px',
+              marginTop: '60px',
               maxWidth: '520px',
               position: 'relative',
               zIndex: 3,

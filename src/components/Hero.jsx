@@ -1,6 +1,165 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { playHover, playTick } from '../hooks/useSound';
 import { useScrollFade } from '../hooks/useScrollFade';
+
+/* ─────────────────────────────────────────────────────────────────────
+   VideoModal — animated open/close, no download, obfuscated source
+   ───────────────────────────────────────────────────────────────────── */
+function VideoModal({ onClose }) {
+  const [phase, setPhase] = useState('entering'); // 'entering' | 'open' | 'closing'
+  const videoRef = useRef(null);
+  const blobUrlRef = useRef(null);
+
+  // Animate in
+  useEffect(() => {
+    const t = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setPhase('open'));
+    });
+    return () => cancelAnimationFrame(t);
+  }, []);
+
+  // Load video as Blob so the real URL never appears in the Network/Sources DevTools tabs
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/assets/videos/promo-reel.mp4')
+      .then((r) => r.blob())
+      .then((blob) => {
+        if (cancelled) return;
+        const url = URL.createObjectURL(blob);
+        blobUrlRef.current = url;
+        if (videoRef.current) {
+          videoRef.current.src = url;
+          videoRef.current.play().catch(() => {});
+        }
+      })
+      .catch(() => {
+        // Fallback: still play directly (blob failed e.g. CORS)
+        if (videoRef.current && !cancelled) {
+          videoRef.current.src = '/assets/videos/promo-reel.mp4';
+          videoRef.current.play().catch(() => {});
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      if (blobUrlRef.current) {
+        URL.revokeObjectURL(blobUrlRef.current);
+        blobUrlRef.current = null;
+      }
+    };
+  }, []);
+
+  // Trigger close: animate out, then unmount
+  const handleClose = useCallback(() => {
+    setPhase('closing');
+    setTimeout(() => onClose(), 420);
+  }, [onClose]);
+
+  // Close on backdrop click
+  const handleBackdropClick = useCallback((e) => {
+    if (e.target === e.currentTarget) handleClose();
+  }, [handleClose]);
+
+  // Close on Escape key
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') handleClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [handleClose]);
+
+  const isOpen = phase === 'open';
+  const isClosing = phase === 'closing';
+
+  return (
+    <>
+      <style>{`
+        .vm-backdrop {
+          position: fixed;
+          inset: 0;
+          z-index: 100000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          background: rgba(0, 0, 0, 0);
+          backdrop-filter: blur(0px);
+          -webkit-backdrop-filter: blur(0px);
+          transition: background 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+        }
+        .vm-backdrop.open {
+          background: rgba(0, 0, 0, 0.92);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+        }
+        .vm-content {
+          position: relative;
+          width: 100%;
+          max-width: 960px;
+          aspect-ratio: 16 / 9;
+          background: #000;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(223,45,109,0.3);
+          border: 1px solid rgba(255,255,255,0.15);
+          transform: scale(0.88) translateY(32px);
+          opacity: 0;
+          transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+        }
+        .vm-content.open {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+        .vm-content.closing {
+          transform: scale(0.88) translateY(32px);
+          opacity: 0;
+        }
+        .vm-close-btn {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.2);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255,255,255,0.3);
+          color: #fff;
+          font-size: 20px;
+          z-index: 10;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.25s ease, transform 0.2s ease;
+        }
+        .vm-close-btn:hover {
+          background: #df2d6d;
+          transform: scale(1.08);
+        }
+        /* Prevent any native video context menu options */
+        .vm-video { pointer-events: auto; }
+      `}</style>
+
+      <div
+        className={`vm-backdrop${isOpen ? ' open' : ''}`}
+        onClick={handleBackdropClick}
+      >
+        <div className={`vm-content${isOpen ? ' open' : ''}${isClosing ? ' closing' : ''}`}>
+          <button className="vm-close-btn" onClick={handleClose} aria-label="Close video">✕</button>
+          <video
+            ref={videoRef}
+            className="vm-video"
+            autoPlay
+            controls
+            controlsList="nodownload noremoteplayback"
+            disablePictureInPicture
+            onContextMenu={(e) => e.preventDefault()}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
+      </div>
+    </>
+  );
+}
 
 /**
  * Hero Section — Exact Animation Replica of Palmer Framer Template
@@ -132,74 +291,9 @@ function Hero() {
         </div>
       </div>
 
-      {/* Full-screen Video Modal Popup */}
+      {/* Full-screen Video Modal Popup — animated open/close */}
       {videoModalOpen && (
-        <div
-          className="hero-video-modal-backdrop"
-          onClick={() => setVideoModalOpen(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.92)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            zIndex: 100000,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '24px',
-          }}
-        >
-          <div
-            className="hero-video-modal-content"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '960px',
-              aspectRatio: '16 / 9',
-              backgroundColor: '#000000',
-              borderRadius: '24px',
-              overflow: 'hidden',
-              boxShadow: '0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(223, 45, 109, 0.3)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
-            }}
-          >
-            <button
-              className="hero-video-modal-close"
-              onClick={() => setVideoModalOpen(false)}
-              style={{
-                position: 'absolute',
-                top: '16px',
-                right: '16px',
-                width: '44px',
-                height: '44px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                color: '#ffffff',
-                fontSize: '20px',
-                cursor: 'pointer',
-                zIndex: 10,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.25s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#df2d6d')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)')}
-            >
-              ✕
-            </button>
-            <video
-              src="/assets/videos/promo-reel.mp4"
-              autoPlay
-              controls
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
-        </div>
+        <VideoModal onClose={() => setVideoModalOpen(false)} />
       )}
 
       {/* Scoped CSS Animations */}

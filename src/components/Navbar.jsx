@@ -86,11 +86,24 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
         paddingTop: 16,
         paddingBottom: 14,
         zIndex: 99999,
+        background: 'transparent',
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
         transform: isHomePage && !scrolledPastHero ? 'translateY(-100%)' : 'translateY(0)',
-        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease',
+        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
-      <style>{`.tf-header .header-inner .item-link { color: ${is404 ? '#ffffff' : '#000000'}; }`}</style>
+      <style>{`
+        header,
+        header.header-sticky,
+        .tf-header,
+        .tf-header.header-sticky {
+          background: transparent !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
+        .tf-header .header-inner .item-link { color: ${is404 ? '#ffffff' : '#000000'}; }
+      `}</style>
       <div className="header-inner" style={{ background: is404 ? '#09090b' : '#ffffff' }}>
 
         <Link to="/" className="logo-site" aria-label="FanzCreative home" onClick={playHomeLink} onMouseEnter={playHover}>
