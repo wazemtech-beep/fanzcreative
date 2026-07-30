@@ -99,7 +99,7 @@ function VideoModal({ onClose }) {
           background: #000;
           border-radius: 24px;
           overflow: hidden;
-          box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(223,45,109,0.3);
+          box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(10,249,207,0.3);
           border: 1px solid rgba(255,255,255,0.15);
           transform: scale(0.88) translateY(32px);
           opacity: 0;
@@ -132,7 +132,7 @@ function VideoModal({ onClose }) {
           transition: background 0.25s ease, transform 0.2s ease;
         }
         .vm-close-btn:hover {
-          background: #df2d6d;
+          background: #0af9cf;
           transform: scale(1.08);
         }
         /* Prevent any native video context menu options */

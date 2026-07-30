@@ -216,7 +216,7 @@ function SoundToggle() {
           cursor: not-allowed;
         }
         .switch-control.active {
-          background-color: #df2d6d;
+          background-color: #0af9cf;
         }
         .switch-slider {
           position: absolute;

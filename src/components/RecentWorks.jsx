@@ -96,8 +96,8 @@ function RecentWorks() {
         }
         .rw-card-wrapper:hover {
           transform: translateY(0px) !important;
-          box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(223, 45, 109, 0.25);
-          border-color: rgba(223, 45, 109, 0.4);
+          box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(10, 249, 207, 0.25);
+          border-color: rgba(10, 249, 207, 0.4);
         }
         .rw-scroll-container.d-flex.gap-4 {
           gap: 20px !important;
@@ -141,9 +141,9 @@ function RecentWorks() {
           transition: all 0.3s ease;
         }
         .rw-card-wrapper:hover .rw-casestudy-btn {
-          background: #df2d6d;
-          border-color: #df2d6d;
-          box-shadow: 0 6px 20px rgba(223, 45, 109, 0.45);
+          background: #0af9cf;
+          border-color: #0af9cf;
+          box-shadow: 0 6px 20px rgba(10, 249, 207, 0.45);
         }
         .rw-nav-arrow {
           width: 44px;
@@ -159,8 +159,8 @@ function RecentWorks() {
           transition: all 0.25s ease;
         }
         .rw-nav-arrow:hover:not(:disabled) {
-          background: #df2d6d;
-          border-color: #df2d6d;
+          background: #0af9cf;
+          border-color: #0af9cf;
         }
         .rw-nav-arrow:disabled {
           opacity: 0.35;

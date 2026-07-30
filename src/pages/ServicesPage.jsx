@@ -69,7 +69,7 @@ function ServicesPage() {
           className="hero-image"
           style={{ pointerEvents: 'none', zIndex: 0, borderRadius: 40, overflow: 'hidden', backgroundColor: '#000' }}
         >
-          <PrismaticBurst intensity={1.5} speed={0.4} animationType="rotate3d" colors={['#df2d6d', '#ff6b9d', '#1a1a2e', '#16213e']} mixBlendMode="screen" />
+          <PrismaticBurst intensity={1.5} speed={0.4} animationType="rotate3d" colors={['#0af9cf', '#7ef716', '#1a1a2e', '#16213e']} mixBlendMode="screen" />
           <div style={{ position: 'absolute', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.45)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 1, pointerEvents: 'none' }}></div>
         </div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>

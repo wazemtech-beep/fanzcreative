@@ -20,24 +20,24 @@
   <path d="M52,192 L75,172 L100,152 L125,167 L150,132 L175,112 L188,102 L188,192 Z" fill="url(#chart_grad)"/>
   
   <!-- Line Chart Path -->
-  <path d="M52,192 L75,172 L100,152 L125,167 L150,132 L175,112 L188,102" fill="none" stroke="#df2d6d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52,192 L75,172 L100,152 L125,167 L150,132 L175,112 L188,102" fill="none" stroke="#0af9cf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   
   <!-- Node Anchors -->
-  <circle cx="188" cy="102" r="4.5" fill="#df2d6d" stroke="white" stroke-width="1.5"/>
-  <circle cx="150" cy="132" r="3" fill="#df2d6d" stroke="white" stroke-width="1"/>
+  <circle cx="188" cy="102" r="4.5" fill="#0af9cf" stroke="white" stroke-width="1.5"/>
+  <circle cx="150" cy="132" r="3" fill="#0af9cf" stroke="white" stroke-width="1"/>
   
   <!-- Stats label -->
   <text x="52" y="98" font-family="'Urbanist', sans-serif" font-weight="700" font-size="12" fill="#18181B">Conversions</text>
-  <text x="188" y="98" text-anchor="end" font-family="'Urbanist', sans-serif" font-weight="700" font-size="12" fill="#df2d6d">+124%</text>
+  <text x="188" y="98" text-anchor="end" font-family="'Urbanist', sans-serif" font-weight="700" font-size="12" fill="#0af9cf">+124%</text>
 
   <!-- Bottom checklists representing business goals -->
   <!-- Check 1 -->
-  <circle cx="46" cy="254" r="7" fill="#df2d6d"/>
+  <circle cx="46" cy="254" r="7" fill="#0af9cf"/>
   <path d="M43,254 L45,256 L49,252" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   <rect x="62" y="250" width="105" height="8" rx="2" fill="white" fill-opacity="0.9"/>
   
   <!-- Check 2 -->
-  <circle cx="46" cy="279" r="7" fill="#df2d6d"/>
+  <circle cx="46" cy="279" r="7" fill="#0af9cf"/>
   <path d="M43,279 L45,281 L49,277" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   <rect x="62" y="275" width="85" height="8" rx="2" fill="white" fill-opacity="0.9"/>
 </g>
@@ -45,8 +45,8 @@
 </g>
 <defs>
 <linearGradient id="chart_grad" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0%" stop-color="#df2d6d" stop-opacity="0.3"/>
-  <stop offset="100%" stop-color="#df2d6d" stop-opacity="0.0"/>
+  <stop offset="0%" stop-color="#0af9cf" stop-opacity="0.3"/>
+  <stop offset="100%" stop-color="#0af9cf" stop-opacity="0.0"/>
 </linearGradient>
 <filter id="filter0_dddd_6045_478" x="0" y="0.000468731" width="239" height="361" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>

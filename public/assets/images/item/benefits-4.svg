@@ -19,23 +19,23 @@
     
     <!-- Pink Gradient for Arrow -->
     <linearGradient id="arrow_grad" x1="25" y1="75" x2="75" y2="25" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#df2d6d"/>
-      <stop offset="100%" stop-color="#ff5e97"/>
+      <stop offset="0%" stop-color="#0af9cf"/>
+      <stop offset="100%" stop-color="#0af9cf"/>
     </linearGradient>
   </defs>
 
   <!-- Outer Glowing Orbit Ring -->
-  <circle cx="50" cy="50" r="38" stroke="#df2d6d" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="3 3"/>
-  <circle cx="50" cy="50" r="30" stroke="#df2d6d" stroke-opacity="0.1" stroke-width="1.5"/>
+  <circle cx="50" cy="50" r="38" stroke="#0af9cf" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="3 3"/>
+  <circle cx="50" cy="50" r="30" stroke="#0af9cf" stroke-opacity="0.1" stroke-width="1.5"/>
 
   <!-- Main Glass Badge -->
   <circle cx="50" cy="50" r="26" fill="url(#badge_glass)" stroke="#FFFFFF" stroke-width="1.5" filter="url(#badge_shadow)"/>
   
   <!-- Subtle inner target crosshair -->
-  <line x1="50" y1="20" x2="50" y2="24" stroke="#df2d6d" stroke-opacity="0.4" stroke-width="1"/>
-  <line x1="50" y1="76" x2="50" y2="80" stroke="#df2d6d" stroke-opacity="0.4" stroke-width="1"/>
-  <line x1="20" y1="50" x2="24" y2="50" stroke="#df2d6d" stroke-opacity="0.4" stroke-width="1"/>
-  <line x1="76" y1="50" x2="80" y2="50" stroke="#df2d6d" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="50" y1="20" x2="50" y2="24" stroke="#0af9cf" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="50" y1="76" x2="50" y2="80" stroke="#0af9cf" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="20" y1="50" x2="24" y2="50" stroke="#0af9cf" stroke-opacity="0.4" stroke-width="1"/>
+  <line x1="76" y1="50" x2="80" y2="50" stroke="#0af9cf" stroke-opacity="0.4" stroke-width="1"/>
 
   <!-- Upward Growth Arrow -->
   <path d="M40 60L56 44M56 44H44M56 44V56" stroke="url(#arrow_grad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>

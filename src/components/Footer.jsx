@@ -24,7 +24,7 @@ function Footer() {
               <img loading="lazy"
                 src="/assets/images/logo/fanz-logo.webp"
                 alt="FanzCreative"
-                style={{ width: 52, height: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
+                style={{ width: 52, height: 'auto', objectFit: 'contain', filter: 'none' }}
               />
             </div>
           </Link>

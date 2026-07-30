@@ -55,7 +55,7 @@ class ErrorBoundary extends Component {
               transform: translate(-50%, -50%);
               width: 500px; height: 500px;
               border-radius: 50%;
-              background: radial-gradient(circle, rgba(223,45,109,0.07) 0%, rgba(223,45,109,0) 70%);
+              background: radial-gradient(circle, rgba(10,249,207,0.07) 0%, rgba(10,249,207,0) 70%);
               pointer-events: none;
               z-index: 1;
               filter: blur(40px);

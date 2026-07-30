@@ -27,7 +27,7 @@ function PageLoader() {
           height: 48px;
           width: auto;
           object-fit: contain;
-          filter: brightness(0) invert(1);
+          filter: none;
           animation: loaderPulse 1.4s ease-in-out infinite alternate;
         }
         .loader-bar-track {
@@ -41,7 +41,7 @@ function PageLoader() {
           height: 100%;
           width: 40%;
           border-radius: 99px;
-          background: #df2d6d;
+          background: linear-gradient(135deg, #0af9cf 0%, #7ef716 100%);
           animation: loaderSlide 1s ease-in-out infinite alternate;
         }
         @keyframes loaderPulse {

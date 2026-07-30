@@ -10,7 +10,7 @@
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
-    --bs-pink: #d63384;
+    --bs-pink: #0af9cf;
     --bs-red: #dc3545;
     --bs-orange: #fd7e14;
     --bs-yellow: #ffc107;
@@ -100,7 +100,7 @@
     --bs-link-decoration: underline;
     --bs-link-hover-color: #0a58ca;
     --bs-link-hover-color-rgb: 10, 88, 202;
-    --bs-code-color: #d63384;
+    --bs-code-color: #0af9cf;
     --bs-highlight-color: #212529;
     --bs-highlight-bg: #fff3cd;
     --bs-border-width: 1px;
@@ -172,7 +172,7 @@
     --bs-link-hover-color: #8bb9fe;
     --bs-link-color-rgb: 110, 168, 254;
     --bs-link-hover-color-rgb: 139, 185, 254;
-    --bs-code-color: #e685b5;
+    --bs-code-color: #0af9cf;
     --bs-highlight-color: #dee2e6;
     --bs-highlight-bg: #664d03;
     --bs-border-color: #495057;

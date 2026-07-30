@@ -102,7 +102,7 @@ function Services() {
           color: #111111;
         }
         .framer-tab-btn.active {
-          color: #df2d6d;
+          color: #0af9cf;
           font-weight: 600;
         }
         .framer-pill-badge {
@@ -227,7 +227,7 @@ function Services() {
                       width: '7px',
                       height: '7px',
                       borderRadius: '50%',
-                      backgroundColor: '#df2d6d',
+                      backgroundColor: '#0af9cf',
                       display: 'inline-block',
                     }}
                   />
@@ -261,7 +261,7 @@ function Services() {
                     style={{
                       fontSize: 'clamp(4.5rem, 9vw, 7.5rem)',
                       fontWeight: 800,
-                      color: '#df2d6d',
+                      color: '#0af9cf',
                       letterSpacing: '-0.02em',
                       lineHeight: 1.25,
                       paddingBottom: '0.1em',
@@ -274,7 +274,7 @@ function Services() {
                   <span
                     style={{
                       fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                      color: '#df2d6d',
+                      color: '#0af9cf',
                       fontWeight: 300,
                       opacity: 0.85,
                       lineHeight: 1,

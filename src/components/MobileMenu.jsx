@@ -11,8 +11,8 @@ function MobileMenu() {
           <div className="offcanvas-content_wrapin">
 
             <div className="canvas_head">
-              <a href="#" className="logo-site">
-                <i className="icon icon-davies-logo"></i>
+              <a href="/" className="logo-site">
+                <img src="/assets/images/logo/fanz-logo.webp" alt="FanzCreative" style={{ height: 36, width: 'auto' }} />
               </a>
               <button
                 type="button"

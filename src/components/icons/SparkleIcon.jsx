@@ -10,13 +10,13 @@ function SparkleIcon() {
           <stop offset="1" stopColor="#555D64" /><stop offset="1" stopColor="#292C2E" />
         </linearGradient>
         <linearGradient id="sparkle_b" x1="10.0034" y1="0" x2="10.0034" y2="20" gradientUnits="userSpaceOnUse">
-          <stop offset="1" stopColor="#df2d6d" /><stop offset="1" stopColor="#df2d6d" />
+          <stop offset="1" stopColor="#0af9cf" /><stop offset="1" stopColor="#0af9cf" />
         </linearGradient>
         <linearGradient id="sparkle_c" x1="10.2993" y1="-1.30435" x2="21.6031" y2="11.1057" gradientUnits="userSpaceOnUse">
           <stop offset="1" stopColor="#555D64" /><stop offset="1" stopColor="#292C2E" />
         </linearGradient>
         <linearGradient id="sparkle_d" x1="10.0034" y1="0" x2="10.0034" y2="20" gradientUnits="userSpaceOnUse">
-          <stop offset="1" stopColor="#df2d6d" /><stop offset="1" stopColor="#df2d6d" />
+          <stop offset="1" stopColor="#0af9cf" /><stop offset="1" stopColor="#0af9cf" />
         </linearGradient>
       </defs>
     </svg>

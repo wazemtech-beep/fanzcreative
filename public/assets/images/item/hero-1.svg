@@ -24,9 +24,9 @@
   <line x1="8" y1="-1" x2="16" y2="-1" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.7"/>
   <line x1="8" y1="3" x2="18" y2="3" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.7"/>
   <!-- Designer Pen/Anchor point element representing guidelines -->
-  <circle cx="-8" cy="13" r="2.5" fill="#e91e8c"/>
-  <circle cx="12" cy="13" r="2.5" fill="#e91e8c"/>
-  <line x1="-8" y1="13" x2="12" y2="13" stroke="#e91e8c" stroke-width="1.2" stroke-dasharray="2 2"/>
+  <circle cx="-8" cy="13" r="2.5" fill="#0af9cf"/>
+  <circle cx="12" cy="13" r="2.5" fill="#0af9cf"/>
+  <line x1="-8" y1="13" x2="12" y2="13" stroke="#0af9cf" stroke-width="1.2" stroke-dasharray="2 2"/>
 </g>
 </g>
 <defs>

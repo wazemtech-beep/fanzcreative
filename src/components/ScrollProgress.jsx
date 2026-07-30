@@ -38,7 +38,7 @@ function ScrollProgress() {
         left: 0,
         width: '100%',
         height: '4px',
-        backgroundColor: '#df2d6d',
+        backgroundColor: '#0af9cf',
         transformOrigin: '0% 50%',
         transform: 'scaleX(0)',
         zIndex: 99999,

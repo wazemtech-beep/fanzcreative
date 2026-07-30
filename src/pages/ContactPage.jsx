@@ -189,7 +189,7 @@ function ContactPage() {
       <style>{`
         .contact-field-error {
           margin-top: 8px;
-          color: #ff7aa8;
+          color: #0af9cf;
           font-size: 14px;
           line-height: 20px;
           font-weight: 600;

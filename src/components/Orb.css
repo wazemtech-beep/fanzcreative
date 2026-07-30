@@ -13,7 +13,7 @@
 
 .form-contact input:focus,
 .form-contact textarea:focus {
-  border-bottom: 1px solid var(--brand, #df2d6d) !important;
+  border-bottom: 1px solid var(--brand, #0af9cf) !important;
 }
 
 .form-contact .attachment {

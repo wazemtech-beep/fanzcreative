@@ -72,7 +72,7 @@ function AboutPage() {
       <style>{`
         .section-about-us .col-left .sub .dot,
         .section-about-us .col-left .sub .dot::before {
-          background-color: #e91e8c !important;
+          background-color: #0af9cf !important;
         }
         .about-page-wrapper {
           width: 100%;

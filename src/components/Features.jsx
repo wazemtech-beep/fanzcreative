@@ -18,34 +18,34 @@ function Features() {
 
   return (
     <div className="section-features flat-spacing pt-0" ref={sectionRef}>
-      {/* Override the red/orange CSS background → pink */}
+      {/* Override CSS background → green gradient */}
       <style>{`
         .features-center {
-          background: linear-gradient(135deg, #e91e8c 0%, #ff6ec7 100%) !important;
+          background: linear-gradient(135deg, #0af9cf 0%, #7ef716 100%) !important;
           box-shadow:
-            0px 22.91px 37.08px 0px rgba(233,30,140,0.18),
-            0px 56px 83px 0px rgba(233,30,140,0.10),
-            0px 14px 34px 0px rgba(233,30,140,0.25),
-            0px 1px 2px 0px rgba(233,30,140,0.4) !important;
+            0px 22.91px 37.08px 0px rgba(10,249,207,0.25),
+            0px 56px 83px 0px rgba(126,247,22,0.20),
+            0px 14px 34px 0px rgba(10,249,207,0.30),
+            0px 1px 2px 0px rgba(126,247,22,0.4) !important;
         }
         .side-line-main .link-break-line .item.top,
         .side-line-main .link-break-line .item.bottom,
         .side-line-main .simu-electric.left,
         .side-line-main .simu-electric.right {
-          background-color: #e91e8c !important;
+          background-color: #0af9cf !important;
           background-image: none !important;
         }
         .side-line-main .link-break-line .item.top {
-          background: radial-gradient(circle at top right, #e91e8c 0%, transparent 90%) !important;
+          background: radial-gradient(circle at top right, #0af9cf 0%, transparent 90%) !important;
         }
         .side-line-main .link-break-line .item.bottom {
-          background: radial-gradient(circle at bottom right, #e91e8c 0%, transparent 90%) !important;
+          background: radial-gradient(circle at bottom right, #0af9cf 0%, transparent 90%) !important;
         }
         .side-line-main .simu-electric.left {
-          background: linear-gradient(to right, #e91e8c 0%, transparent 100%) !important;
+          background: linear-gradient(to right, #0af9cf 0%, transparent 100%) !important;
         }
         .side-line-main .simu-electric.right {
-          background: linear-gradient(to left, #e91e8c 0%, transparent 100%) !important;
+          background: linear-gradient(to left, #0af9cf 0%, transparent 100%) !important;
         }
       `}</style>
 
@@ -80,7 +80,7 @@ function Features() {
                   width: 120,
                   height: 'auto',
                   objectFit: 'contain',
-                  filter: 'brightness(0) invert(1)',
+                  filter: 'none',
                 }}
               />
             </div>

@@ -19,8 +19,8 @@
     
     <!-- Accent Gradient -->
     <linearGradient id="pink_grad" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#df2d6d"/>
-      <stop offset="100%" stop-color="#ff5e97"/>
+      <stop offset="0%" stop-color="#0af9cf"/>
+      <stop offset="100%" stop-color="#0af9cf"/>
     </linearGradient>
   </defs>
 
@@ -29,7 +29,7 @@
 
   <!-- Left: Sparkle Badge (shifted right to x=30 to give comfortable spacing from left border) -->
   <g transform="translate(30, 45)">
-    <circle cx="0" cy="0" r="14" fill="#df2d6d" fill-opacity="0.1"/>
+    <circle cx="0" cy="0" r="14" fill="#0af9cf" fill-opacity="0.1"/>
     <!-- Sparkle shape -->
     <path d="M0,-8 Q0,0 -8,0 Q0,0 0,8 Q0,0 8,0 Q0,0 0,-8 Z" fill="url(#pink_grad)"/>
   </g>

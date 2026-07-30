@@ -53,8 +53,8 @@ function Process({ className = "pt-0" }) {
       <DotField
         dotRadius={1.5}
         dotSpacing={16}
-        gradientFrom="rgba(233, 30, 140, 0.2)"
-        gradientTo="rgba(180, 100, 220, 0.12)"
+        gradientFrom="rgba(10, 249, 207, 0.25)"
+        gradientTo="rgba(126, 247, 22, 0.18)"
         glowColor="transparent"
         glowRadius={0}
         bulgeOnly={true}

@@ -8,7 +8,7 @@
   <path d="M15,-10 L22,-2 L15,6" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <line x1="4" y1="-15" x2="-4" y2="11" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
   <!-- Motion Design Wave in brand color -->
-  <path d="M-22,17 Q-11,9 0,17 T22,17" fill="none" stroke="#e91e8c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M-22,17 Q-11,9 0,17 T22,17" fill="none" stroke="#0af9cf" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </g>
 <defs>

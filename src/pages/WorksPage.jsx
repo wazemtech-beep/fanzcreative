@@ -59,9 +59,9 @@ function WorksPage() {
                 onClick={() => { setLayoutMode('single'); playClick(); }}
                 onMouseEnter={playHover}
                 style={{
-                  background: layoutMode === 'single' ? '#e91e8c' : 'transparent',
-                  border: '1px solid #e91e8c',
-                  color: layoutMode === 'single' ? '#fff' : '#e91e8c',
+                  background: layoutMode === 'single' ? '#0af9cf' : 'transparent',
+                  border: '1px solid #0af9cf',
+                  color: layoutMode === 'single' ? '#fff' : '#0af9cf',
                   width: '40px', height: '40px', borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   cursor: 'pointer', transition: 'all 0.3s ease'
@@ -81,9 +81,9 @@ function WorksPage() {
                 onClick={() => { setLayoutMode('grid'); playClick(); }}
                 onMouseEnter={playHover}
                 style={{
-                  background: layoutMode === 'grid' ? '#e91e8c' : 'transparent',
-                  border: '1px solid #e91e8c',
-                  color: layoutMode === 'grid' ? '#fff' : '#e91e8c',
+                  background: layoutMode === 'grid' ? '#0af9cf' : 'transparent',
+                  border: '1px solid #0af9cf',
+                  color: layoutMode === 'grid' ? '#fff' : '#0af9cf',
                   width: '40px', height: '40px', borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   cursor: 'pointer', transition: 'all 0.3s ease'
@@ -169,7 +169,7 @@ function WorksPage() {
                 </div>
                 <div className="right">
                   <div className="delay-progress mb-12">
-                    <div className="progress-line" style={{ width: '90%', backgroundColor: '#e91e8c' }}></div>
+                    <div className="progress-line" style={{ width: '90%', backgroundColor: '#0af9cf' }}></div>
                     <h4 className="number-progress fw-semibold text-white">90%</h4>
                   </div>
                   <div className="text text-secondary text-end">/Efficiency</div>
@@ -182,7 +182,7 @@ function WorksPage() {
                 </div>
                 <div className="right">
                   <div className="delay-progress mb-12">
-                    <div className="progress-line" style={{ width: '85%', backgroundColor: '#e91e8c' }}></div>
+                    <div className="progress-line" style={{ width: '85%', backgroundColor: '#0af9cf' }}></div>
                     <h4 className="number-progress fw-semibold text-white">85%</h4>
                   </div>
                   <div className="text text-secondary text-end">/Innovation</div>
@@ -195,7 +195,7 @@ function WorksPage() {
                 </div>
                 <div className="right">
                   <div className="delay-progress mb-12">
-                    <div className="progress-line" style={{ width: '95%', backgroundColor: '#e91e8c' }}></div>
+                    <div className="progress-line" style={{ width: '95%', backgroundColor: '#0af9cf' }}></div>
                     <h4 className="number-progress fw-semibold text-white">95%</h4>
                   </div>
                   <div className="text text-secondary text-end">/Opportunities</div>
@@ -208,7 +208,7 @@ function WorksPage() {
                 </div>
                 <div className="right">
                   <div className="delay-progress mb-12">
-                    <div className="progress-line" style={{ width: '98%', backgroundColor: '#e91e8c' }}></div>
+                    <div className="progress-line" style={{ width: '98%', backgroundColor: '#0af9cf' }}></div>
                     <h4 className="number-progress fw-semibold text-white">98%</h4>
                   </div>
                   <div className="text text-secondary text-end">/Creative Focus</div>

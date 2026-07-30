@@ -3,14 +3,9 @@ import { useEffect, useRef } from 'react';
 /**
  * CustomCursor
  *
- * A smooth lerp-following dot cursor with mix-blend-mode: difference.
- * Centering is done via translate(-50%, -50%) chained in the JS transform
- * so the dot NEVER jumps when it grows on hover — no negative-margin bug.
- *
- * • Hides the native OS cursor on desktop (cursor: none).
- * • Grows when hovering interactive elements (links, buttons, cards).
- * • Scales down on click.
- * • Hidden on touch / coarse-pointer devices.
+ * Smooth GSAP quickTo following circle cursor with mix-blend-mode: difference.
+ * Inverts colors automatically on dark and light backgrounds.
+ * Scales up on hover over interactive elements (buttons, links, hover targets).
  */
 function CustomCursor() {
   const dotRef = useRef(null);
@@ -19,120 +14,135 @@ function CustomCursor() {
     const dot = dotRef.current;
     if (!dot) return;
 
-    // Lerp state — start offscreen so first appearance is invisible
-    let targetX = -300;
-    let targetY = -300;
-    let currentX = -300;
-    let currentY = -300;
-    let raf;
+    const gsapObj = window.gsap;
 
-    // ── Mouse move ──────────────────────────────────────────────────────────
-    const onMove = (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      dot.style.opacity = '1';
+    if (gsapObj && gsapObj.quickTo) {
+      // GSAP quickTo for buttery smooth easing follow (duration 0.5, power3 ease)
+      const xTo = gsapObj.quickTo(dot, 'x', { duration: 0.5, ease: 'power3' });
+      const yTo = gsapObj.quickTo(dot, 'y', { duration: 0.5, ease: 'power3' });
 
-      // Grow on interactive elements
-      const interactive = Boolean(
-        e.target.closest(
-          'a, button, [role="button"], input, textarea, select, ' +
-          '.palmer-video-card, .rw-card-wrapper, .tf-btn, ' +
-          '.rw-casestudy-btn, .rw-nav-arrow, .framer-tab-btn'
-        )
-      );
-      dot.classList.toggle('cc-hover', interactive);
-    };
+      // Initialize position offscreen and hidden
+      gsapObj.set(dot, { x: -300, y: -300, opacity: 0 });
 
-    // ── Press / release ─────────────────────────────────────────────────────
-    const onDown = () => dot.classList.add('cc-click');
-    const onUp   = () => dot.classList.remove('cc-click');
+      const onMouseMove = (e) => {
+        gsapObj.to(dot, { opacity: 1, duration: 0.2 });
+        xTo(e.clientX);
+        yTo(e.clientY);
+      };
 
-    // ── Visibility ──────────────────────────────────────────────────────────
-    const onLeave = () => { dot.style.opacity = '0'; };
-    const onEnter = () => { dot.style.opacity = '1'; };
+      const onMouseOver = (e) => {
+        const target = e.target.closest(
+          'a, button, [role="button"], input, textarea, select, .hover-target, .tf-btn, .palmer-video-card, .rw-card-wrapper, .rw-casestudy-btn, .rw-nav-arrow, .framer-tab-btn, .menu-item'
+        );
+        if (target) {
+          gsapObj.to(dot, { scale: 2.5, duration: 0.3, ease: 'power2.out' });
+        } else {
+          gsapObj.to(dot, { scale: 1, duration: 0.3, ease: 'power2.out' });
+        }
+      };
 
-    // ── RAF loop (lerp) ─────────────────────────────────────────────────────
-    const loop = () => {
-      currentX += (targetX - currentX) * 0.16;
-      currentY += (targetY - currentY) * 0.16;
+      const onMouseDown = () => {
+        gsapObj.to(dot, { scale: 1.8, duration: 0.15, ease: 'power2.out' });
+      };
 
-      // translate3d positions the dot, translate(-50%,-50%) always centers it
-      // at the exact mouse point regardless of its current size → no jump
-      dot.style.transform =
-        `translate3d(${currentX}px,${currentY}px,0) translate(-50%,-50%)`;
+      const onMouseUp = (e) => {
+        const target = e.target.closest(
+          'a, button, [role="button"], input, textarea, select, .hover-target, .tf-btn, .palmer-video-card, .rw-card-wrapper, .rw-casestudy-btn, .rw-nav-arrow, .framer-tab-btn, .menu-item'
+        );
+        gsapObj.to(dot, { scale: target ? 2.5 : 1, duration: 0.2, ease: 'power2.out' });
+      };
 
+      const onMouseLeave = () => {
+        gsapObj.to(dot, { opacity: 0, duration: 0.2 });
+      };
+
+      const onMouseEnter = () => {
+        gsapObj.to(dot, { opacity: 1, duration: 0.2 });
+      };
+
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      document.addEventListener('mouseover', onMouseOver, { passive: true });
+      document.addEventListener('mousedown', onMouseDown, { passive: true });
+      document.addEventListener('mouseup', onMouseUp, { passive: true });
+      document.body.addEventListener('mouseleave', onMouseLeave, { passive: true });
+      document.body.addEventListener('mouseenter', onMouseEnter, { passive: true });
+
+      return () => {
+        window.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseover', onMouseOver);
+        document.removeEventListener('mousedown', onMouseDown);
+        document.removeEventListener('mouseup', onMouseUp);
+        document.body.removeEventListener('mouseleave', onMouseLeave);
+        document.body.removeEventListener('mouseenter', onMouseEnter);
+      };
+    } else {
+      // Fallback LERP if GSAP script is still loading
+      let targetX = -300, targetY = -300, currentX = -300, currentY = -300, raf;
+      const onMove = (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        dot.style.opacity = '1';
+        const interactive = Boolean(
+          e.target.closest('a, button, [role="button"], input, textarea, select, .hover-target, .tf-btn')
+        );
+        dot.classList.toggle('cc-hover', interactive);
+      };
+
+      const loop = () => {
+        currentX += (targetX - currentX) * 0.16;
+        currentY += (targetY - currentY) * 0.16;
+        dot.style.transform = `translate3d(${currentX}px,${currentY}px,0) translate(-50%,-50%)`;
+        raf = requestAnimationFrame(loop);
+      };
+
+      document.addEventListener('mousemove', onMove, { passive: true });
       raf = requestAnimationFrame(loop);
-    };
 
-    document.addEventListener('mousemove',  onMove,  { passive: true });
-    document.addEventListener('mousedown',  onDown);
-    document.addEventListener('mouseup',    onUp);
-    document.body.addEventListener('mouseleave', onLeave);
-    document.body.addEventListener('mouseenter', onEnter);
-    raf = requestAnimationFrame(loop);
-
-    return () => {
-      document.removeEventListener('mousemove',  onMove);
-      document.removeEventListener('mousedown',  onDown);
-      document.removeEventListener('mouseup',    onUp);
-      document.body.removeEventListener('mouseleave', onLeave);
-      document.body.removeEventListener('mouseenter', onEnter);
-      cancelAnimationFrame(raf);
-    };
-  }, []); // ← runs once, no stale closures
+      return () => {
+        document.removeEventListener('mousemove', onMove);
+        cancelAnimationFrame(raf);
+      };
+    }
+  }, []);
 
   return (
     <>
       <style>{`
-        /* ── Hide native cursor on desktop ───────────────────────── */
+        /* Hide native OS cursor on desktop */
         @media (hover: hover) and (pointer: fine) {
           *, *::before, *::after {
             cursor: none !important;
           }
         }
 
-        /* ── Dot base ────────────────────────────────────────────── */
-        .cc-dot {
+        /* Custom cursor circle with mix-blend-mode: difference */
+        .cursor {
           position: fixed;
           top: 0;
           left: 0;
           width: 20px;
           height: 20px;
-          border-radius: 50%;
           background: #ffffff;
+          border-radius: 50%;
           pointer-events: none;
-          z-index: 2147483647;       /* max z-index */
           mix-blend-mode: difference;
-          opacity: 0;
+          z-index: 999999;
+          transform: translate(-50%, -50%);
           will-change: transform;
-          /* transition only size — transform is handled by JS lerp */
-          transition:
-            width  0.3s cubic-bezier(0.16, 1, 0.3, 1),
-            height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-            opacity 0.25s ease,
-            scale   0.15s ease;
         }
 
-        /* ── Hover state: grow ───────────────────────────────────── */
-        .cc-dot.cc-hover {
+        .cursor.cc-hover {
           width: 44px;
           height: 44px;
-          /* centering is always done by translate(-50%,-50%) in JS  */
-          /* so growing NEVER shifts the dot left or up              */
         }
 
-        /* ── Click state: shrink ─────────────────────────────────── */
-        .cc-dot.cc-click {
-          scale: 0.7;
-        }
-
-        /* ── Hide on touch devices ───────────────────────────────── */
+        /* Hide on touch / coarse devices */
         @media (hover: none), (pointer: coarse) {
-          .cc-dot { display: none !important; }
+          .cursor { display: none !important; }
         }
       `}</style>
 
-      <div ref={dotRef} className="cc-dot" />
+      <div ref={dotRef} className="cursor" id="cursor" />
     </>
   );
 }

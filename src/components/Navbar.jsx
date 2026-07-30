@@ -102,19 +102,59 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
           background-color: transparent !important;
           box-shadow: none !important;
         }
-        .tf-header .header-inner .item-link { color: ${is404 ? '#ffffff' : '#000000'}; }
+        .tf-header .header-inner,
+        .tf-header.header2 .header-inner,
+        header.header-sticky .header-inner {
+          background: #000000 !important;
+          background-color: #000000 !important;
+          border: 1px solid rgba(255, 255, 255, 0.15) !important;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(10, 249, 207, 0.12) !important;
+          backdrop-filter: blur(20px) !important;
+          border-radius: 999px !important;
+        }
+        .tf-header .header-inner .item-link {
+          color: rgba(255, 255, 255, 0.9) !important;
+          transition: color 0.25s ease;
+          font-weight: 600 !important;
+        }
+        .tf-header .header-inner .item-link::before,
+        .tf-header .header-inner .item-link::after {
+          background-color: #0af9cf !important;
+          background: linear-gradient(90deg, #0af9cf 0%, #7ef716 100%) !important;
+          height: 2px !important;
+        }
+        .tf-header .header-inner .item-link.active,
+        .tf-header .header-inner .item-link:hover {
+          color: #0af9cf !important;
+        }
+        .tf-header .header-inner .start-project-btn {
+          background: #ffffff !important;
+          color: #000000 !important;
+          border: 1px solid #ffffff !important;
+          border-radius: 999px !important;
+          font-weight: 700 !important;
+          transition: all 0.3s ease !important;
+        }
+        .tf-header .header-inner .start-project-btn:hover {
+          background: linear-gradient(135deg, #0af9cf 0%, #7ef716 100%) !important;
+          color: #000000 !important;
+          border-color: #0af9cf !important;
+          box-shadow: 0 4px 15px rgba(10, 249, 207, 0.4) !important;
+          transform: translateY(-1px);
+        }
       `}</style>
-      <div className="header-inner" style={{ background: is404 ? '#09090b' : '#ffffff' }}>
+      <div className="header-inner">
 
         <Link to="/" className="logo-site" aria-label="FanzCreative home" onClick={playHomeLink} onMouseEnter={playHover}>
           <img
             src="/assets/images/logo/fanz-logo.webp"
             alt="FanzCreative"
             style={{
-              height: 44,
+              height: 40,
               width: 'auto',
               objectFit: 'contain',
-              filter: is404 ? 'none' : 'brightness(0)',
+              filter: 'none',
+              display: 'block',
             }}
           />
         </Link>
@@ -144,11 +184,10 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
 
         <Link
           to="/contact"
-          className="tf-btn d-lg-flex d-none"
+          className="tf-btn start-project-btn d-lg-flex d-none"
           aria-label="Start a Project"
           onClick={playPop}
           onMouseEnter={playHover}
-          style={is404 ? { background: '#ffffff', color: '#09090b', borderColor: '#ffffff' } : {}}
         >
           Start a Project
         </Link>
@@ -158,8 +197,8 @@ function Navbar({ is404 = false, currentPage = 'home' }) {
           onClick={() => { setMenuOpen(true); playWhoosh(); }}
           aria-label="Open menu"
           style={{
-            color: is404 ? '#ffffff' : '#000000',
-            borderColor: is404 ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'
+            color: '#ffffff',
+            borderColor: 'rgba(255, 255, 255, 0.2)'
           }}
         >
           <i className="icon icon-grip-lines-solid"></i>

@@ -46,12 +46,12 @@ function AnimatedTitleIcon({ className = '', style = {} }) {
           width: 255px;
           height: 80px;
           border-radius: 999px;
-          background: linear-gradient(180deg, #ffffff 0%, #df2d6d 100%);
+          background: linear-gradient(135deg, #0af9cf 0%, #7ef716 100%);
           box-shadow: 0px 3.44px 5.57px 0px rgba(0,0,0,0.09),
-                      0px 22.91px 37.08px 0px rgba(223,45,109,0.16),
-                      0px 56px 83px 0px rgba(223,45,109,0.25),
-                      0px 14px 34px 0px rgba(223,45,109,0.25),
-                      0px 1px 2px 0px rgba(223,45,109,0.4);
+                      0px 22.91px 37.08px 0px rgba(10,249,207,0.25),
+                      0px 56px 83px 0px rgba(126,247,22,0.3),
+                      0px 14px 34px 0px rgba(10,249,207,0.3),
+                      0px 1px 2px 0px rgba(126,247,22,0.4);
         }
         .animated-title-icon .hero-shape-flight-zone {
           position: absolute;

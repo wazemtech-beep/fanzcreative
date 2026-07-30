@@ -101,7 +101,7 @@ void main() {
 }
 `;
 
-export default function Aurora({ colorStops = ['#e91e8c', '#ffffff', '#9c27b0'], amplitude = 1.0, blend = 0.5, speed = 1.0 }) {
+export default function Aurora({ colorStops = ['#0af9cf', '#ffffff', '#9c27b0'], amplitude = 1.0, blend = 0.5, speed = 1.0 }) {
   const propsRef = useRef({ colorStops, amplitude, blend, speed });
   const ctnDom = useRef(null);
 
